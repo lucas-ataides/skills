@@ -33,15 +33,14 @@ Legend: `[x]` done & lint-green · `[~]` in progress · `[ ]` todo · `[!]` bloc
 - [x] productivity/: handoff · teach · simple
 - [x] marketing/: public-relations
 
-## Wave 4 — documents cluster (documents/) — "extremely beautiful" output
-- [ ] pptx · [ ] pdf · [ ] docx · [ ] xlsx
+## Wave 4 — documents cluster (documents/) ✅
+- [x] pptx · [x] pdf · [x] docx · [x] xlsx (python-pptx/openpyxl/python-docx/WeasyPrint+reportlab)
 
-## Wave 5 — cloud cluster (cloud/) — best-practices, SOC2
-- [ ] aws-toolkit · [ ] azure-toolkit · [ ] gcp-toolkit · [ ] cloud-best-practices
+## Wave 5 — cloud cluster (cloud/) ✅
+- [x] aws-toolkit · [x] azure-toolkit · [x] gcp-toolkit · [x] cloud-best-practices (SOC2)
 
-## Wave 6 — agent-infra ports
-- [ ] ralph (loop; relate to app-completion-loop) · [ ] ralph-vault (ralph + obsidian)
-- [ ] autoguardrails (global POLICY.md + per-repo; NO extra LLM — pure skill + script)
+## Wave 6 — agent-infra ports ✅ (ralph-vault → wave 7)
+- [x] ralph (autonomous loop) · [x] autoguardrails (POLICY.md + scripts/check-policy.sh, no LLM, --selftest)
 
 ## Wave 7 — second brain / obsidian (obsidian/) — major, script-backed
 - [ ] obsidian-vault (the full compiler spec: orientation, connector gate, _tools scripts, validation gates)
