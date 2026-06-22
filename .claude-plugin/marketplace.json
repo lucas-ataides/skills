@@ -1,0 +1,26 @@
+{
+  "name": "ldatb-skills",
+  "owner": {
+    "name": "Lucas de Ataides",
+    "email": "lucasatab@gmail.com"
+  },
+  "metadata": {
+    "description": "Deterministic Claude skills built to a manufacturing quality bar.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "ldatb-skills",
+      "source": "./",
+      "description": "Determinism-first skills: secure SDLC, second brain, marketing, design, and the toolchain that enforces them.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Lucas de Ataides",
+        "email": "lucasatab@gmail.com"
+      },
+      "category": "productivity",
+      "keywords": ["skills", "determinism", "engineering", "obsidian", "marketing", "security", "design"],
+      "strict": true
+    }
+  ]
+}
