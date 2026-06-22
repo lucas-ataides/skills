@@ -14,8 +14,11 @@
     "./skills/engineering/engineering",
     "./skills/engineering/git-guardrails",
     "./skills/engineering/secure-sdlc",
+    "./skills/engineering/software-architecture",
+    "./skills/engineering/subagent-driven-development",
     "./skills/engineering/supply-chain-audit",
     "./skills/engineering/tdd",
+    "./skills/engineering/to-issues",
     "./skills/marketing/ad-creative",
     "./skills/marketing/churn-prevention",
     "./skills/marketing/cold-email",
@@ -23,6 +26,7 @@
     "./skills/marketing/copywriting",
     "./skills/marketing/marketing-ideas",
     "./skills/marketing/marketing-psychology",
+    "./skills/marketing/public-relations",
     "./skills/marketing/revops",
     "./skills/marketing/sales-enablement",
     "./skills/marketing/site-architecture",
@@ -34,9 +38,13 @@
     "./skills/productivity/caveman",
     "./skills/productivity/caveman-review",
     "./skills/productivity/grill-me",
+    "./skills/productivity/handoff",
     "./skills/productivity/least-code",
+    "./skills/productivity/simple",
+    "./skills/productivity/teach",
     "./skills/quality/full-output-enforcement",
     "./skills/quality/overdrive",
-    "./skills/quality/polish"
+    "./skills/quality/polish",
+    "./skills/quality/verification-before-completion"
   ]
 }

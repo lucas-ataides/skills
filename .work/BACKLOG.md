@@ -27,10 +27,11 @@ Legend: `[x]` done & lint-green · `[~]` in progress · `[ ]` todo · `[!]` bloc
 - [x] design/: web-design-guidelines · ui-ux-pro-max · design-taste-frontend · gpt-taste · brandkit · industrial-brutalist-ui
 - [x] quality/: polish · overdrive · full-output-enforcement
 
-## Wave 3 — process/writing cluster
-- [ ] subagent-driven-development · [ ] verification-before-completion
-- [ ] handoff · [ ] teach · [ ] to-issues · [ ] simple (brainstorming)
-- [ ] software-architecture (system design) · [ ] public-relations
+## Wave 3 — process/writing/architecture cluster ✅
+- [x] engineering/: to-issues · software-architecture · subagent-driven-development
+- [x] quality/: verification-before-completion
+- [x] productivity/: handoff · teach · simple
+- [x] marketing/: public-relations
 
 ## Wave 4 — documents cluster (documents/) — "extremely beautiful" output
 - [ ] pptx · [ ] pdf · [ ] docx · [ ] xlsx
