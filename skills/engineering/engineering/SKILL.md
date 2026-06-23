@@ -5,6 +5,8 @@ description: Build and change software end to end — app code, infrastructure, 
 
 Build software that fits the system and delivers the requirement, across application code, infrastructure, and the tests that prove it. Judge the design before writing code, build test-first, and ship behind the gates. The hard part is rarely the code — it is choosing the right seam, guarding the blast radius, and proving the change does what was asked.
 
+Keep the project legible as you work: maintain its AGENTS.md/CLAUDE.md and task list via [project-context](../project-context/SKILL.md).
+
 ## Steps
 
 1. **State the requirement.** Write what the change must deliver and the acceptance criteria that decide done. Code measured against nothing cannot be reviewed.
