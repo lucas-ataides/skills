@@ -28,16 +28,25 @@ that plan and stops for sign-off:
 1. **Resume check.** Look for `state.json` and `INGESTION-LOG.md` at the
    configured vault path. On a resume, read both before any other action, then
    continue from `current_phase` and `next_actions`.
-2. **Inspect the sources.** Enumerate available sources — working-directory
-   files, pasted text, and the connectors the user named. Record the working
-   directory, the configured vault path, and a source inventory.
-3. **Verify accounts before proposing.** Per external connector, capture which
+2. **Confirm the four, then inspect.** Before any substantive read, confirm the
+   working directory, the output root, the source locations, and each connector's
+   connected account. Enumerate available sources — working-directory
+   files, pasted text, and the connectors the user named — and record the source
+   inventory.
+3. **Scaffold the vault.** Run `scripts/scaffold.py <output-root>` to lay the
+   canonical folders, the six control files, the `state.json` schema, and a
+   self-contained `_tools/` (the validators copied in, so the vault re-validates on
+   its own). The default output root is
+   `Compiled-Vaults/compiled-vault-brain-<date>/` under the working directory; an
+   existing vault may be the root, to compile in place. The scaffold never
+   overwrites an existing file.
+4. **Verify accounts before proposing.** Per external connector, capture which
    account and workspace it is signed into. A connector signed into the wrong
    account is recorded as a blocker, not a source.
-4. **Write the orientation report.** Produce `Reports/ORIENTATION-REPORT.md`
-   holding the working directory, vault path, source and connector inventory,
+5. **Write the orientation report.** Produce `Reports/ORIENTATION-REPORT.md`
+   holding the working directory, output root, source and connector inventory,
    account verification, the proposed compilation plan, and any blockers.
-5. **HARD CHECKPOINT 1 — pause for approval.** Present the orientation report and
+6. **HARD CHECKPOINT 1 — pause for approval.** Present the orientation report and
    stop. Broad ingestion waits until the user approves, amends, or rejects the
    plan.
 

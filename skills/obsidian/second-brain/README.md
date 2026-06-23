@@ -27,7 +27,7 @@
 1. Initialize and name the capability.
 2. Capture through the script.
 3. Retrieve connected context.
-4. Compile: orient, gate, and pass HARD CHECKPOINT 1.
+4. Compile: confirm, scaffold, orient, and pass HARD CHECKPOINT 1.
 5. Maintain: run the bounded autonomous loop.
 6. Remove only through the guard.
 

@@ -66,14 +66,19 @@ frontmatter contract — is in
    step is done once the recall cites the notes it came from, an empty result
    reported plainly rather than filled by invention.
 
-4. **Compile: orient, gate, and pass HARD CHECKPOINT 1.** Inventory the sources,
-   verify each connector's account, write `Reports/ORIENTATION-REPORT.md`, record
-   every connector in SOURCE-MANIFEST.md, and run
-   `scripts/generate-manifest.py --vault <path> --verify` before any broad read —
-   the orientation, the connector-verification gate, and the resumable
-   `state.json` contract are in [compiler.md](references/compiler.md). This step is
-   done once the manifest verifier exits 0, no wrong-account connector remains
-   unblocked, and the user has approved the plan at HARD CHECKPOINT 1.
+4. **Compile: confirm, scaffold, orient, and pass HARD CHECKPOINT 1.** Confirm the
+   four — the working directory, the output root, the source locations, and each
+   connector's connected account. Scaffold the canonical vault with
+   `scripts/scaffold.py <output-root>` (default
+   `Compiled-Vaults/compiled-vault-brain-<date>/`, or an existing vault to compile
+   in place), which lays the folders, the control files, and a self-contained
+   `_tools/`. Inventory the sources, record every connector in SOURCE-MANIFEST.md,
+   write `Reports/ORIENTATION-REPORT.md`, then run
+   `scripts/generate-manifest.py --vault <path> --verify`. The four confirmations,
+   the connector gate, the model tiering, and the resumable `state.json` contract
+   live in [compiler.md](references/compiler.md). This step is done once the
+   scaffold validates, the manifest verifier exits 0, and the user has approved at
+   HARD CHECKPOINT 1.
 
 5. **Compile: run the pipeline, smoke-pass at HARD CHECKPOINT 2, then hold the
    HARD GATES.** Drive each source batch through the nine-stage pipeline
@@ -110,6 +115,8 @@ fixtures, assert, and exit 0:
 
 - `scripts/vault.sh` — init, capture, append, link, daily, find, and the guarded
   `rm` (the CRUD + correlation engine).
+- `scripts/scaffold.py` — build the canonical vault (folders, control files, the
+  `state.json` schema) and copy the validators into the vault's `_tools/`.
 - `scripts/validate-wikilinks.py` — resolve `[[wikilinks]]`; report unresolved and
   ambiguous.
 - `scripts/validate-slugs.py` — empty filenames, invalid paths, duplicate slugs,
@@ -127,8 +134,8 @@ fixtures, assert, and exit 0:
   types, note formats, frontmatter contract, and the retrieval model.
 - [crud-and-retrieval.md](references/crud-and-retrieval.md) — capture taxonomy,
   correlation patterns, and the retrieval decision procedure.
-- [compiler.md](references/compiler.md) — orientation, the two HARD CHECKPOINTS,
-  the connector gate, the nine-stage pipeline, the validators, the HARD GATES, and
-  redaction.
+- [compiler.md](references/compiler.md) — the four confirmations, the scaffold,
+  orientation, the two HARD CHECKPOINTS, the connector gate, the nine-stage
+  pipeline, model tiering, the validators, the HARD GATES, and redaction.
 - [maintenance.md](references/maintenance.md) — the autonomous loop, its
   guardrails, and when to prefer checkpointed compilation.
