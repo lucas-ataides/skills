@@ -140,7 +140,7 @@ each; a pillar with no stance is a gap, not a default.
 The vendor toolkits carry the pillar checklists in depth:
 [AWS Well-Architected](../../../cloud/aws-toolkit/references/well-architected.md),
 [Azure Well-Architected](../../../cloud/azure-toolkit/references/well-architected.md), and
-[GCP practices](../../../cloud/gcp-toolkit/SKILL.md). The
+[GCP Architecture Framework](../../../cloud/gcp-toolkit/references/architecture-framework.md). The
 architecture step records a stance; the toolkit step audits the implementation against
 it.
 
