@@ -75,10 +75,23 @@ second-brain feed through `vault` + `second_brain`, and the gates read `gates.st
 
 ## Enable the second brain
 
-1. Set `vault.path` to your Obsidian vault and `vault.enabled = true` (above).
-2. Confirm: `skill-config path` prints the path.
-3. From then on, skills record salient outcomes there (opt out with `second_brain.feed = false`). The [second-brain](skills/obsidian/second-brain/SKILL.md) skill's `scripts/vault.sh` does the writing — capture, daily note, link, find — at that path.
-4. No vault set? Nothing breaks — the feed is skipped silently.
+1. Set `vault.path` to your Obsidian vault and `vault.enabled = true` (above). The path is absolute; the folder need not exist yet.
+2. Confirm: `skill-config path` prints the path (exit 0). A silent exit 1 means the feed is still off.
+3. Bridge the config to the script. The [second-brain](skills/obsidian/second-brain/SKILL.md) skill writes through `scripts/vault.sh`, which reads the `$VAULT` environment variable. The skill exports it for you; for direct CLI use, export it yourself: `export VAULT="$(skill-config path)"` (add that line to your shell profile to make it stick).
+4. Make the first note. No scaffold step exists — `vault.sh` creates the vault and its type folders on demand:
+
+   ```bash
+   VAULT_SH=skills/obsidian/second-brain/scripts/vault.sh
+   bash "$VAULT_SH" capture project "Q3 Roadmap" owner=you   # prints the new note path
+   bash "$VAULT_SH" daily                                     # today's daily note
+   bash "$VAULT_SH" find "Q3"                                 # locate it again
+   ```
+
+   Note types: `person project meeting idea task decision daily client feedback 1on1 company`.
+5. From then on, skills record salient outcomes there (opt out with `second_brain.feed = false`), and the simplest path is to just ask Claude — the skill resolves the script and the vault for you.
+6. No vault set? Nothing breaks — the feed is skipped silently.
+
+> Building a vault from existing chats, emails, or exports (rather than capturing fresh) is the second brain's **compile** capability — a guarded pipeline with two approval checkpoints and a validator suite. Start it by invoking the [second-brain](skills/obsidian/second-brain/SKILL.md) skill and asking to compile from your sources.
 
 ## Per-skill configuration
 
