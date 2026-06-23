@@ -86,18 +86,26 @@ deterministic (script + manual). Per-skill docs: generated README.md per skill (
 - [x] documentation: "Run after every code change" trigger. (PostToolUse hook = per-user settings, documented in skill.)
 - [x] git-guardrails: "Applies to every git action" trigger.
 
-# ===== R-merges + R-behavior DONE. Remaining: R-content, R-systems, README refresh. =====
+# ===== R-merges + R-behavior + R-content + R-systems + README — ALL DONE. =====
 
-## R-content
-- [ ] AWS/Azure/GCP: each follows its cloud philosophy (AWS managed-first/Well-Architected; Azure WAF; GCP Arch Framework).
-- [ ] software-architecture: + cloud architecture + diagrams (C4/Mermaid) + output ADR/design docs.
-- [ ] NEW soc-siem skill: Wazuh + Grafana + Suricata; monitor cloud + VMs.
-- [x] NEW project-context skill: maintain AGENTS.md/CLAUDE.md + TODO.md per project (scripts/project-context.sh check|init|--selftest). engineering wired; wire other dev skills (agent-loop, secure-sdlc, tdd, code-review, software-architecture, documentation) to it during the cross-cutting pass.
+## R-content ✅
+- [x] AWS/Azure/GCP rewritten to each cloud's philosophy + managed-first (Well-Architected / WAF+CAF / Arch Framework+SRE), with managed-service decision tables + worked reference architectures.
+- [x] software-architecture: + cloud architecture + C4/sequence/ER diagrams (Mermaid) + ADR/design-doc outputs.
+- [x] NEW soc-siem: Wazuh + Suricata + Grafana for cloud + VMs (detection engineering, MITRE ATT&CK, SOC2 evidence).
+- [x] NEW project-context: AGENTS.md/CLAUDE.md + TODO per project; engineering wired.
 
-## R-systems (cross-cutting; after merges settle)
-- [ ] config: tools/skillkit config loader reading ~/.config/skills/skills.toml + ./skills.toml; install.sh seeds default; review EVERY skill for config values.
-- [ ] second-brain feed: opt-out "record" step on every skill (graceful no-vault; agent decides + asks; deterministic).
-- [ ] per-skill README: skill-readme generator + a README.md in every skill folder.
+## R-systems ✅
+- [x] config: skillkit.config (layered ~/.config/skills/skills.toml + ./skills.toml); `skill-config`; install.sh seeds it.
+- [x] second-brain feed: imbued into the foundation doctrine (opt-out, graceful, agent-decides + asks).
+- [x] per-skill README: `skill-readme` generator + README.md in all 45 skills; --check wired into pre-commit + CI + `make ci`.
+
+## README ✅
+- [x] root README refreshed to 45 skills / 10 domains / current layout + toolchain.
+
+## Remaining / optional
+- [ ] wire project-context reference into the other dev skills (agent-loop, secure-sdlc, tdd, code-review, software-architecture, documentation) — incremental.
+- [ ] explicit per-skill "record to second brain" step (beyond the doctrine imbue) — incremental.
+- [ ] R-content/R-systems adversarial stress-test round (like the earlier round 1) — optional.
 
 ## Notes
 - Every SKILL.md must pass `skill-lint --strict`; every cross-link must resolve (`skill-docs`).

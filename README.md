@@ -55,6 +55,7 @@ applied to agent skills. The full doctrine lives in
 make install        # uv sync + pre-commit hooks
 make lint           # skill-lint --strict over every skill
 make docs           # skill-docs — every Markdown link resolves
+make readme         # skill-readme — regenerate the per-skill READMEs
 make test           # the toolchain's own test suite
 ```
 
@@ -107,43 +108,42 @@ skill cannot be created by hand (**Poka-yoke** at authoring time).
 ## Repository layout
 
 ```bash
-skills/                 # the skills, by domain
+skills/                 # 45 skills, by domain (each with a generated README.md)
   meta/                 # foundation, creating-skills, setup, cavecrew
-  engineering/          # secure-sdlc, tdd, code-review, supply-chain-audit, engineering,
-                        # git-guardrails, autoguardrails, ralph, software-architecture, ...
+  engineering/          # secure-sdlc, tdd, code-review, engineering (app+infra+qa),
+                        # software-architecture, git-guardrails, autoguardrails, agent-loop,
+                        # subagent-driven-development, project-context, changelog-gen, documentation, to-issues
   quality/              # verification-before-completion, polish, overdrive, full-output-enforcement
-  marketing/            # copywriting, ad-creative, cold-email, social-content, revops, ...
-  design/               # web-design-guidelines, ui-ux-pro-max, brandkit, gpt-taste, ...
-  documents/            # pptx, pdf, docx, xlsx (beautiful, deterministic generation)
-  cloud/                # aws-toolkit, azure-toolkit, gcp-toolkit, cloud-best-practices
-  obsidian/             # obsidian-vault (vault compiler), second-brain-crud, ralph-vault
+  marketing/            # copywriting, content, growth, outreach
+  design/               # frontend-design (Swiss-editorial × brutalism), brandkit
+  documents/            # docx, pdf, pptx, xlsx (beautiful, deterministic generation)
+  cloud/                # aws-toolkit, azure-toolkit, gcp-toolkit, cloud-best-practices, soc-siem
+  obsidian/             # second-brain (capture · compile · retrieve · maintain)
   management/           # project-management, client-satisfaction, employee-management
-  productivity/         # grill-me, least-code, caveman, handoff, teach, simple
-  social/               # social-media-viral
-tools/                  # the deterministic toolchain (Python): skill_lint, skill_new,
-                        # skill_gate, skill_changelog, skill_docs, skill_update, skillkit
+  productivity/         # brainstorm, caveman, grill-me, handoff, teach
+tools/                  # the deterministic toolchain (Python): skill_lint, skill_new, skill_gate,
+                        # skill_changelog, skill_docs, skill_update, skill_config, skill_readme, skillkit
 scripts/                # install.sh, git-commit.sh
 .claude-plugin/         # marketplace.json + plugin.json
-.github/workflows/      # CI: determinism gate, docs, tests, ruff, Semgrep
+.github/workflows/      # CI: determinism gate, docs, READMEs, tests, ruff, Semgrep
 ```
 
 ## Categories
 
-62 skills across 11 domains, every one lint-gated. The taxonomy grows as skills land — no empty folders.
+45 skills across 10 domains, every one lint-gated and carrying a generated README.md. The taxonomy grows as skills land — no empty folders.
 
 | Domain | What lives here |
 | ------ | --------------- |
-| `meta` | Foundation, skill-authoring, install/setup, the cavecrew subagent protocol |
-| `engineering` | Secure SDLC, TDD, code review, supply-chain, architecture, git/auto guardrails, autonomous loops |
+| `meta` | Foundation doctrine, skill-authoring, install/setup, the cavecrew subagent protocol |
+| `engineering` | Secure SDLC, TDD, code review, full-stack engineering, software + cloud architecture, git/auto guardrails, the agent loop, project-context, changelog, documentation, to-issues |
 | `quality` | Verification-before-completion, polish, overdrive, full-output enforcement |
-| `marketing` | Copy, ads, cold email, social content, sales enablement, RevOps, PR, psychology |
-| `design` | Web/UI-UX guidelines, design taste, anti-AI-slop, brandkit, brutalist UI |
+| `marketing` | copywriting, content, growth, outreach |
+| `design` | frontend-design (Swiss-editorial × brutalism) + brandkit |
 | `documents` | Beautiful deterministic pptx, pdf, docx, xlsx generation |
-| `cloud` | AWS / Azure / GCP toolkits + cross-cloud SOC2 best practices |
-| `obsidian` | Source-backed vault compiler + fast second-brain CRUD |
+| `cloud` | AWS / Azure / GCP toolkits (each to its own framework), cloud-best-practices (SOC2), soc-siem (Wazuh/Suricata/Grafana) |
+| `obsidian` | second-brain: source-backed vault compiler + fast CRUD + retrieval |
 | `management` | Project management, client satisfaction, people management |
-| `productivity` | grill-me, least-code, caveman, handoff, teach, simple |
-| `social` | Viral research for Instagram + X |
+| `productivity` | brainstorm, caveman, grill-me, handoff, teach |
 
 ## Authoring a skill
 
@@ -158,6 +158,8 @@ Every change passes the same gates locally (pre-commit) and in CI (**Jidoka** �
 violation is a red build, not a warning):
 
 - `skill-lint --strict` — the determinism gate
+- `skill-docs` — every Markdown link resolves
+- `skill-readme --check` — the per-skill READMEs are current
 - `pytest` — the toolchain test suite
 - `ruff` — Python lint/format
 - `semgrep` — static analysis (SCA) on the toolchain
