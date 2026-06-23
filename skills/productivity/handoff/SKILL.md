@@ -22,3 +22,5 @@ The bar is resumability, not narration. A status report says what happened; a ha
 6. **Confirm resumability against the failure modes.** Read the handoff once as the fresh reader, checking it against [the handoff format](references/handoff-format.md): present current-state, concrete next-actions, documented gotchas, nothing stale. The step ends, and the handoff is done, only when that reader could resume the work without asking the author a single question.
 
 See also: [the handoff format](references/handoff-format.md) for the full anatomy of a complete handoff, the resumability principle, handoff versus status report, the failure modes and red flags, and a worked example.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

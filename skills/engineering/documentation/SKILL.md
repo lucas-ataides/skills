@@ -24,3 +24,7 @@ Run the deterministic link check first. Spend judgment on what the check cannot 
 7. **Record and verify.** Run `skill-docs` once more, then hand the user-visible change to [changelog-gen](../changelog-gen/SKILL.md) for its CHANGELOG entry. This step is done when the link check exits zero and the changelog records the change.
 
 See also: [the foundation doctrine](../../meta/foundation/SKILL.md).
+
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

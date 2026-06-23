@@ -44,3 +44,5 @@ reference before building.
    checklist in the reference: margins, type scale, baseline grid, AA contrast, break
    discipline, table styling, furniture, and the not-default-print test. The skill is done
    once every checklist line holds or carries a written, justified exception.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

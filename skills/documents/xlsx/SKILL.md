@@ -24,3 +24,5 @@ Generate the workbook deterministically with openpyxl. Push styling into reused 
 7. **Verify the artifact by reopening it.** Save the `.xlsx`, reopen it with openpyxl, and confirm the sheet names, the frozen pane, and a sampled formula cell match the plan from step 1 — observe the real file rather than assume it. Done when the reopened workbook reports the expected sheets, a frozen header, and a formula (not a literal) in a checked result cell.
 
 See also: [references/beautiful-spreadsheets.md](references/beautiful-spreadsheets.md) for deterministic openpyxl generation, the design system, the inputs-calcs-outputs separation, the archetypes, the failure modes and red flags, and a worked formula-driven example.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

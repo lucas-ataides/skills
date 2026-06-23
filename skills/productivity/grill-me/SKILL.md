@@ -22,3 +22,5 @@ The leverage is in the gaps. Read the existing material first, locate what it le
 6. **Stop at saturation.** Watch the document change with each answer. Saturation is the point where new answers stop changing it and the remaining gaps are closed. The grill ends once the document answers its own open questions and no gap from step 1 remains unaddressed.
 
 See also: [the question frameworks](references/question-frameworks.md) for the question taxonomy, the tacit-knowledge techniques, the anti-patterns, and a worked example.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

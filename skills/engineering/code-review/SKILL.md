@@ -20,3 +20,7 @@ Run the deterministic gates first, then spend judgment on what no tool can see.
 5. **Weigh the trade-offs.** State what the change traded — complexity, coupling, performance, time — and whether the trade earns the intent. A silent trade-off is itself the finding.
 
 6. **Rank and report.** Label each finding blocker, major, or minor, tied to the lens it failed and the intent it endangers. The review is done when every changed file and every lens has a verdict.
+
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

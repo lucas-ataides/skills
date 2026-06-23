@@ -22,3 +22,5 @@ Work the structure, the rules, and the failure modes in [the brand system refere
 6. **Check consistency across surfaces, then sweep for failure modes.** Confirm one token set drives the site, app, social, decks, and email, with per-surface changes limited to density and format. Sweep the kit against the reference failure modes — inconsistent palette, no tokens, logo misuse, voice drift, contrast failures, scale leakage — and against the red-flag list. The step is done when one token set is confirmed across surfaces and every failure mode resolves to a fix or to a stated pass.
 
 7. **Report against the criteria.** Compile the kit (or the audit) into the worked-example shape in the reference: foundations and voice on top, a token table below with a role and an AA pair on every color. The step is done when a reviewer can verify, line by line, that every color has a role plus an AA pair, every value sits on a named scale, the voice carries a lexicon, and no token is a one-off.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

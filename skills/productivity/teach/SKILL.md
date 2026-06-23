@@ -20,3 +20,5 @@ Calibrate before you explain. The depth, the moves, the failure modes, and a wor
 5. **Check by application, not by nodding.** Ask the learner to apply the idea — predict an output, name the next case, spot where it breaks — rather than asking "make sense?". The step is done when the learner has produced an answer that reveals whether the idea landed or hit a blank spot.
 
 6. **Layer or repair on the response.** A correct application earns the next layer of depth on request; a wrong one earns a re-explanation from a different anchor, not a louder repeat. The step is done when the learner can apply the concept to a case neither of you walked through.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

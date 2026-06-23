@@ -74,3 +74,5 @@ Work the reference for the depth behind each step: [client health](references/cl
 - The latest feedback pulse has a score and a qualitative note recorded.
 - Every client-facing message sits as a reviewed draft awaiting the founder's send.
 - The assessment is appended to the health log and linked to projects, people, and commitments.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

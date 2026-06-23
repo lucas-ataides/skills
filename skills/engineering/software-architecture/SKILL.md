@@ -29,3 +29,7 @@ The depth bar across the seven steps is [the design process](references/design-p
 
 - [aws-toolkit](../../cloud/aws-toolkit/SKILL.md), [azure-toolkit](../../cloud/azure-toolkit/SKILL.md), [gcp-toolkit](../../cloud/gcp-toolkit/SKILL.md) — once the architecture names a cloud vendor, the matching toolkit carries the provider-specific service map, security baseline, and IaC.
 - [code-review](../code-review/SKILL.md) — the review lenses that judge a change against the architecture it lands in.
+
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

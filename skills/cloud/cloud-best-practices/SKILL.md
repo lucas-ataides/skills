@@ -24,3 +24,5 @@ The controls, the SOC2 Trust Services Criteria mapping, the evidence each contro
 7. **Review against the red flags.** Check the assembled mapping against the failure modes in [the cloud controls reference](references/cloud-controls.md): compliance theater, no audit trail, no evidence, secrets in code, over-permissive IAM. The step is done when each red flag is absent or carries a recorded, signed-off exception with a review date.
 
 See also: [the determinism doctrine](../../meta/foundation/SKILL.md).
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

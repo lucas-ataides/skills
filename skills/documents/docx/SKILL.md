@@ -22,3 +22,5 @@ Generate the document deterministically with python-docx. Push formatting into n
 6. **Run the design-system review.** Check the document against the red-flags list in [the reference](references/beautiful-docx.md): a Calibri wall, manual formatting in place of styles, inconsistent heading levels, dense tables, sub-AA contrast. Record each hit as a defect to fix. Done when the red-flags list has a verdict and no unresolved defect remains.
 
 7. **Verify the artifact by opening it.** Save the `.docx`, reopen it with python-docx, and confirm the styles, heading outline, and page count match the plan from step 1 — observe the real file, never assume it. Done when the reopened document reports the expected named styles and heading hierarchy.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

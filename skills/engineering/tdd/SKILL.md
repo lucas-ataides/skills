@@ -22,3 +22,7 @@ Each phase ends on a condition the test gate can observe, so the loop is enforce
 6. **Advance or close.** Per remaining behavior, return to step 1 with the next one. The change is done when every framed behavior has a green test and steps 2 through 5 have each reported their completion criterion.
 
 See also: [the foundation doctrine](../../meta/foundation/SKILL.md).
+
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

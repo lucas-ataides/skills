@@ -26,3 +26,5 @@ Three references carry the depth. Read [frameworks.md](references/frameworks.md)
 7. **Read aloud against voice and the contract.** Read the final copy aloud once for the founder's voice and rhythm, flatten any line that sounds like a corporate brochure, then set the result beside the step-1 contract. This step is done when every sentence sounds like the founder speaking, no jargon filler remains, and the claim, reader, and action survive unchanged.
 
 See also: [persuasion.md](references/persuasion.md) for the ethics line and the dark patterns this skill refuses to emit.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

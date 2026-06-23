@@ -22,3 +22,5 @@ The leverage is in the order. Frame before you generate, generate before you jud
 6. **Stop on a clear next step.** Convergence is done when a concrete next action exists — a file to open, a spike to run, a question to settle. Thinking past that point is analysis paralysis, not diligence. The step ends once the chosen direction and its first checkable next step are both written in one or two lines.
 
 See also: [the thinking moves](references/thinking-moves.md) for the techniques, the failure modes, the red flags, and a worked example.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

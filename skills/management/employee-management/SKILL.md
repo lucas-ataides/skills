@@ -27,3 +27,5 @@ People data is sensitive. Mark sensitivity in note frontmatter at capture with t
 - Recent 1:1s and feedback exist as dated, linked notes — not as unrecorded memory.
 - An active performance concern has a dated, documented record predating a formal process.
 - Private notes carry a sensitivity marker, and private detail is summarized rather than copied.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

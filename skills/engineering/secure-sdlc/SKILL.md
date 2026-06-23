@@ -26,3 +26,7 @@ Ship a change only after every deterministic gate is green, then record what "gr
    Confirm the record names a result per category from step 1. The step is done when the gate record and the SBOM file both exist for this change.
 
 See also: [the determinism doctrine](../../meta/foundation/SKILL.md).
+
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

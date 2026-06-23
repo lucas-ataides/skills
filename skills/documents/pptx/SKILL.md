@@ -22,3 +22,5 @@ Push the work down the determinism ladder: a python-pptx script owns geometry, c
 5. **Polish to the design checklist.** Run the deck against the reference checklist — type scale, ≤2 fonts, palette and AA contrast, spacing on the grid, one idea per slide, visual hierarchy, no clip-art, no wall-of-text — and fix each failing line. Polish is complete when every checklist line holds or carries a written, justified exception.
 
 6. **Lint the skill and verify the file opens.** Run `uv run skill-lint --strict skills/documents/pptx` and `uv run skill-docs skills/documents/pptx`, then reopen the generated deck by reloading it with `python-pptx` and counting its slides. The skill ships when lint and docs both report zero findings and the reload returns the expected slide count without raising.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

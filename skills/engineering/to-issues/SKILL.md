@@ -20,3 +20,5 @@ A well-formed issue states an outcome, carries the context to act on cold, and e
 5. **Label and link.** Apply type, priority, and area labels from the taxonomy read at step 1, then record dependency and parent-child links between the drafts. Done when every draft carries a type label, a priority, and its stated links.
 
 6. **Confirm, then create on approval.** Present the numbered drafts and ask the user to approve, edit, or reject. Creating issues via `gh issue create` or the Linear API is an external write — run it only after explicit approval, on the approved set alone. Done when the user has approved (issues created) or declined (drafts returned unwritten).
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

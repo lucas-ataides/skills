@@ -24,3 +24,5 @@ The depth bar, the failure modes, and a worked example live in [references/pm-sy
 6. **Correlate the project in the vault.** Link the project note to the people, companies, and commitments it touches via [second-brain](../../obsidian/second-brain/SKILL.md), so a query across the vault surfaces this project beside related work. The step is done when the project links to at least its owner and one company-or-commitment note, and the link resolves.
 
 7. **Verify the record against the checklist.** Confirm the project passes the completion checklist in [references/pm-system.md](references/pm-system.md): testable goal, explicit scope, dated milestones, acceptance-tagged tasks, a current cadence entry, owned risks, linked decisions, a changed/next/blocked update, and vault links that resolve. The step is done when every checklist line holds or carries a dated, owned exception.
+
+With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
