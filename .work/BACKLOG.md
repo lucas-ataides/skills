@@ -90,6 +90,7 @@ deterministic (script + manual). Per-skill docs: generated README.md per skill (
 - [ ] AWS/Azure/GCP: each follows its cloud philosophy (AWS managed-first/Well-Architected; Azure WAF; GCP Arch Framework).
 - [ ] software-architecture: + cloud architecture + diagrams (C4/Mermaid) + output ADR/design docs.
 - [ ] NEW soc-siem skill: Wazuh + Grafana + Suricata; monitor cloud + VMs.
+- [x] NEW project-context skill: maintain AGENTS.md/CLAUDE.md + TODO.md per project (scripts/project-context.sh check|init|--selftest). engineering wired; wire other dev skills (agent-loop, secure-sdlc, tdd, code-review, software-architecture, documentation) to it during the cross-cutting pass.
 
 ## R-systems (cross-cutting; after merges settle)
 - [ ] config: tools/skillkit config loader reading ~/.config/skills/skills.toml + ./skills.toml; install.sh seeds default; review EVERY skill for config values.
