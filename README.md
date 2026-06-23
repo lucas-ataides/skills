@@ -33,7 +33,7 @@ applied to agent skills. The full doctrine lives in
 
 ## Install
 
-1. the CLIs the skills call (skill-lint, skill-gate, skill-changelog, skill-docs, skill-update)
+1. the CLIs the skills call (skill-lint, skill-new, skill-gate, skill-changelog, skill-docs, skill-update, skill-config, skill-readme)
 
   ```bash
   git clone https://github.com/ldatb/skills.git && cd skills
