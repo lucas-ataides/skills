@@ -21,6 +21,6 @@ Keep the project legible as you work: maintain its AGENTS.md/CLAUDE.md and task 
 
 6. **Finish the user-facing edges.** For a UI change, cover the loading, empty, and error states and the accessibility checklist. For an API change, cover the error contract, pagination, and idempotency.
 
-7. **Gate and verify.** Run `skill-gate --strict`, then confirm each acceptance criterion against the running change. The work is done when every criterion passes and the gates are green.
+7. **Gate and verify.** Pass the [appsec](../appsec/SKILL.md) gate — every code change, app or infra, runs `skill-gate --strict` through that skill's fixed order — then confirm each acceptance criterion against the running change. The work is done when every criterion passes and the appsec gate is green.
 
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

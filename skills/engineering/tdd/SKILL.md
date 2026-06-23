@@ -25,4 +25,6 @@ See also: [the foundation doctrine](../../meta/foundation/SKILL.md).
 
 See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
 
+The full gate is [appsec](../appsec/SKILL.md) — clear it before the change ships.
+
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

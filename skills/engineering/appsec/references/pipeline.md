@@ -1,6 +1,6 @@
 # The secure-SDLC pipeline
 
-The judgment behind the secure-sdlc steps. A gate run is cheap; a defect that reaches
+The judgment behind the appsec steps. A gate run is cheap; a defect that reaches
 production is not, so the discipline is built around catching each class of defect at the
 earliest gate that can see it and then *attesting* what was checked. The gates
 (`skill-gate`) own the deterministic scanning; this page explains why each gate exists,

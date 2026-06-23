@@ -94,7 +94,7 @@ accent  = "#3b5bdb"
 [skill.agent-loop]
 mode = "checkpointed"    # "checkpointed" (pause for approval) or "autonomous"
 
-[skill.secure-sdlc]
+[skill.appsec]
 block_severity = "high"  # the CVE/finding severity that blocks a merge
 
 [skill.soc-siem]

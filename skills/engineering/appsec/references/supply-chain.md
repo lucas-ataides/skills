@@ -1,6 +1,6 @@
 # Supply-chain depth — auditing the dependency tree
 
-The judgment behind the secure-sdlc security gates when the finding lives in a dependency
+The judgment behind the appsec security gates when the finding lives in a dependency
 rather than in first-party code. The gates (`skill-gate`) run the sca and secrets scanners
 and emit findings; this page is what the scanners cannot decide — which finding is real,
 which is reachable, and what a defensible response looks like. A modern application ships
@@ -8,7 +8,7 @@ far more code from its dependency tree than from its own repository, so the depe
 is the attack surface. Treat every package as untrusted input that executes with your
 privileges until an audit says otherwise.
 
-This reference is the canonical home for the dependency-audit substance the secure-sdlc
+This reference is the canonical home for the dependency-audit substance the appsec
 pipeline folds into its **sca** and **secrets** gates and its `syft` SBOM step.
 
 ## The threat model — five ways the tree turns hostile
@@ -89,7 +89,7 @@ Two formats dominate, and a useful audit can emit either:
 Pick by audience: CycloneDX for the security pipeline, SPDX when a contract or compliance
 regime names it. An SBOM is only as honest as its inputs, so generate it from the same
 locked tree the build ships — an SBOM built from floating manifests lists components that
-were never installed. In the secure-sdlc pipeline the SBOM comes from `syft` (`skill-gate`
+were never installed. In the appsec pipeline the SBOM comes from `syft` (`skill-gate`
 has no SBOM capability), generated from the locked tree alongside the gate record.
 
 ## Triaging a CVE finding — severity is a label, not a verdict
@@ -193,7 +193,7 @@ here. The SBOM is the one step `skill-gate` does not own, so `syft` is invoked d
 - **`pip-audit`** (Python), **`npm audit`** (Node) — ecosystem-native vulnerability scans
   reading the lockfile, also behind the **sca** gate.
 - **`syft`** — generate the SBOM (CycloneDX or SPDX) from the source tree or image. This is
-  the secure-sdlc SBOM step, run outside `skill-gate`.
+  the appsec SBOM step, run outside `skill-gate`.
 - **`gitleaks`** — scan the working tree and history for leaked credentials. This backs the
   **secrets** gate.
 

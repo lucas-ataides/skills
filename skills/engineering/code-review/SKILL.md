@@ -23,4 +23,6 @@ Run the deterministic gates first, then spend judgment on what no tool can see.
 
 See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
 
+The gates in step 2 are the [appsec](../appsec/SKILL.md) pipeline — a code change clears appsec before it merges.
+
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

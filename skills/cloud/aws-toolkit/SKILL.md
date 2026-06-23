@@ -25,4 +25,6 @@ Climb the determinism ladder: an AWS CLI command, a Config rule, or a Service Co
 
 7. **Gate the mutation on a reviewed plan.** Produce the plan (`terraform plan` or `cdk diff`) and have a human name what it creates, changes, and destroys, per the [infra-safety discipline](../../engineering/engineering/references/infra-safety.md): a plan showing replace or destroy on a stateful resource stops the line until the data path is confirmed. The apply itself is the approval-gated external mutation, outside this skill's default authority. This step is done once a written plan exists with a recorded approval, and the change is halted absent that approval.
 
+Infrastructure is code — pass the [appsec](../../engineering/appsec/SKILL.md) gate before any apply.
+
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

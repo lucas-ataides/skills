@@ -122,7 +122,7 @@ skill cannot be created by hand (**Poka-yoke** at authoring time).
 ```bash
 skills/                 # 45 skills, by domain (each with a generated README.md)
   meta/                 # foundation, creating-skills, setup, cavecrew
-  engineering/          # secure-sdlc, tdd, code-review, engineering (app+infra+qa),
+  engineering/          # appsec, tdd, code-review, engineering (app+infra+qa),
                         # software-architecture, git-guardrails, autoguardrails, agent-loop,
                         # subagent-driven-development, project-context, changelog-gen, documentation, to-issues
   quality/              # verification-before-completion, polish, overdrive, full-output-enforcement
@@ -147,7 +147,7 @@ scripts/                # install.sh
 | Domain | What lives here |
 | ------ | --------------- |
 | `meta` | Foundation doctrine, skill-authoring, install/setup, the cavecrew subagent protocol |
-| `engineering` | Secure SDLC, TDD, code review, full-stack engineering, software + cloud architecture, git/auto guardrails, the agent loop, project-context, changelog, documentation, to-issues |
+| `engineering` | AppSec (the gate every code change passes), TDD, code review, full-stack engineering, software + cloud architecture, git/auto guardrails, the agent loop, project-context, changelog, documentation, to-issues |
 | `quality` | Verification-before-completion, polish, overdrive, full-output enforcement |
 | `marketing` | copywriting, content, growth, outreach |
 | `design` | frontend-design (Swiss-editorial × brutalism) + brandkit |

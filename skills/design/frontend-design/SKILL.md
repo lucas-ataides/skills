@@ -91,4 +91,6 @@ building:
    when a continuous click path runs entry → consideration → decision (for a site) and every
    finding carries a severity, a cause, and a verifiable fix condition.
 
+Frontend code is code — pass the [appsec](../../engineering/appsec/SKILL.md) gate before it ships.
+
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

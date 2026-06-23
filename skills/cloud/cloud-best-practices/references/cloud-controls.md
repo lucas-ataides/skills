@@ -179,7 +179,7 @@ the gap between "compliant on audit day" and "compliant every day" closes.
   `terrascan`, `trivy config`) so a misconfiguration fails the build instead of reaching the
   account. This scan is a `skill-gate` category, run through
   [autoguardrails](../../../engineering/autoguardrails/SKILL.md) and ordered with the other
-  gates by [secure-sdlc](../../../engineering/secure-sdlc/SKILL.md). The scan output is itself
+  gates by [appsec](../../../engineering/appsec/SKILL.md). The scan output is itself
   change-management evidence.
 - **Drift detection.** Compare the live account against the IaC state on a schedule
   (`terraform plan` in check mode, AWS Config rules, Azure Policy compliance state) so a
@@ -273,7 +273,7 @@ and the captured evidence are the audit.
 - [the determinism doctrine](../../../meta/foundation/SKILL.md) — predictability over cleverness.
 - [infra-safety](../../../engineering/engineering/references/infra-safety.md) — blast radius
   and rollback for the IaC changes that implement these controls.
-- [secure-sdlc](../../../engineering/secure-sdlc/SKILL.md) — the gate order the compliance
+- [appsec](../../../engineering/appsec/SKILL.md) — the gate order the compliance
   scans join.
-- [supply-chain](../../../engineering/secure-sdlc/references/supply-chain.md) — the
+- [supply-chain](../../../engineering/appsec/references/supply-chain.md) — the
   same evidence-and-triage discipline applied to the dependency tree.

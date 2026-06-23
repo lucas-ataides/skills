@@ -1,17 +1,12 @@
-# secure-sdlc
+# appsec
 
-> Run every deterministic quality and security gate before a change ships, then attest the result. Use when the user wants to ship securely, run all the gates, harden a change before merge, produce a security attestation or SBOM, or prove a build is clean.
+> The security gate every code change passes before it ships — runs the deterministic quality and security gates in a fixed order, then attests the result. Use whenever code changes — backend, frontend, infrastructure, Terraform, Kubernetes, Docker, CI config, or any other code — before merging or shipping; to harden a change, run all the gates, produce an SBOM or attestation, or prove a build is clean.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
 ## When to use
 
-- ship securely
-- run all the gates
-- harden a change before merge
-- produce a security attestation
-- SBOM
-- prove a build is clean
+Invoke it by name when you need its task.
 
 ## What it does
 

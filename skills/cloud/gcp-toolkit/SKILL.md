@@ -25,4 +25,6 @@ Climb the determinism ladder: a `gcloud` command, an org policy constraint, or a
 
 7. **Review against the five categories and the red flags, then gate the mutation on a reviewed plan.** Check the design against each category's failure modes and the security red flags: a public bucket, a primitive role, a downloaded service-account key, absent audit logs, a VM where Cloud Run fits, click-ops. Then produce `terraform plan` and route any create, change, or destroy on a stateful resource through the human-approval gate in the [infra-safety discipline](../../engineering/engineering/references/infra-safety.md), where a plan showing replace or destroy on stateful data stops the line until the data path is confirmed. The apply against a live project is the approval-gated external mutation, outside this skill's default authority. This step is done once each red flag is marked absent or recorded as an accepted risk with a named owner, a written plan exists with a recorded approval, and the change is halted absent that approval.
 
+Infrastructure is code — pass the [appsec](../../engineering/appsec/SKILL.md) gate before any apply.
+
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

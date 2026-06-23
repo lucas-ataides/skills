@@ -1,9 +1,9 @@
 ---
-name: secure-sdlc
-description: Run every deterministic quality and security gate before a change ships, then attest the result. Use when the user wants to ship securely, run all the gates, harden a change before merge, produce a security attestation or SBOM, or prove a build is clean.
+name: appsec
+description: The security gate every code change passes before it ships — runs the deterministic quality and security gates in a fixed order, then attests the result. Use whenever code changes — backend, frontend, infrastructure, Terraform, Kubernetes, Docker, CI config, or any other code — before merging or shipping; to harden a change, run all the gates, produce an SBOM or attestation, or prove a build is clean.
 ---
 
-Ship a change only after every deterministic gate is green, then record what "green" covered. This skill orchestrates the gates in a fixed order so each run is identical; the commands live in `skill-gate`, never in prose, and the per-gate rationale lives in [the pipeline reference](references/pipeline.md). Mechanical scanning is the floor — the attestation is the artifact that proves the floor was met. The pipeline now subsumes the dependency supply-chain audit: the sca and secrets gates and the `syft` SBOM cover dependency vulnerabilities, pinning, and CVE triage, with the depth in [supply-chain risk](references/supply-chain.md).
+Every code change passes this gate before it ships — application code, frontend, infrastructure, Terraform, Kubernetes manifests, Dockerfiles, CI config, all of it. A change is shippable only after every deterministic gate is green, and the run then records what "green" covered. This skill orchestrates the gates in a fixed order so each run is identical; the commands live in `skill-gate`, never in prose, and the per-gate rationale lives in [the pipeline reference](references/pipeline.md). Mechanical scanning is the floor — the attestation is the artifact that proves the floor was met. The pipeline subsumes the dependency supply-chain audit: the sca and secrets gates and the `syft` SBOM cover dependency vulnerabilities, pinning, and CVE triage, with the depth in [supply-chain risk](references/supply-chain.md).
 
 ## Steps
 
