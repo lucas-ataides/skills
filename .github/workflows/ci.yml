@@ -33,6 +33,9 @@ jobs:
       - name: Toolchain tests
         run: pytest -q
 
+      - name: skill-selftest — every skill script self-tests green
+        run: python tools/run_selftests.py skills/
+
       - name: Ruff
         run: ruff check tools/
 

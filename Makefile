@@ -34,6 +34,10 @@ readme: ## Regenerate the per-skill README.md files from each SKILL.md.
 test: ## Run the toolchain test suite.
 	uv run pytest
 
+.PHONY: selftest
+selftest: ## Run every skill script's --selftest. Blocks on any failure (Jidoka).
+	uv run python tools/run_selftests.py skills/
+
 .PHONY: format
 format: ## Format + autofix Python tooling with ruff.
 	uv run ruff check --fix tools/
@@ -48,6 +52,6 @@ new-skill: ## Scaffold a conformant skill. Usage: make new-skill CATEGORY=engine
 	uv run skill-new --category "$(CATEGORY)" --name "$(NAME)"
 
 .PHONY: ci
-ci: lint docs test sca ## Everything CI runs, locally. Green here == green there.
+ci: lint docs test selftest sca ## Everything CI runs, locally. Green here == green there.
 	uv run ruff check tools/
 	uv run skill-readme --check skills/

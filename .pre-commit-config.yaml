@@ -34,6 +34,13 @@ repos:
         pass_filenames: false
         files: ^tools/.*\.py$
 
+      - id: skill-selftest
+        name: skill-selftest (every skill script self-tests green)
+        entry: python tools/run_selftests.py skills
+        language: python
+        pass_filenames: false
+        always_run: true
+
       - id: ruff
         name: ruff (lint tooling)
         entry: ruff check --fix tools
