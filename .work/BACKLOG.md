@@ -73,13 +73,13 @@ deterministic (script + manual). Per-skill docs: generated README.md per skill (
 
 ## R-merges (settle the skill set)
 - [x] remove caveman-review
-- [ ] marketing 13→4: copywriting(+copy-editing+marketing-psychology) · content(+ad-creative+social-content+social-media-viral) · growth(+marketing-ideas+revops+churn-prevention) · outreach(cold-email+sales-enablement+public-relations). Remove social/ category.
-- [ ] design 5→1 `frontend-design` (Swiss editorial + brutalism, ref misostack.com) + absorb site-architecture; brandkit stays.
-- [ ] obsidian 3→1 `second-brain` (obsidian-vault + ralph-vault + second-brain-crud; keep scripts; add retrieval).
-- [ ] `agent-loop` ← ralph + app-completion-loop (checkpointed + autonomous; subagent-driven-development composes).
+- [x] marketing 13→4: copywriting · content · growth · outreach. social/ removed.
+- [x] design 5→1 `frontend-design` (Swiss editorial + brutalism) + absorbed site-architecture; brandkit separate.
+- [x] `agent-loop` ← ralph + app-completion-loop (checkpointed + autonomous; subagent-driven-development composes).
+- [ ] obsidian 3→1 `second-brain` (obsidian-vault + ralph-vault + second-brain-crud; keep scripts; add retrieval).  <-- NEXT
 - [ ] secure-sdlc ← absorb supply-chain-audit.
 - [ ] rename docs-sync → `documentation`; rename simple → `brainstorm`.
-- [ ] remove standalone least-code → imbue subtraction ladder into foundation (also imbue full-output-enforcement + verification-before-completion as inherited principles; keep those two standalone).
+- [ ] remove standalone least-code → imbue subtraction ladder into foundation (also imbue full-output-enforcement + verification-before-completion; keep those two standalone).
 
 ## R-behavior
 - [ ] autoguardrails: auto (triggers + pre-commit/CI runs check-policy.sh every commit).

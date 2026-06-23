@@ -4,7 +4,7 @@ A deck earns the word *beautiful* the same way a web UI does: by being systemati
 
 This reference works on two jobs at once: **generating** a deck from data or an outline with `python-pptx`, and **styling** one so it stops looking auto-generated. The governing move is to push the work down the determinism ladder — a script owns geometry, color, and font (exact, repeatable, free of eyeballing), and the model owns only the prose and the choice of archetype per slide. The lineage of the design rules is Refactoring UI and the brand-system and web-design references in this repo, distilled into values a script can hardcode.
 
-The design tokens here resolve to the same roles named in [the brand system](../../../design/brandkit/SKILL.md) and the scales named in [the web design rules](../../../design/web-design-guidelines/SKILL.md). A deck is one more surface that inherits the kit; what changes from the website is density and presenter-scale type, never the identity values.
+The design tokens here resolve to the same roles named in [the brand system](../../../design/brandkit/SKILL.md) and the scales named in [the web design rules](../../../design/frontend-design/SKILL.md). A deck is one more surface that inherits the kit; what changes from the website is density and presenter-scale type, never the identity values.
 
 ---
 
@@ -361,7 +361,7 @@ A deck likely needs this skill when any of these appear:
 
 ## 8. Worked example — a branded title slide and a content slide
 
-The script below builds one title slide and one content slide that look designed, on the 16:9 canvas, from a single token block. The tokens resolve to the "Lumen" mini-kit roles in [the brand system](../../../design/brandkit/SKILL.md) — `brand = #3b5bdb`, `fg = #1a1b1e`, body `Inter` — and the scales to [the web design rules](../../../design/web-design-guidelines/SKILL.md).
+The script below builds one title slide and one content slide that look designed, on the 16:9 canvas, from a single token block. The tokens resolve to the "Lumen" mini-kit roles in [the brand system](../../../design/brandkit/SKILL.md) — `brand = #3b5bdb`, `fg = #1a1b1e`, body `Inter` — and the scales to [the web design rules](../../../design/frontend-design/SKILL.md).
 
 ```python
 from pptx import Presentation

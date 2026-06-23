@@ -2,7 +2,7 @@
 
 A PDF is a *printed* artifact, not a web page that happens to scroll. The page is a fixed
 canvas with hard edges, no hover, no reflow, and a reader who judges the whole spread at a
-glance. The governing idea matches the [web design rules](../../../design/web-design-guidelines/references/web-design-rules.md):
+glance. The governing idea matches the [web design rules](../../../design/frontend-design/references/visual-rules.md):
 **professional layout is systematic, not inspired.** Pick a small set of scales once, snap
 every value to them, and the document reads as designed. The default browser "Print to PDF"
 breaks all of this — that look is the failure to design, and avoiding it is the whole job.

@@ -1,7 +1,7 @@
 # The ralph-vault loop
 
 The reference behind the loop steps. Ralph-vault names one application of a single
-technique: take the autonomous [ralph](../../../engineering/ralph/SKILL.md) loop and point it
+technique: take the autonomous [ralph](../../../engineering/agent-loop/SKILL.md) loop and point it
 at the [obsidian-vault](../../obsidian-vault/SKILL.md) compiler, so a vault of unprocessed
 sources compiles itself into canonical notes under hard guardrails. One stable prompt drives
 every iteration — re-read the vault loop state, ingest one source, canonicalize it, run the
@@ -10,7 +10,7 @@ unattended until a fixed done-condition holds or a guardrail halts it. This page
 judgment the steps assume: how the loop maps onto the compiler, what each guardrail does, the
 state contract, when ralph-vault is the right tool, how it fails, and a worked example.
 
-Ralph-vault inherits the whole base technique from [ralph](../../../engineering/ralph/SKILL.md)
+Ralph-vault inherits the whole base technique from [ralph](../../../engineering/agent-loop/SKILL.md)
 and changes only the domain: the backlog is sources and entities rather than code call sites,
 the gate is the vault validator rather than a code test suite, and the safety burden grows
 because a vault holds private data and the connectors reach external services. The

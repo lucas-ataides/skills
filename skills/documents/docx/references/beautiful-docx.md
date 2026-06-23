@@ -1,6 +1,6 @@
 # Beautiful .docx with python-docx
 
-Concrete, opinionated practice for generating Word documents that read as designed, not defaulted. The governing idea matches the [web design rules](../../../design/web-design-guidelines/references/web-design-rules.md): **professional design is systematic, not inspired.** Pick a small set of scales once — a type ramp, a spacing rhythm, a restrained palette — encode them as named styles, then snap every paragraph to a style instead of hand-formatting it.
+Concrete, opinionated practice for generating Word documents that read as designed, not defaulted. The governing idea matches the [web design rules](../../../design/frontend-design/references/visual-rules.md): **professional design is systematic, not inspired.** Pick a small set of scales once — a type ramp, a spacing rhythm, a restrained palette — encode them as named styles, then snap every paragraph to a style instead of hand-formatting it.
 
 The grounding is the [foundation](../../../meta/foundation/SKILL.md) determinism doctrine: a script generates the file, the output is reproducible, and the design lives in data (styles) rather than in scattered judgment (inline runs). The depth bar for reviewing the result is the tech-lead standard from [code-review](../../../engineering/code-review/SKILL.md) — judge the document against what it must deliver and whether it reads as one coherent artifact, not only whether each line compiles.
 
