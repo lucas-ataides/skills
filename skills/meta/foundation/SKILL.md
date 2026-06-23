@@ -36,6 +36,10 @@ Skills call `skillkit` instead of describing a file operation in prose:
 - `atomic_write` — a reader never sees a half-written file.
 - `safe_remove` — refuses anything outside its root, refuses the root itself, never recurses.
 
+## Subtraction — the least code that works
+
+The best code is the code never written. Before adding, climb the subtraction ladder and stop at the first rung that holds: does this need to exist at all; does the standard library cover it; does a native platform feature cover it; does an installed dependency solve it; can it be one line. New code earns its place only past those rungs. This principle is imbued in every skill; the full ladder, the never-simplify-away carve-outs (validation, data-loss safety, security, accessibility), and worked examples live in [references/subtraction.md](references/subtraction.md).
+
 ## Japanese quality principles
 
 The doctrine is grounded in manufacturing discipline, mapped to concrete mechanics in [references/japanese-principles.md](references/japanese-principles.md):

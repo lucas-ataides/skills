@@ -26,7 +26,7 @@ The check: three or more genuinely different options sit on the page, none yet j
 
 The third phase closes the space. Now judgment is welcome, applied through one filter: what does the framed question actually need? Score each option against that need, drop the ones that overshoot or undershoot, and pick the survivor with the fewest moving parts.
 
-Simplicity is the tie-breaker and usually the decider. "Simplest that works" carries a load-bearing qualifier — *that works* means the full framed need, carve-outs included, never a subset that only demos. A solution that is simple because it ignores half the requirement is not simple; such a solution is merely incomplete. The same bias drives the [least-code](../../least-code/SKILL.md) ladder for implementation, pulled one level up to the choice of direction: reach for the elaborate option only after the plain one is shown not to cover the need.
+Simplicity is the tie-breaker and usually the decider. "Simplest that works" carries a load-bearing qualifier — *that works* means the full framed need, carve-outs included, never a subset that only demos. A solution that is simple because it ignores half the requirement is not simple; such a solution is merely incomplete. The same bias drives the [least-code](../../../meta/foundation/SKILL.md) ladder for implementation, pulled one level up to the choice of direction: reach for the elaborate option only after the plain one is shown not to cover the need.
 
 The check: one direction is chosen, and its advantage over the runners-up is stated in a sentence tied to the framed need.
 

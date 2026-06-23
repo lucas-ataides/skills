@@ -1,5 +1,5 @@
 ---
-name: docs-sync
+name: documentation
 description: Keep documentation in sync with code — detect link drift deterministically with skill-docs, then reconcile the prose a tool cannot write. Use when the user changes code, renames or moves a file, updates a public API, edits a README or guide, or asks to verify, refresh, or audit the docs after a change.
 ---
 

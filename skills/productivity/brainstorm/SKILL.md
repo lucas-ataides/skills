@@ -1,5 +1,5 @@
 ---
-name: simple
+name: brainstorm
 description: Think a problem through to a simple, clear answer — frame the real question, diverge then converge, and pick the simplest thing that works. Use when the user wants to brainstorm, talk an idea or decision through, untangle a vague or messy problem, weigh options, get unstuck, find an approach, or sanity-check a direction before building.
 ---
 
@@ -15,7 +15,7 @@ The leverage is in the order. Frame before you generate, generate before you jud
 
 3. **Probe for the trivial version.** Ask what would make this problem trivial — the constraint that, if dropped or added, collapses the work to almost nothing. A reframed problem often beats the best solution to the original. The step ends once the cheapest framing is named, even when the answer is that none collapses it.
 
-4. **Converge — pick the simplest option that works.** Score the options on what the framed question needs, then choose the one that meets it with the least moving parts. Simplest-that-works ties to [least-code](../least-code/SKILL.md): smallest thing covering the need in full, never a subset that only demos. The step ends once one direction is chosen and the reason it beat the runners-up is stated in a sentence.
+4. **Converge — pick the simplest option that works.** Score the options on what the framed question needs, then choose the one that meets it with the least moving parts. Simplest-that-works ties to [least-code](../../meta/foundation/SKILL.md): smallest thing covering the need in full, never a subset that only demos. The step ends once one direction is chosen and the reason it beat the runners-up is stated in a sentence.
 
 5. **Stress-test the choice by inversion.** Ask what would make the chosen direction fail, and name the one assumption it rests on most heavily. A choice with no known failure mode has not been examined yet. The step ends once the top failure mode is written and the choice either survives it or is swapped for one that does.
 
