@@ -40,6 +40,10 @@ Skills call `skillkit` instead of describing a file operation in prose:
 
 The best code is the code never written. Before adding, climb the subtraction ladder and stop at the first rung that holds: does this need to exist at all; does the standard library cover it; does a native platform feature cover it; does an installed dependency solve it; can it be one line. New code earns its place only past those rungs. This principle is imbued in every skill; the full ladder, the never-simplify-away carve-outs (validation, data-loss safety, security, accessibility), and worked examples live in [references/subtraction.md](references/subtraction.md).
 
+## Feed the second brain
+
+When a vault is configured (`skill-config path`), a skill records its salient outcome on the way out — a decision made, a fact learned, a task closed — through the [second-brain](../../obsidian/second-brain/SKILL.md) capture at the configured vault path. The feed is opt-out: on by default, skipped silently when no vault is set, and the agent judges what is worth keeping. When the value of recording is unclear, it asks before writing. Configuration (the vault path, the feed toggle, per-skill settings) lives in `skills.toml` and is read through `skillkit.config`.
+
 ## Japanese quality principles
 
 The doctrine is grounded in manufacturing discipline, mapped to concrete mechanics in [references/japanese-principles.md](references/japanese-principles.md):

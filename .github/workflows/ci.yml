@@ -27,6 +27,9 @@ jobs:
       - name: skill-docs — Markdown links resolve
         run: skill-docs .
 
+      - name: skill-readme — per-skill READMEs current
+        run: skill-readme --check skills/
+
       - name: Toolchain tests
         run: pytest -q
 

@@ -18,6 +18,14 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: skill-readme
+        name: skill-readme (per-skill READMEs current)
+        entry: python tools/run_readme.py skills
+        language: python
+        additional_dependencies: ["PyYAML>=6.0"]
+        pass_filenames: false
+        always_run: true
+
       - id: toolchain-tests
         name: toolchain tests
         entry: python -m pytest tools -q

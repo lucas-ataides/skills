@@ -7,7 +7,7 @@ name = "ldatb-skills-tools"
 version = "0.1.0"
 description = "Deterministic toolchain for the ldatb/skills repository: skill-lint and skill-new."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Lucas de Ataides", email = "lucasatab@gmail.com" }]
 dependencies = ["PyYAML>=6.0"]
@@ -22,10 +22,12 @@ skill-gate = "skill_gate.cli:main"
 skill-changelog = "skill_changelog.cli:main"
 skill-docs = "skill_docs.cli:main"
 skill-update = "skill_update.cli:main"
+skill-config = "skill_config.cli:main"
+skill-readme = "skill_readme.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["tools"]
-include = ["skill_lint*", "skill_new*", "skill_gate*", "skill_changelog*", "skill_docs*", "skill_update*", "skillkit*"]
+include = ["skill_lint*", "skill_new*", "skill_gate*", "skill_changelog*", "skill_docs*", "skill_update*", "skill_config*", "skill_readme*", "skillkit*"]
 
 [tool.setuptools.package-data]
 skill_lint = ["rules.yaml"]
@@ -40,7 +42,7 @@ addopts = "-q"
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 src = ["tools"]
 
 [tool.ruff.lint]

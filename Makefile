@@ -26,6 +26,10 @@ lint-fix: ## Apply skill-lint's deterministic autofixes (frontmatter normalizati
 docs: ## Check that every Markdown link and file reference resolves.
 	uv run skill-docs .
 
+.PHONY: readme
+readme: ## Regenerate the per-skill README.md files from each SKILL.md.
+	uv run skill-readme skills/
+
 .PHONY: test
 test: ## Run the toolchain test suite.
 	uv run pytest
@@ -46,3 +50,4 @@ new-skill: ## Scaffold a conformant skill. Usage: make new-skill CATEGORY=engine
 .PHONY: ci
 ci: lint docs test sca ## Everything CI runs, locally. Green here == green there.
 	uv run ruff check tools/
+	uv run skill-readme --check skills/

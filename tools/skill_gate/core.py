@@ -10,7 +10,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 import yaml
@@ -18,7 +18,7 @@ import yaml
 GATES_PATH = Path(__file__).with_name("gates.yaml")
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     PASS = "pass"
     FAIL = "fail"
     SKIPPED = "skipped"

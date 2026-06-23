@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 import yaml
@@ -24,7 +24,7 @@ _ENABLE_RE = re.compile(r"skill-lint:\s*enable\s+(all|[A-Z0-9, ]+)", re.IGNORECA
 _SENTENCE_SPLIT = re.compile(r"(?<=[.:;!?])\s+")
 
 
-class Severity(str, Enum):
+class Severity(StrEnum):
     ERROR = "error"
     WARNING = "warning"
     INFO = "info"
