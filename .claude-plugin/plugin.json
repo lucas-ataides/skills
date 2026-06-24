@@ -41,6 +41,7 @@
     "./skills/productivity/caveman",
     "./skills/productivity/grill-me",
     "./skills/productivity/handoff",
+    "./skills/productivity/linear",
     "./skills/productivity/teach",
     "./skills/quality/full-output-enforcement",
     "./skills/quality/overdrive",
