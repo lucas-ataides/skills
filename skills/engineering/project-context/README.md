@@ -1,6 +1,6 @@
 # project-context
 
-> Keep every project legible to agents — an AGENTS.md/CLAUDE.md plus a current TODO list. Use when starting work in a project, when an AGENTS.md/CLAUDE.md or TODO is missing, or to keep them current as the project changes.
+> Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain (brain.md) for deep CLI-managed memory. Use when starting work in a project, when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
@@ -9,6 +9,8 @@
 - starting work in a project
 - when an AGENTS.md/CLAUDE.md
 - TODO is missing
+- to adopt
+- read the project brain
 - to keep them current as the project changes
 
 ## What it does
@@ -18,6 +20,7 @@
 3. Fill the agent-instructions file.
 4. Keep the TODO current.
 5. Maintain on change.
+6. Use the project brain for deep memory.
 
 ## Scripts
 

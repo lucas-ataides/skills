@@ -21,7 +21,7 @@ Run the deterministic gates first, then spend judgment on what no tool can see.
 
 6. **Rank and report.** Label each finding blocker, major, or minor, tied to the lens it failed and the intent it endangers. The review is done when every changed file and every lens has a verdict.
 
-See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md and task list current.
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md, task list, and project brain (brain.md) current.
 
 The gates in step 2 are the [appsec](../appsec/SKILL.md) pipeline — a code change clears appsec before it merges.
 
