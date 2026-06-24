@@ -1,98 +1,114 @@
-# The project brain
+# The project brain — an LLM wiki for the repo
 
 The depth behind the "use the project brain" step in [the skill](../SKILL.md). The project
-brain is a **predefined Markdown structure** committed in a repo's `brain/` directory — no
-tool to install, no script to run. It is the project-scoped, in-repo sibling of the personal
-[second brain](../../../obsidian/second-brain/SKILL.md): durable memory an agent reads before
-working and updates as understanding changes. The structure *is* the determinism — a fixed,
-predictable shape the agent fills the same way every time. (Model inspired by brain.md.)
+brain is a **predefined Markdown structure** in a repo's `brain/` directory, following
+[Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
+No tool to install: the structure is plain Markdown and the agent does all the bookkeeping.
+It is the project-scoped sibling of the personal
+[second brain](../../../obsidian/second-brain/SKILL.md), which follows the same pattern.
 
-## Why a structure, not a script
+## The idea
 
-A brain lives in every repo you touch, so a per-repo script would be friction — something to
-install and remember to call. A predefined structure travels for free: it is plain Markdown,
-readable by any agent (Claude, Cursor, Codex) and any human, with nothing to run. The
-trade-off is honest — without a script enforcing it, the agent must hold the shape itself, so
-the template below is fixed and small enough to follow exactly, and an optional validator
-pass (below) catches drift.
+Not retrieval-over-files-each-time, but a **persistent, compounding synthesis**. The repo's
+code, commits, and PRs are the immutable raw sources; the brain is the understanding they do
+not carry — why the system is shaped this way, what was decided and rejected, where the
+bodies are buried. The agent compiles that once and keeps it current, so the next agent
+reads a settled wiki instead of re-deriving it. The tedious part is the bookkeeping
+(cross-links, the index, the log) — and that is exactly what an agent does without getting
+bored.
 
 ## The structure
 
 ```
 brain/
-  README.md        the protocol + index (every brain has this)
-  <slug>.md        one page per topic, entity, decision, or system
+  index.md     the catalog — every page, one-line summary, by category. Read FIRST.
+  log.md       append-only, parseable: ## [YYYY-MM-DD] <kind> | <summary>
+  <slug>.md    wiki pages — synthesis of an entity, concept, decision, or system
 ```
 
-- **One page per thing.** Filenames are lowercase slugs (`auth-flow.md`, `acme-corp.md`) so
-  they double as `[[wikilink]]` targets.
-- **Two parts per page.** A **Truth** section is the current understanding, *rewritten in
-  place* — keep it current, never a log. A **Timeline** section is *append-only* — what
-  changed and why, newest at the bottom.
+Filenames are lowercase slugs so they double as `[[wikilink]]` targets. Pages are
+**synthesis kept current** (rewritten in place), not a log — the chronology lives once in
+`log.md`. The repo's `AGENTS.md` points at `brain/index.md` so an agent always finds it.
 
-### `brain/README.md` — drop this in each repo's `brain/`
+### `brain/index.md`
 
 ```markdown
 # Project brain
 
-Durable project memory for agents. One page per topic under `brain/`, plain Markdown — no
-tool required. Each page has:
+An LLM wiki for this repo (Karpathy pattern). The agent owns it: read `index.md` first,
+then the pages a task touches. On a change, update the page, refresh its line here, and
+append to `log.md`. Synthesis only — never restate the code; flag contradictions with their
+source. Plain Markdown, no tool required.
 
-- **Truth** — the current understanding, rewritten in place.
-- **Timeline** — append-only: what changed, when, and why.
-- **Related** — `[[wikilinks]]` to other pages.
-
-Read the pages a task touches before working; update Truth and append a Timeline line when
-something changes. Never let Truth drift from what the code actually does.
-
-## Pages
-- [[auth-flow]] — how auth works
+## Architecture
+- [[auth-flow]] — how auth works end to end
+## Decisions
+- [[adr-keycloak]] — Cognito → Keycloak, and why
+## Systems
+- [[billing-service]] — the billing service and its seams
 ```
 
-### Page template — copy for a new page
+### A wiki page
 
 ```markdown
 ---
 title: "Auth flow"
-type: topic        # topic | person | project | decision | system | risk
+type: concept        # concept | entity | decision | system | risk
 updated: 2026-06-24
+sources: [commit a1b2c3d, "PR #45"]
 ---
 
 # Auth flow
 
-## Truth
 Sessions are JWTs issued by Keycloak via OIDC; the API validates them at the edge.
+Replaced Cognito for self-host control and OIDC parity (see [[adr-keycloak]]).
 
-## Timeline
-- 2026-06-24 — Switched off Cognito to Keycloak (ADR-1): self-host control, OIDC parity.
+> Contradiction (2026-06-24): `legacy-api` still calls Cognito directly — not yet migrated.
+> Source: commit a1b2c3d.
 
 ## Related
-- [[keycloak-deploy]]
+- [[adr-keycloak]] · [[billing-service]]
 ```
 
-## How a skill uses it
+### `brain/log.md`
 
-1. **Read before acting.** Open the pages a task touches (start from `brain/README.md`), so
-   the agent inherits the settled understanding instead of rediscovering it.
-2. **Update on change.** When a decision lands or the understanding shifts, rewrite that
-   page's Truth in place and append a dated Timeline line with the *why*. Open a new page
-   from the template for a new topic. Cross-link with `[[wikilinks]]`.
+```markdown
+# Log
 
-## Optional validation (no per-repo tool)
-
-Because the format matches the second brain's, the plugin's generic validators check a
-`brain/` directory deterministically — links resolve, slugs are clean — without anything
-installed in the project:
-
-```sh
-python skills/obsidian/second-brain/scripts/validate-wikilinks.py --vault ./brain
-python skills/obsidian/second-brain/scripts/validate-slugs.py --vault ./brain
+## [2026-06-24] decision | Cognito → Keycloak (adr-keycloak)
+## [2026-06-24] ingest | auth-flow synthesized from PR #45
 ```
+
+## The rules (from the pattern)
+
+1. **The agent owns the wiki.** Every page, cross-reference, index line, and log entry is the
+   agent's to maintain — you curate the code and ask questions.
+2. **Index first.** Read `brain/index.md` before drilling into pages.
+3. **Synthesis, not a dump.** A page compiles understanding the code lacks; it never restates
+   the code, which is the raw source.
+4. **Contradictions are flagged, not silenced.** New information that conflicts with a page is
+   noted inline with its source, never quietly overwritten.
+5. **The log is append-only and parseable.** One line per event, the `## [date] kind | …`
+   prefix, so it stays machine-readable.
+6. **One change touches many files.** A decision updates the affected page, refreshes its
+   `index.md` line, and appends `log.md` — the agent does the whole sweep in one pass.
+
+## Workflow
+
+- **Read:** `brain/index.md` → the listed pages a task touches → follow `[[wikilinks]]`.
+- **Update:** rewrite the affected page in place, refresh its `index.md` summary, append a
+  `log.md` line; flag a contradiction with its source.
+- **Lint (optional, no per-repo tool):** the format matches the second brain, so the plugin's
+  generic validators check `./brain` deterministically — links resolve, slugs are clean:
+  ```sh
+  python skills/obsidian/second-brain/scripts/validate-wikilinks.py --vault ./brain
+  python skills/obsidian/second-brain/scripts/validate-slugs.py --vault ./brain
+  ```
 
 ## Relationship to AGENTS.md / TODO
 
-AGENTS.md and TODO.md (`scripts/project-context.sh`) are the **lightweight, always-present
-entry** — how to build, test, and work here, and what is in flight. The brain is the
-**deep, evolving memory** — the accumulated truth and timeline per topic. A small project may
-need only the entry layer; a long-lived one keeps `brain/README.md` linked from AGENTS.md so
-an agent always finds it.
+`AGENTS.md` and `TODO.md` (`scripts/project-context.sh`) are the **lightweight, always-present
+entry** — how to build, test, and work here, and what is in flight. The brain is the **deep,
+compounding wiki** — the synthesized understanding per topic. A small project may need only
+the entry layer; a long-lived one keeps `brain/index.md` linked from `AGENTS.md` so every
+agent starts from the catalog.

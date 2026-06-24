@@ -7,7 +7,7 @@ description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a 
 
 A project an agent can pick up cold needs two living files: an AGENTS.md (or CLAUDE.md) that states how to build, test, and work here, and a TODO list that holds what is in flight. This skill creates them when absent and keeps them true to the project. Stale instructions mislead, so the files are updated in the same change as the code.
 
-For deep, evolving memory, a project can adopt the **project brain** — a predefined `brain/` directory of Markdown pages the agent reads and maintains, with no tool to install, covered in step 6.
+For deep, evolving memory, a project can adopt the **project brain** — an LLM wiki (Karpathy's pattern) in a `brain/` directory the agent owns and keeps current as an index, synthesis pages, and an append-only log, with no tool to install, covered in step 6.
 
 ## Steps
 
@@ -21,7 +21,7 @@ For deep, evolving memory, a project can adopt the **project brain** — a prede
 
 5. **Maintain on change.** A changed command, convention, or gotcha updates AGENTS.md in the same commit; a started or finished task moves in TODO.md. The depth — what a strong AGENTS.md contains and the anti-ambiguity rules it follows — lives in [the context-files guide](references/context-files.md).
 
-6. **Use the project brain for deep memory.** Read the relevant pages under `brain/` before working, so the agent inherits the project's settled understanding. When a decision lands or the understanding shifts, rewrite that page's `## Truth` in place and append a dated line to its `## Timeline`, and open a new page from the template for a new topic. The predefined structure, the page template, and an optional validator pass live in [the project brain reference](references/project-brain.md). The step is done once the relevant pages are read, or `brain/` is confirmed absent.
+6. **Use the project brain for deep memory.** Read `brain/index.md` first, then the pages it catalogs that the task touches, so the agent inherits the synthesized understanding. When a decision lands or the understanding shifts, update the affected page in place, refresh its line in `brain/index.md`, and append a dated entry to `brain/log.md`; flag a contradiction with its source rather than silencing it. The structure, the templates, and the rules live in [the project brain reference](references/project-brain.md). The step is done once `brain/index.md` and the touched pages are read, or `brain/` is confirmed absent.
 
 <!-- skill-lint: enable SK080 -->
 
