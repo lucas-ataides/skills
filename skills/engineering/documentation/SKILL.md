@@ -25,6 +25,6 @@ Run the deterministic link check first. Spend judgment on what the check cannot 
 
 See also: [the foundation doctrine](../../meta/foundation/SKILL.md).
 
-See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md, task list, and project brain (brain.md) current.
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md, task list, and project brain current.
 
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

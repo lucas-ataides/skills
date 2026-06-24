@@ -33,6 +33,6 @@ See also [the loop protocol](references/loop-protocol.md) for the two modes, don
 - [tdd](../tdd/SKILL.md) — how each slice is built test-first.
 - [subagent-driven-development](../subagent-driven-development/SKILL.md) — fan one slice across independent owned-file subagents when breadth dominates.
 
-See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md, task list, and project brain (brain.md) current.
+See also [project-context](../project-context/SKILL.md) to keep the project's AGENTS.md, task list, and project brain current.
 
 With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).

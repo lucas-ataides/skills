@@ -1,6 +1,6 @@
 # project-context
 
-> Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain (brain.md) for deep CLI-managed memory. Use when starting work in a project, when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
+> Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep CLI-managed memory. Use when starting work in a project, when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
@@ -24,6 +24,7 @@
 
 ## Scripts
 
+- `scripts/brain.py`
 - `scripts/project-context.sh`
 
 ## Learn more

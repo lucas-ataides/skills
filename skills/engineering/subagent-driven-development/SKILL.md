@@ -26,4 +26,4 @@ This procedure is the orchestrator's. Worker agents are non-user-facing, so each
 ## See also
 
 - [cavecrew](../../meta/cavecrew/SKILL.md) — the output protocol every dispatched worker follows.
-- [project-context](../project-context/SKILL.md) — keep the project's AGENTS.md, task list, and project brain (brain.md) current.
+- [project-context](../project-context/SKILL.md) — keep the project's AGENTS.md, task list, and project brain current.
