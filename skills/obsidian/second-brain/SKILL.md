@@ -60,7 +60,7 @@ frontmatter contract — is in
 
 3. **Retrieve connected context.** Load an existing pack from `Context Packs/`
    for a recurring task, else locate notes with `scripts/vault.sh find "<query>"`
-   by entity, tag (`tags: [project]`), or text, then follow the matched note's
+   by entity, tag (`tags: [project]`), text, or a declared alias, then follow the matched note's
    `## Related` and `## Sources` links into the connected notes — the retrieval
    procedure is in [crud-and-retrieval.md](references/crud-and-retrieval.md). This
    step is done once the recall cites the notes it came from, an empty result

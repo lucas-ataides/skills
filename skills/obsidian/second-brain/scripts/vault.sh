@@ -336,13 +336,31 @@ cmd_init() {
   printf 'vault ready: %s\n' "$root"
 }
 
-# find <query>: list vault notes whose tag, title, or text matches the query.
-# Prints matching paths; exit 0 even on no match (an empty result is not an error).
+# find <query>: list vault notes whose tag, title, or text matches the query, plus the notes
+# that match any name or alias the matched notes declare — so a customer filed under one
+# spelling still surfaces notes that used another. Prints matching paths; exit 0 even on no
+# match (an empty result is not an error). Paths only, so no note contents are ever read.
 cmd_find() {
   [ "$#" -eq 1 ] || { echo "usage: vault.sh find <query>" >&2; return 2; }
-  local root
+  local root seed terms moar all
   root=$(vault_root)
-  grep -rliIF -- "$1" "$root" --include='*.md' 2>/dev/null | sort || true
+  # Pass 1 — direct substring hits (case-insensitive, fixed-string). The trailing `|| true`
+  # keeps a no-match (grep exit 1) from tripping `set -euo pipefail`.
+  seed=$(grep -rliIF -- "$1" "$root" --include='*.md' 2>/dev/null || true)
+  [ -n "$seed" ] || return 0
+  # Pass 2 — widen by the name and aliases the matched notes declare. The entity note carries
+  # the alias list; a term with no such note simply adds nothing.
+  terms=$(printf '%s\n' "$seed" | while IFS= read -r f; do
+            sed -nE 's/^name:[[:space:]]*"?([^"]+)"?[[:space:]]*$/\1/p; s/^aliases:[[:space:]]*\[(.*)\].*$/\1/p' "$f" 2>/dev/null || true
+          done | tr ',' '\n' | sed -E 's/^[[:space:]"]*//; s/[[:space:]"]*$//' | grep -vE '^$' | sort -u || true)
+  all=$seed
+  if [ -n "$terms" ]; then
+    moar=$(printf '%s\n' "$terms" | while IFS= read -r t; do
+             grep -rliIF -- "$t" "$root" --include='*.md' 2>/dev/null || true
+           done)
+    all=$(printf '%s\n%s' "$seed" "$moar")
+  fi
+  printf '%s\n' "$all" | grep -vE '^$' | sort -u || true
 }
 
 # rm <note>: delete a single note, only inside the vault. Refuses the vault root
@@ -511,6 +529,14 @@ selftest() {
   # find by tag matches the project frontmatter.
   out=$(cmd_find "tags: [project]")
   case "$out" in *"$project"*) : ;; *) echo "FAIL: find by tag"; exit 1 ;; esac
+
+  # find expands a name's aliases — a note that used a variant spelling still surfaces, so a
+  # customer filed under one name is never lost to a search that used another.
+  local variant
+  cmd_capture client "IndySoft" 'aliases=[Indy Soft, ISoft]' >/dev/null
+  variant=$(cmd_capture meeting "Indy Soft kickoff")
+  out=$(cmd_find "IndySoft")
+  case "$out" in *"$variant"*) : ;; *) echo "FAIL: find did not expand aliases to the variant note"; exit 1 ;; esac
 
   # rm guard: the root guard fires with its own message, not a generic miss.
   out=$(cmd_rm "$tmp/vault" 2>&1) && { echo "FAIL: rm accepted vault root"; exit 1; } || true
