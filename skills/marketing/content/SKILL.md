@@ -39,4 +39,4 @@ Pick the reference for the job and read it before drafting:
 
 - `report <captures.json>` — render the ranked daily radar (trends by platform, top post patterns, candidates to adapt) from the captures file the browser scan records. The captures schema and the daily routine live in [the viral-research reference](references/viral-research.md).
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

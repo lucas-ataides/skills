@@ -23,4 +23,4 @@ Generation is deterministic and split in two. The model writes only the **conten
 
 - `scripts/render.sh <content.md> <out.docx> [reference.docx]` — renders Markdown to `.docx` via `pandoc --from gfm --to docx`, adding `--reference-doc` only when a template path is given AND the file exists. A missing content file exits 2; an absent `pandoc` exits 3; a successful render prints `wrote <out.docx>`. Run `scripts/render.sh --selftest` to render a fixture and assert the output is a valid docx (the gate `tools/run_selftests.py` discovers this check).
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

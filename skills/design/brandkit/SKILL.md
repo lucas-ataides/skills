@@ -52,4 +52,4 @@ The spec is one JSON object; every block is optional and falls back to a documen
 
 A colors value is a `#rgb` or `#rrggbb` string. The `type_scale` block derives each step as `base * ratio**i`; the `spacing` block derives each step as `base * i`. Run `tokens.py build --help` for the full interface.
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

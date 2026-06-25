@@ -25,4 +25,4 @@ See also [project-context](../project-context/SKILL.md) to keep the project's AG
 
 The gates in step 2 are the [appsec](../appsec/SKILL.md) pipeline — a code change clears appsec before it merges.
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

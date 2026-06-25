@@ -25,4 +25,4 @@ The depth bar, the failure modes, and a worked example live in [references/pm-sy
 
 7. **Verify the record against the checklist.** Confirm the project passes the completion checklist in [references/pm-system.md](references/pm-system.md): testable goal, explicit scope, dated milestones, acceptance-tagged tasks, a current cadence entry, owned risks, linked decisions, a changed/next/blocked update, and vault links that resolve. The step is done when every checklist line holds or carries a dated, owned exception.
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

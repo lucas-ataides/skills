@@ -23,4 +23,4 @@ The grammar, the type-to-section map, the breaking-change rule, the SemVer decis
 
 See also: [the determinism doctrine](../../meta/foundation/SKILL.md).
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

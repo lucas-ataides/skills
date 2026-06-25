@@ -33,4 +33,4 @@ Route the request to one of three jobs first, then follow that job's depth:
 
 This skill stops at a reviewed draft. Handing a message to a sending tool, an email API, a status page, or an automation platform is the user's decision and the user's action. The grounding doctrine is [the foundation determinism rules](../../meta/foundation/SKILL.md); the review depth bar for judging a finished draft is the tech-lead standard in [the review lenses](../../engineering/code-review/references/review-lenses.md).
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).

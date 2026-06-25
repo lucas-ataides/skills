@@ -27,4 +27,4 @@ Push the work down the determinism ladder. The model owns only the words and the
 
 - [scripts/render.sh](scripts/render.sh) — render a Markdown deck to `.pptx` with pandoc. Usage: `render.sh <content.md> <out.pptx> [reference.pptx]`. A missing content file exits 2; an absent `pandoc` exits 3. The reference template applies only when the given path exists, so a wrong path falls back to the unstyled render. Run `bash scripts/render.sh --selftest` to confirm the renderer works on this machine; the selftest prints `pptx render selftest: ok` and exits zero, or prints `render selftest: skipped (pandoc absent)` where pandoc is not installed.
 
-With a vault configured, record this skill's outcome to the second brain (opt-out; ask first if the value is unclear) — see [Feed the second brain](../../meta/foundation/SKILL.md).
+With a vault configured, prime from the second brain before starting and feed the outcome after (opt-out; the prime is read-only, ask before writing) — see [the second-brain protocol](../../meta/foundation/SKILL.md).
