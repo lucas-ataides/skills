@@ -24,7 +24,7 @@ whole job here.
 
 1. **Frame the niche and the goal**: niche, target buyer, product, and the one metric
    this round chases (reach, saves, follows, or clicks).
-2. **Scan four live surfaces by hand** in the user's logged-in browser at human pace, and
+2. **Scan the live surfaces by hand** in the user's logged-in browser at human pace, and
    capture 8 to 12 spiking posts with all seven fields.
 3. **Extract each capture to its transferable pattern** using the taxonomy — name the
    pattern, not the surface topic.
@@ -45,7 +45,7 @@ spiking *right now* shows up in the live For You feed and the Explore grid hours
 any trend report names it. Drive the session by hand, at human reading pace, the way the
 user would scan their own feed. The goal is a small, well-observed sample, not a scrape.
 
-Scan four surfaces and capture what each rewards:
+Scan the live surfaces and capture what each rewards:
 
 - **X — Trending.** Read the Trending panel and the per-topic pages for spikes adjacent
   to the niche. A trend with a *why now* attached (an event, a launch, a fight) is fuel;
@@ -61,13 +61,17 @@ Scan four surfaces and capture what each rewards:
   and open two or three niche hashtag pages. Note the cover frames that earn the tap, the
   audio attached to spiking Reels, and the carousel covers that promise a payoff worth a
   swipe.
+- **TikTok — For You, Discover, trending sounds.** Scroll the For You feed for the
+  short-video shapes the algorithm is pushing now, open Discover for the trending hashtags,
+  and note the **sound** attached to each spiking video — a rising sound is itself a trend to
+  ride. Capture the first-second hook, the format, and the sound.
 
 For the 8 to 12 posts the procedure captures, record seven fields each, because a
 pattern is only transferable once it is broken into parts:
 
 | Field | What to capture | Why it matters |
 |-------|-----------------|----------------|
-| Platform | X or Instagram, and the surface (For You, Explore, Reels, hashtag) | Norms and formats differ per surface |
+| Platform | X, Instagram, or TikTok, and the surface (For You, Explore, Reels, Discover, hashtag) | Norms and formats differ per surface |
 | Format | Standalone post, thread, carousel, Reel, short video | The format is half the pattern |
 | Hook | The literal first line, first frame, or cover slide | The hook is the part most worth stealing |
 | Structure | The beat order: hook, body shape, close | The skeleton the niche version reuses |
@@ -180,7 +184,7 @@ as much as topic: the adapted draft has to sound like the founder talking, not l
 original author ventriloquized. Read the draft aloud — a line the founder would never say
 is a line to rewrite.
 
-## Platform-specific norms — X versus Instagram
+## Platform-specific norms — X, Instagram, and TikTok
 
 The same pattern is built differently per platform, because each room rewards a different
 shape. Cross-posting identical text signals that the founder does not respect the room.
@@ -201,10 +205,50 @@ the whole hook, captions are on for the sound-off scroller, the aspect ratio is 
 Audio is a discovery surface on Reels — a spiking sound is itself a trend to ride. The
 feed caption supports the visual; it does not carry the post the way X copy does.
 
+**TikTok.** Sound-first and native-first. The first second is the whole hook, like a Reel,
+but the bar for polish is lower and the bar for authenticity is higher — a clip that looks
+like an ad dies. The **trending sound** is its own discovery surface: riding a rising sound
+puts a video in front of everyone else using it. Text-on-screen carries the hook for the
+sound-off scroller, and the For You algorithm rewards watch-through and rewatches over
+follows, so the open and the loop matter more than the brand. A format that works on Reels
+usually crosses to TikTok, rebuilt looser and faster.
+
 The translation rule: an X thread's argument becomes an Instagram carousel's slides; an X
 standalone's single sharp line becomes a Reel's spoken hook; the *idea* is shared across
 rooms, the *execution* is rebuilt for each. A pattern observed on one platform can cross
 to the other — the structure travels, the build does not.
+
+## The daily radar — fetch, rank, report
+
+The scan above is the deep method; the **daily radar** runs that same scan as a routine that
+lands a ranked report each morning. The browser still does the reading — a scheduled session
+drives the user's logged-in X, Instagram, and TikTok through the surfaces above at human pace
+and records what it saw — but the ranking and the report are a script, so the output has the
+same shape every day.
+
+1. **Record the scan.** As the session reads each surface, write what it observed into a
+   captures file:
+
+   ```json
+   {"niche": "<niche>", "captured_at": "<YYYY-MM-DD>",
+    "trends": [{"platform": "x|instagram|tiktok", "topic": "...", "why_now": "...", "angle": "..."}],
+    "posts":  [{"platform": "...", "surface": "...", "format": "...", "hook": "...",
+                "structure": "...", "saves": 0, "shares": 0, "reposts": 0, "comments": 0, "likes": 0}]}
+   ```
+
+2. **Rank and render.** `python scripts/trends.py report captures.json` scores every captured
+   post by the save-share-repost signal — likes never override it — and renders the radar:
+   trends grouped by platform, the top patterns ranked, and the candidates to adapt. Same
+   input, same report.
+
+3. **Schedule it locally.** Run the routine daily with `cron` or `launchd` calling
+   `claude -p "run the content daily radar"`, so the radar is waiting each morning; save it to
+   a file or the second brain to see which patterns recur. The routine **reads only** — it
+   observes the trend surfaces like a human checking trends over coffee, takes no action, and
+   posts nothing.
+
+The line the ethics section draws holds here: a once-a-day human-paced read is research, and
+it never becomes bulk scraping or an automated action against the live account.
 
 ## The post-and-test loop
 
@@ -235,7 +279,8 @@ is cadence, variation, measurement, double-down.
 This line is not optional, and crossing it risks the user's accounts. Stay inside it.
 
 - **Manual browsing only.** Drive the browser to read and observe at human pace, the way
-  the user scans their own feed. Reading is the permitted operation.
+  the user scans their own feed. Reading is the permitted operation. A scheduled daily pass
+  over the trend surfaces is still reading — one human-paced scan, not a bulk harvest.
 - **No scraping at scale.** Capturing a handful of posts by hand for study is research.
   Bulk-harvesting posts, profiles, or follower lists with automation violates both
   platforms' terms and is out of scope here.

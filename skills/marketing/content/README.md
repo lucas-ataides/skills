@@ -1,24 +1,19 @@
 # content
 
-> Content engine for a founder selling a product — organic system (pillars, hooks, cadence, repurposing, give/sell ratio), paid ad creative (angles, hooks, the test), and live viral research on Instagram and X. Use when the user wants a content strategy, calendar, or pillars; ad ideas, copy, hooks, angles, Reels or UGC scripts, Meta or Instagram or X ads, or test variations; to turn an insight into posts; what or how often to post; what is trending; or why a post blew up. Research and draft only.
+> Content engine for a founder selling a product — organic system (pillars, hooks, cadence, give/sell ratio), paid ad creative (angles, hooks, the test), and live viral research on X, Instagram, and TikTok with a deterministic daily trend radar. Use when the user wants a content strategy or pillars; ad ideas, copy, hooks, angles, Reels or UGC scripts; what or how often to post; what is trending; a daily trend-fetch routine; or why a post blew up. Research and draft only.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
 ## When to use
 
 - a content strategy
-- calendar
 - pillars; ad ideas
 - copy
 - hooks
 - angles
 - Reels
-- UGC scripts
-- Meta
-- Instagram
-- X ads
-- test variations; to turn an insight into posts; what
-- how often to post; what is trending;
+- UGC scripts; what
+- how often to post; what is trending; a daily trend-fetch routine;
 - why a post blew up
 
 ## What it does
@@ -34,6 +29,7 @@
 ## Scripts
 
 - `scripts/content-lint.py`
+- `scripts/trends.py`
 
 ## Learn more
 
