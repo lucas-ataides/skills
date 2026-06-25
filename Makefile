@@ -1,4 +1,4 @@
-# ldatb/skills — deterministic toolchain entrypoints.
+# ataides/skills — deterministic toolchain entrypoints.
 # Every target is reproducible: same input, same result. No hidden state.
 # Requires uv (https://docs.astral.sh/uv/). uv owns the venv and the lockfile.
 
@@ -36,7 +36,7 @@ test: ## Run the toolchain test suite.
 
 .PHONY: selftest
 selftest: ## Run every skill script's --selftest. Blocks on any failure (Jidoka).
-	uv run python tools/run_selftests.py skills/
+	uv run python tools/run_selftests.py skills/ hooks/
 
 .PHONY: format
 format: ## Format + autofix Python tooling with ruff.

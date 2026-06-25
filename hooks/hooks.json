@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/skill-router.sh\"",
+            "timeout": 5,
+            "statusMessage": "Routing to ataides-skills..."
+          }
+        ]
+      }
+    ]
+  }
+}

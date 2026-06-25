@@ -44,7 +44,7 @@ applied to agent skills. The full doctrine lives in
 
   ```bash
   /plugin marketplace add lucas-ataides/skills
-  /plugin install lucas-ataides-skills@lucas-ataides-skills
+  /plugin install ataides-skills@ataides-skills
   ```
 
 `skill-update` reports when a newer tagged release exists.

@@ -19,12 +19,14 @@ _MARKER = "--selftest"
 
 
 def discover(roots: list[Path]) -> list[Path]:
-    """Return skill scripts that declare a ``--selftest``, in deterministic order."""
+    """Return skill scripts and plugin hooks declaring a ``--selftest``, deterministically."""
     found: set[Path] = set()
     for root in roots:
         for pattern in ("*.sh", "*.py"):
-            for path in root.glob(f"**/scripts/{pattern}"):
-                if _MARKER in path.read_text(encoding="utf-8"):
+            for path in root.glob(f"**/{pattern}"):
+                if path.parent.name in ("scripts", "hooks") and _MARKER in path.read_text(
+                    encoding="utf-8"
+                ):
                     found.add(path)
     return sorted(found)
 

@@ -1,5 +1,5 @@
 {
-  "name": "lucas-ataides-skills",
+  "name": "ataides-skills",
   "skills": [
     "./skills/cloud/aws-toolkit",
     "./skills/cloud/azure-toolkit",

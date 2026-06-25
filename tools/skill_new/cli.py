@@ -50,7 +50,7 @@ def register(root: Path, rel: str) -> bool:
     if manifest.exists():
         data = json.loads(manifest.read_text(encoding="utf-8"))
     else:
-        data = {"name": "lucas-ataides-skills", "skills": []}
+        data = {"name": "ataides-skills", "skills": []}
     skills = set(data.get("skills", []))
     if rel in skills:
         return False

@@ -62,6 +62,13 @@ creative (where the hook owns the first three seconds) and trend-adapted posts.
   carousel. The hook's only job is to stop the scroll. A hook states a tension, a
   stake, a contradiction, or a promise — never a topic. "How I think about pricing" is
   a topic and dies; "I almost killed my startup by pricing too low" is a hook and lives.
+  Two sharpeners the feed punishes you for missing. **Point the hook at the viewer, not
+  yourself** — "you're automating the wrong task first" stops more cold strangers than
+  "I automated my workflow," because the scroller cares about their problem, not your
+  story. And **keep the soft personal anecdote off the cover** — "I used to lose every
+  good idea" is a warm *second* line, but on frame one it asks a stranger to care about
+  you before you have earned it; open on their tension or a curiosity gap, and spend the
+  anecdote on the retain beat that follows.
 - **Retain** — the middle. The body delivers on the hook's promise fast, then keeps the
   reader moving with specifics, a list, a story beat, or an open loop that the close
   resolves. The enemy of retention is the throat-clear: an intro paragraph before the
@@ -74,6 +81,20 @@ The hook earns the open, retention earns the watch-through or the read-through, 
 reward earns the save, the share, and the follow. Saves and shares are the signals that
 move organic reach, so the reward line is doing the distribution work — write it first,
 then write backward to the hook.
+
+**Match the delivery to the promise.** A bold hook writes a check the body has to cash.
+"The part nobody shows you" followed by advice everyone has already seen — capture fast,
+link your notes — is the most common way a strong open dies in the feed: the gap between
+the promise and a generic body is exactly what kills the share. If the hook claims a
+secret, the body owes a specific, non-obvious mechanism, not a tour of table stakes.
+
+**Know what actually earns the share.** A reader passes a post on for one of two reasons:
+it is useful enough to save and send to one person by name, or sharing it makes the
+sharer look sharp. Both demand at least one concrete, screenshot-worthy beat — a real
+before/after ("before: a generic answer; after: it answered using my own projects"), a
+named number, a reframe that flips an assumption — never a tidy restatement of common
+knowledge. Build the piece around that beat and compress the table-stakes setup into a
+single line, so the novel part carries the weight.
 
 ## 3. Format fit per platform
 
@@ -153,6 +174,27 @@ lives where the warmest audience already is. The mechanism is trust banking — 
 post is a deposit, each ask is a withdrawal, and an account that withdraws faster than it
 deposits goes bankrupt on attention.
 
+## Write human, not templated
+
+A draft that reads as machine-generated underperforms the same information written like a
+person — the audience pattern-matches the template and scrolls before it reads. The tells
+that flatten a draft into AI-default:
+
+- **Rigid parallel lists** — three items of identical length and grammar, each opening the
+  same way. People write uneven: a fragment, then a longer beat, then an aside.
+- **The "not X, but Y" tic on repeat** — once is rhetoric; three times in a post is a
+  generator signature. Vary the sentence shapes.
+- **Marker emoji and boilerplate CTAs** — 🧵, 👇, and a "save this post" that could bolt
+  onto any draft read as filler. Earn the save with a specific line instead.
+- **Even rhythm and em-dash polish** — every sentence the same cadence, every clause
+  balanced. Real typing runs short, then long, then a parenthetical, then a word left
+  imperfect.
+- **No skin in it** — no concrete moment, no opinion that could cost a follower, no detail
+  only this founder would know. Specificity is the fingerprint a template cannot fake.
+
+The fix is not slang. It is one real anecdote, one genuine opinion, and uneven sentences —
+write the piece the way the founder would say it out loud to one person.
+
 ## Failure modes
 
 These are the patterns that sink founder accounts. Each is a direct violation of one
@@ -172,6 +214,15 @@ system rule above.
   voice on X, a horizontal video where vertical wins. The format fights the platform and
   the algorithm buries it. Violates format fit. Fix: rebuild the piece in the surface's
   native shape.
+- **Promise–delivery gap** — a bold hook over a generic body. The open stops the scroll,
+  the body pays out common knowledge, and the share never comes because nothing was worth
+  passing on. Violates the post structure. Fix: make the body deliver the specific,
+  non-obvious beat the hook promised, or dial the hook back to what the body can honestly
+  cash.
+- **Reads as templated** — parallel lists, repeated "not X but Y", marker emoji, even
+  rhythm, no concrete detail. The audience clocks the machine shape and scrolls past the
+  substance. Violates write-human. Fix: one real anecdote, one opinion, uneven sentences;
+  cut the boilerplate CTA.
 
 ## Red flags
 
@@ -187,6 +238,11 @@ Stop and rework the plan the moment one of these appears:
   duplication.
 - A cadence the founder privately admits is unsustainable — the system fails the week
   motivation dips, which is the week consistency matters most.
+- A hook that promises a secret over a body that pays out table stakes — the share dies in
+  the gap between them.
+- A draft with no concrete, screenshot-worthy beat — nothing in it earns a save or a send.
+- A draft that reads as templated — parallel lists, repeated "not X but Y", marker emoji,
+  no detail only this founder would know.
 
 ## Worked example — one insight to a week of posts
 

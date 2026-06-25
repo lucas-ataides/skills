@@ -36,7 +36,7 @@ repos:
 
       - id: skill-selftest
         name: skill-selftest (every skill script self-tests green)
-        entry: python tools/run_selftests.py skills
+        entry: python tools/run_selftests.py skills hooks
         language: python
         pass_filenames: false
         always_run: true

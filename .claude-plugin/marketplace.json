@@ -1,5 +1,5 @@
 {
-  "name": "lucas-ataides-skills",
+  "name": "ataides-skills",
   "owner": {
     "name": "Lucas de Ataides",
     "email": "lucasatab@gmail.com"
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "lucas-ataides-skills",
+      "name": "ataides-skills",
       "source": "./",
       "description": "Determinism-first skills: appsec, second brain, marketing, design, and the toolchain that enforces them.",
       "author": {
