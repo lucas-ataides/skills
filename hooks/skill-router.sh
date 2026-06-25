@@ -8,6 +8,10 @@
 # (the Claude Code hook contract) — no interpreter dependency, and it can never break a
 # prompt: on any doubt it prints nothing and exits 0.
 #
+# When a task matches, it also nudges the second-brain prime — pull context on the way in,
+# feed the outcome on the way out — so the read/write loop fires deterministically, not only
+# when the model remembers the protocol.
+#
 # It only nudges; the model still chooses, and the user's instructions still win.
 # Self-check:  sh skill-router.sh --selftest
 
@@ -66,11 +70,22 @@ if [ "${1:-}" = "--selftest" ]; then
 		echo "FAIL: off-topic prompt should not route"
 		fail=1
 	}
+	echo "update the deploy pipeline" | sh "$0" | grep -q "prime from it first" || {
+		echo "FAIL: a matched task should also nudge the second-brain prime"
+		fail=1
+	}
+	[ -z "$(echo 'the weather is nice today' | sh "$0")" ] || {
+		echo "FAIL: off-topic prompt should stay silent end-to-end (no prime either)"
+		fail=1
+	}
 	[ "$fail" = 0 ] && echo "skill-router selftest: ok" || echo "skill-router selftest: FAIL"
 	exit "$fail"
 fi
 
 payload=$(cat 2>/dev/null) || exit 0
 nudge=$(route "$payload")
-[ -n "$nudge" ] && printf 'ataides-skills router — this task matches installed skills. Invoke the most relevant via the Skill tool before proceeding (the user'\''s own instructions still take precedence):\n%s' "$nudge"
+if [ -n "$nudge" ]; then
+	printf 'ataides-skills router — this task matches installed skills. Invoke the most relevant via the Skill tool before proceeding (the user'\''s own instructions still take precedence):\n%s\n' "$nudge"
+	printf -- '- if a second-brain vault is configured, prime from it first via ataides-skills:second-brain (`vault.sh find`), then feed the outcome after.\n'
+fi
 exit 0
