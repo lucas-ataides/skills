@@ -13,7 +13,7 @@ For deep, evolving memory, a project can adopt the **project brain** — an LLM 
 
 1. **Detect.** Run the helper `skills/engineering/project-context/scripts/project-context.sh check` at the project root. The output reports whether AGENTS.md or CLAUDE.md and TODO.md are present. The step is done once the status of all three is known.
 
-2. **Create what is missing.** Run the helper with `init`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, and never overwrites an existing file. To set up a fresh repo for the skills in one pass — an AGENTS.md carrying the skills directive and the brain pointer, a TODO.md, and a seeded `brain/` — run `bootstrap` instead of `init`. The step is done once an agent-instructions file and a TODO file both exist.
+2. **Create what is missing.** Run the helper with `bootstrap`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, seeds a missing `brain/` (an index, a Mermaid architecture map, and a log), and never overwrites an existing file — safe on a populated repo. The step is done once the agent-instructions file, the TODO file, and `brain/` exist. (Use `init` for the rare project that should stay without a brain.)
 
 3. **Fill the agent-instructions file.** Replace the placeholders with the real build, test, run, and lint commands, the conventions, the load-bearing architecture facts, the quality gates, and the gotchas. Each entry is concrete enough to act on without guessing. The step is done once a newcomer could build and test from the file alone.
 
