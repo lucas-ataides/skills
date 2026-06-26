@@ -24,10 +24,11 @@ skill-docs = "skill_docs.cli:main"
 skill-update = "skill_update.cli:main"
 skill-config = "skill_config.cli:main"
 skill-readme = "skill_readme.cli:main"
+skill-cursor = "skill_cursor.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["tools"]
-include = ["skill_lint*", "skill_new*", "skill_gate*", "skill_changelog*", "skill_docs*", "skill_update*", "skill_config*", "skill_readme*", "skillkit*"]
+include = ["skill_lint*", "skill_new*", "skill_gate*", "skill_changelog*", "skill_docs*", "skill_update*", "skill_config*", "skill_readme*", "skill_cursor*", "skillkit*"]
 
 [tool.setuptools.package-data]
 skill_lint = ["rules.yaml"]
