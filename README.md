@@ -120,7 +120,7 @@ skill cannot be created by hand (**Poka-yoke** at authoring time).
 ## Repository layout
 
 ```bash
-skills/                 # 46 skills, by domain (each with a generated README.md)
+skills/                 # 47 skills, by domain (each with a generated README.md)
   meta/                 # foundation, creating-skills, setup, cavecrew
   engineering/          # appsec, tdd, code-review, engineering (app+infra+qa),
                         # software-architecture, git-guardrails, autoguardrails, agent-loop,
@@ -142,7 +142,7 @@ scripts/                # install.sh
 
 ## Categories
 
-46 skills across 10 domains, every one lint-gated and carrying a generated README.md. The taxonomy grows as skills land — no empty folders.
+47 skills across 10 domains, every one lint-gated and carrying a generated README.md. The taxonomy grows as skills land — no empty folders.
 
 | Domain | What lives here |
 | ------ | --------------- |

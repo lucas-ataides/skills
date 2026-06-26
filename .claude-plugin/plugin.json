@@ -15,6 +15,7 @@
     "./skills/engineering/agent-loop",
     "./skills/engineering/appsec",
     "./skills/engineering/autoguardrails",
+    "./skills/engineering/bootstrap",
     "./skills/engineering/changelog-gen",
     "./skills/engineering/code-review",
     "./skills/engineering/documentation",
