@@ -2,8 +2,9 @@
 # project-context.sh — ensure a project has agent-instructions (AGENTS.md/CLAUDE.md)
 # and a TODO list, so any agent can pick the project up cold. Deterministic; never
 # overwrites an existing file (Poka-yoke); writes atomically (temp + mv).
-#   project-context.sh check [dir]    report what exists / is missing
-#   project-context.sh init  [dir]    create only what is missing
+#   project-context.sh check     [dir]   report what exists / is missing
+#   project-context.sh init      [dir]   create missing AGENTS.md + TODO.md
+#   project-context.sh bootstrap [dir]   init + seed brain/ — the full ataides-skills setup
 #   project-context.sh --selftest
 set -euo pipefail
 
@@ -39,6 +40,24 @@ agents_template() {
 ## Gotchas
 - <non-obvious traps, footguns, environment quirks>
 
+## Agent skills (ataides-skills)
+Work this repo with the **ataides-skills** toolkit — invoke the matching skill before acting
+(your own explicit instructions still win):
+
+- build or change code/infra, test-first → `ataides-skills:engineering`
+- commits, branches, PRs → `ataides-skills:git-guardrails`
+- review a diff → `ataides-skills:code-review`
+- write tests → `ataides-skills:tdd`
+- architecture or design decisions → `ataides-skills:software-architecture`
+- keep this file, TODO, and the brain current → `ataides-skills:project-context`
+
+The determinism doctrine every skill inherits is `ataides-skills:foundation`.
+
+## Project brain
+Deep memory lives in [brain/](brain/index.md). Read `brain/index.md` first, then the pages a
+task touches. On a decision: update the page, refresh its index line, and append `brain/log.md`.
+Synthesis only — never restate the code.
+
 ## Tasks
 See [TODO.md](TODO.md) for the current task list.
 TMPL
@@ -58,6 +77,29 @@ as a checkable outcome. Move finished items to Done; keep the history.
 - [ ] <queued, in priority order>
 
 ## Done
+TMPL
+}
+
+brain_index_template() {
+  cat <<'TMPL'
+# Project brain
+
+An LLM wiki for this repo (Karpathy pattern). The agent owns it: read this index first, then
+the pages a task touches. On a change, update the page, refresh its line here, and append
+`log.md`. Synthesis only — never restate the code; flag contradictions with their source.
+
+## Architecture
+## Decisions
+## Systems
+TMPL
+}
+
+brain_log_template() {
+  cat <<'TMPL'
+# Log
+
+Append-only and parseable — one line per event:
+`## [YYYY-MM-DD] <kind> | <summary>`  — kind is decision | ingest | change | risk.
 TMPL
 }
 
@@ -92,6 +134,17 @@ cmd_init() {
   write_new "$dir/TODO.md" todo_template
 }
 
+# bootstrap: the full ataides-skills setup — AGENTS.md (with the skills directive and the
+# brain pointer), TODO.md, and a seeded brain/. Never overwrites; safe to re-run.
+cmd_bootstrap() {
+  local dir="${1:-.}"
+  [ -d "$dir" ] || { echo "no such directory: $dir" >&2; return 2; }
+  cmd_init "$dir"
+  mkdir -p "$dir/brain"
+  write_new "$dir/brain/index.md" brain_index_template
+  write_new "$dir/brain/log.md" brain_log_template
+}
+
 selftest() {
   local t c
   t="$(mktemp -d)"
@@ -105,6 +158,13 @@ selftest() {
   : >"$c/CLAUDE.md"
   cmd_init "$c" >/dev/null
   [ -f "$c/AGENTS.md" ] && { echo "FAIL: created AGENTS.md despite CLAUDE.md"; exit 1; }
+  local b
+  b="$(mktemp -d)"
+  cmd_bootstrap "$b" >/dev/null
+  grep -q 'ataides-skills:engineering' "$b/AGENTS.md" || { echo "FAIL: bootstrap skills directive"; exit 1; }
+  grep -q 'Project brain' "$b/AGENTS.md" || { echo "FAIL: bootstrap brain pointer"; exit 1; }
+  { [ -f "$b/brain/index.md" ] && [ -f "$b/brain/log.md" ]; } || { echo "FAIL: bootstrap brain seed"; exit 1; }
+  cmd_bootstrap "$b" >/dev/null  # idempotent: a second run keeps everything
   echo "project-context selftest: ok"
 }
 
@@ -112,8 +172,9 @@ main() {
   case "${1:-}" in
     check) shift; cmd_check "${1:-.}" ;;
     init) shift; cmd_init "${1:-.}" ;;
+    bootstrap) shift; cmd_bootstrap "${1:-.}" ;;
     --selftest) selftest ;;
-    *) echo "usage: project-context.sh {check|init} [dir]  |  --selftest" >&2; exit 2 ;;
+    *) echo "usage: project-context.sh {check|init|bootstrap} [dir]  |  --selftest" >&2; exit 2 ;;
   esac
 }
 

@@ -1,6 +1,6 @@
 ---
 name: project-context
-description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
+description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded brain/), when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
 ---
 
 <!-- skill-lint: disable SK080 — "TODO" is this skill's subject (the TODO.md task file), not a stray authoring marker. -->
@@ -13,7 +13,7 @@ For deep, evolving memory, a project can adopt the **project brain** — an LLM 
 
 1. **Detect.** Run the helper `skills/engineering/project-context/scripts/project-context.sh check` at the project root. The output reports whether AGENTS.md or CLAUDE.md and TODO.md are present. The step is done once the status of all three is known.
 
-2. **Create what is missing.** Run the helper with `init`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, and never overwrites an existing file. The step is done once an agent-instructions file and a TODO file both exist.
+2. **Create what is missing.** Run the helper with `init`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, and never overwrites an existing file. To set up a fresh repo for the skills in one pass — an AGENTS.md carrying the skills directive and the brain pointer, a TODO.md, and a seeded `brain/` — run `bootstrap` instead of `init`. The step is done once an agent-instructions file and a TODO file both exist.
 
 3. **Fill the agent-instructions file.** Replace the placeholders with the real build, test, run, and lint commands, the conventions, the load-bearing architecture facts, the quality gates, and the gotchas. Each entry is concrete enough to act on without guessing. The step is done once a newcomer could build and test from the file alone.
 
