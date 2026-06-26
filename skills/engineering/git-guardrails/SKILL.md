@@ -1,9 +1,9 @@
 ---
 name: git-guardrails
-description: Keep git operations safe and deterministic — conventional commits via a script, no destructive history rewrites, branch before committing on a shared branch. Applies to every git action; use when the user commits, pushes, rebases, resets, or asks about git workflow.
+description: Keep git operations safe and deterministic — conventional commits via a script, no destructive history rewrites, branch before committing — and cut a release, generating a deterministic CHANGELOG from conventional commits with the SemVer bump. Use when the user commits, pushes, rebases, resets, asks about git workflow, updates the changelog, cuts release notes, or drafts a version.
 ---
 
-Treat git history as shared state: a wrong push is felt by everyone. Commit through a deterministic helper, never rewrite published history, and confirm before any destructive operation.
+Treat git history as shared state: a wrong push is felt by everyone. Commit through a deterministic helper, never rewrite published history, and confirm before any destructive operation. When cutting a release, the changelog is generated from the commits, never hand-written, so the same history always renders the same notes.
 
 ## Steps
 
@@ -16,3 +16,9 @@ Treat git history as shared state: a wrong push is felt by everyone. Commit thro
 4. **Guard destruction.** A history rewrite or a working-tree discard runs only with explicit approval, and only on an unshared branch. See [the git rules](references/git-rules.md) for the operations that demand a stop.
 
 5. **Push with care.** Push a feature branch with `--set-upstream` on its first push, and never force-push a shared branch. The step is done once the push succeeds and the branch tracks its remote.
+
+6. **Decide the release version.** To cut a release, read the commit subjects since the previous tag (`previous-tag..HEAD`), then climb the [SemVer ladder](references/conventional-commits.md) to the highest bump any single commit forces: a breaking `!` forces a major, a `feat` forces a minor, a `fix` forces a patch. The step is done once the new version is written down with the one commit that justifies it.
+
+7. **Generate and write the CHANGELOG.** Run `skill-changelog --version <version> --date <YYYY-MM-DD> --from <previous-tag> --to HEAD --write CHANGELOG.md` to prepend a Keep-a-Changelog section — grouped by type with breaking changes first, written atomically above the prior history — then read the rendered section against the raw range to catch a dropped or mis-grouped commit. The step is done once `wrote CHANGELOG.md` prints and the new version sits at the top of the file.
+
+See also [the determinism doctrine](../../meta/foundation/SKILL.md).

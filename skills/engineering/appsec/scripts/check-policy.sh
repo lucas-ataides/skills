@@ -125,7 +125,7 @@ run_repo() {
 # only that temp dir via `mktemp`-owned path.
 selftest() {
   local tmp policy bad good rules out rc
-  tmp=$(mktemp -d "${TMPDIR:-/tmp}/autoguardrails.XXXXXX")
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/appsec.XXXXXX")
   trap 'test -n "${tmp:-}" && test -d "$tmp" && find "$tmp" -mindepth 0 -maxdepth 3 -delete' EXIT
 
   policy="$tmp/POLICY.md"

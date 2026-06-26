@@ -17,7 +17,7 @@ The controls, the SOC2 Trust Services Criteria mapping, the evidence each contro
 
 4. **Implement controls as code.** Express each control in infrastructure-as-code (Terraform, CloudFormation, Bicep) rather than the console, so the control is versioned, reviewed, and reproducible. Click-ops applied by hand leaves no diff and no trail. The step is done when each mapped control exists as committed IaC and the plan for a destructive or stateful change is read per [infra-safety](../../engineering/engineering/references/infra-safety.md).
 
-5. **Gate the controls in CI.** Add policy-as-code and IaC scanning to the pipeline through [autoguardrails](../../engineering/autoguardrails/SKILL.md) and the gates in [appsec](../../engineering/appsec/SKILL.md), so a non-compliant change fails the build instead of reaching the account. Configure drift detection to flag any resource changed outside IaC. The step is done when a deliberately non-compliant fixture fails the gate and a drift event raises an alert.
+5. **Gate the controls in CI.** Add policy-as-code and IaC scanning to the pipeline through the gates in [appsec](../../engineering/appsec/SKILL.md), so a non-compliant change fails the build instead of reaching the account. Configure drift detection to flag any resource changed outside IaC. The step is done when a deliberately non-compliant fixture fails the gate and a drift event raises an alert.
 
 6. **Collect the evidence.** Capture the artifact each control produces — IAM policy exports, encryption-config snapshots, audit-log retention settings, backup-restore test records, CI policy-scan results — and store each with a timestamp and the control it proves. The step is done when every in-scope criterion has a dated evidence artifact a reader can open.
 

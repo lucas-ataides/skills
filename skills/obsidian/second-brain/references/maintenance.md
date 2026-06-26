@@ -1,7 +1,7 @@
 # Maintenance: the autonomous loop
 
 The optional fourth capability: keep the vault current and validated unattended.
-Maintenance applies the autonomous [ralph](../../../engineering/agent-loop/SKILL.md)
+Maintenance applies the autonomous [ralph](../../../engineering/agent-orchestration/SKILL.md)
 loop to the [compiler](compiler.md) — one stable prompt re-reads the loop state,
 compiles one source into canonical notes, proves the result with the vault
 validators, writes the new state back, and repeats with no human between
@@ -13,7 +13,7 @@ runs and the compiler's HARD CHECKPOINTS still hold.
 This page owns only the loop, the stop-condition, and the guardrails. Every vault
 operation — parse, classify, extract, canonicalize, reconcile, validate —
 delegates to the [compiler](compiler.md); the base autonomous technique is
-[ralph](../../../engineering/agent-loop/SKILL.md). The autonomous loop fits a
+[ralph](../../../engineering/agent-orchestration/SKILL.md). The autonomous loop fits a
 large, mechanical source backlog. Checkpointed manual compilation is safer for
 sensitive sources — the choice is below.
 

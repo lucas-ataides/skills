@@ -1,7 +1,7 @@
 # Cloud controls
 
 The judgment behind the cloud-best-practices steps. The gates (`skill-gate`, run through
-[autoguardrails](../../../engineering/autoguardrails/SKILL.md)) scan infrastructure-as-code
+[appsec](../../../engineering/appsec/SKILL.md)) scan infrastructure-as-code
 and emit policy findings; this page is what the scanner cannot decide — which control a
 criterion demands, how to build it across three clouds, and what artifact proves it ran. An
 auditor never sees your cloud console. The auditor sees evidence. A control that produces no
@@ -178,7 +178,7 @@ the gap between "compliant on audit day" and "compliant every day" closes.
 - **IaC scanning.** Scan the infrastructure-as-code before it applies (`checkov`, `tfsec`,
   `terrascan`, `trivy config`) so a misconfiguration fails the build instead of reaching the
   account. This scan is a `skill-gate` category, run through
-  [autoguardrails](../../../engineering/autoguardrails/SKILL.md) and ordered with the other
+  [appsec](../../../engineering/appsec/SKILL.md) and ordered with the other
   gates by [appsec](../../../engineering/appsec/SKILL.md). The scan output is itself
   change-management evidence.
 - **Drift detection.** Compare the live account against the IaC state on a schedule

@@ -49,7 +49,7 @@ script was renamed to `dev`; a human or the model must.
 ### 5. A changelog missing the change — judgment
 
 A user-visible change — a new feature, a fix, a breaking change — that shipped without a
-CHANGELOG entry. A reader upgrading has no record of what moved. The `changelog-gen`
+CHANGELOG entry. A reader upgrading has no record of what moved. The `git-guardrails`
 skill generates the entry from conventional commits deterministically, so the gap is
 checkable *given disciplined commit subjects*; a malformed or missing commit subject is
 the actual hole, and that is a judgment call.
@@ -64,7 +64,7 @@ the actual hole, and that is a judgment call.
 | Prose API signatures         | none                          | judgment                 |
 | Free-text code examples      | none                          | judgment                 |
 | README / quickstart accuracy | none                          | judgment                 |
-| Changelog completeness       | `changelog-gen` + commits     | checkable given subjects |
+| Changelog completeness       | `git-guardrails` + commits     | checkable given subjects |
 
 The rule: never hand-check what a tool proves, and never assume a tool proves what only
 a reader can settle. Run `skill-docs` first so the certain drift is gone before judgment
@@ -157,5 +157,5 @@ const opts = loadConfig(raw);
 The two drifts share one cause — the rename — but split cleanly across the determinism
 line: the link is a fact a tool settles, the example is a meaning a reader settles. Run
 the tool first to clear Drift 1, then read the prose to catch Drift 2. Close the loop by
-recording the rename in the changelog as a breaking change via `changelog-gen`, so an
+recording the rename in the changelog as a breaking change via `git-guardrails`, so an
 upgrader sees `parseConfig` is gone.

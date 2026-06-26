@@ -21,7 +21,7 @@ Run the deterministic link check first. Spend judgment on what the check cannot 
 
 6. **Regenerate the reference.** Where the stack ships a doc generator (typedoc, godoc, sphinx), run it so the generated reference matches the current signatures. This step is done when the generator exits clean and its output is committed.
 
-7. **Record and verify.** Run `skill-docs` once more, then hand the user-visible change to [changelog-gen](../changelog-gen/SKILL.md) for its CHANGELOG entry. This step is done when the link check exits zero and the changelog records the change.
+7. **Record and verify.** Run `skill-docs` once more, then hand the user-visible change to [git-guardrails](../git-guardrails/SKILL.md) for its CHANGELOG entry. This step is done when the link check exits zero and the changelog records the change.
 
 See also: [the foundation doctrine](../../meta/foundation/SKILL.md).
 

@@ -1,8 +1,8 @@
 # The policy model
 
-This is the deep reference for autoguardrails. The skill procedure lives in
+This is the deep reference for appsec. The skill procedure lives in
 [../SKILL.md](../SKILL.md); the global rule list lives in
-[../POLICY.md](../POLICY.md). Read this before adding or changing a rule.
+`POLICY.md` at the repo root. Read this before adding or changing a rule.
 
 The governing principle is the determinism doctrine: **no model judgment sits in
 the enforcement path**. A policy is data; the scanner is a deterministic function
@@ -13,7 +13,7 @@ result in pre-commit, in CI, and on a laptop offline.
 ## Rule syntax
 
 One rule per line. The scanner
-(`skills/engineering/autoguardrails/scripts/check-policy.sh`) recognizes exactly
+(`skills/engineering/appsec/scripts/check-policy.sh`) recognizes exactly
 three line kinds:
 
 ```
@@ -86,7 +86,7 @@ scanner.
 2. **Write one DENY line.** Add `DENY <regex> -- <message>` to the global
    `POLICY.md` (org-wide) or the repo-local `./POLICY.md` (project-specific). The
    message must tell the author what to do, not merely that they erred.
-3. **Calibrate.** Run `skills/engineering/autoguardrails/scripts/check-policy.sh`
+3. **Calibrate.** Run `skills/engineering/appsec/scripts/check-policy.sh`
    and read every hit. Widen or narrow the regex until a known-bad line is caught
    and no safe line is flagged.
 4. **Prove it red, then green.** Add a deliberate known-bad line, confirm a
@@ -125,9 +125,9 @@ Pre-commit (`.pre-commit-config.yaml`):
 repos:
   - repo: local
     hooks:
-      - id: autoguardrails
+      - id: appsec
         name: policy scan
-        entry: skills/engineering/autoguardrails/scripts/check-policy.sh
+        entry: skills/engineering/appsec/scripts/check-policy.sh
         language: system
         pass_filenames: false
 ```
@@ -136,7 +136,7 @@ CI (GitHub Actions step):
 
 ```yaml
 - name: Policy scan
-  run: skills/engineering/autoguardrails/scripts/check-policy.sh
+  run: skills/engineering/appsec/scripts/check-policy.sh
 ```
 
 Both fail the job on a non-zero exit. This is **Jidoka**: the line stops on a
@@ -163,7 +163,7 @@ event loop and is a common shell-injection sink.
 3. **Run the scanner** at the repo root:
 
    ```sh
-   skills/engineering/autoguardrails/scripts/check-policy.sh
+   skills/engineering/appsec/scripts/check-policy.sh
    ```
 
    It prints the hit and exits non-zero:

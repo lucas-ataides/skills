@@ -1,6 +1,6 @@
 # git-guardrails
 
-> Keep git operations safe and deterministic — conventional commits via a script, no destructive history rewrites, branch before committing on a shared branch. Applies to every git action; use when the user commits, pushes, rebases, resets, or asks about git workflow.
+> Keep git operations safe and deterministic — conventional commits via a script, no destructive history rewrites, branch before committing — and cut a release, generating a deterministic CHANGELOG from conventional commits with the SemVer bump. Use when the user commits, pushes, rebases, resets, asks about git workflow, updates the changelog, cuts release notes, or drafts a version.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
@@ -11,6 +11,9 @@
 - rebases
 - resets
 - asks about git workflow
+- updates the changelog
+- cuts release notes
+- drafts a version
 
 ## What it does
 
@@ -19,6 +22,8 @@
 3. Commit deterministically.
 4. Guard destruction.
 5. Push with care.
+6. Decide the release version.
+7. Generate and write the CHANGELOG.
 
 ## Scripts
 

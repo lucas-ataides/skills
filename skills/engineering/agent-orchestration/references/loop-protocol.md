@@ -154,7 +154,7 @@ slice that depends on an unmade decision; surface the decision rather than guess
 
 When breadth within one slice dominates depth — several independent units that each touch a
 disjoint file set — fan the slice across owned-file workers via
-[subagent-driven-development](../../subagent-driven-development/SKILL.md), then gate the
+[the fan-out pattern](../SKILL.md), then gate the
 merged tree as one. The loop owns the slice boundary; the orchestrator owns the fan-out
 inside it.
 
@@ -257,7 +257,7 @@ exact failure this skill exists to prevent.
 A red gate reverts the failed item to open, but the failed attempt's edits remain in the
 working tree. Both modes restore that item's changed files to their pre-iteration state
 from version control before the next attempt, exactly as the
-[orchestration](../../subagent-driven-development/references/orchestration.md) re-dispatch
+[the orchestration reference](orchestration.md) re-dispatch
 loop resets a failed unit's owned files from VCS. Without this reset the loop accumulates
 dirty, half-applied changes across retries until the gate can no longer tell which edit is
 under test.
