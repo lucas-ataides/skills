@@ -21,10 +21,14 @@ bored.
 
 ```
 brain/
-  index.md     the catalog — every page, one-line summary, by category. Read FIRST.
-  log.md       append-only, parseable: ## [YYYY-MM-DD] <kind> | <summary>
-  <slug>.md    wiki pages — synthesis of an entity, concept, decision, or system
+  index.md         the catalog — every page, one-line summary, by category. Read FIRST.
+  architecture.md  the system map — a Mermaid graph of components, boundaries, data flow.
+  log.md           append-only, parseable: ## [YYYY-MM-DD] <kind> | <summary>
+  <slug>.md        wiki pages — synthesis of an entity, concept, decision, or system
 ```
+
+`project-context.sh bootstrap` seeds `index.md`, `architecture.md`, and `log.md`; the agent
+fills the rest.
 
 Filenames are lowercase slugs so they double as `[[wikilink]]` targets. Pages are
 **synthesis kept current** (rewritten in place), not a log — the chronology lives once in
@@ -47,6 +51,13 @@ source. Plain Markdown, no tool required.
 ## Systems
 - [[billing-service]] — the billing service and its seams
 ```
+
+### `brain/architecture.md`
+
+Read first for orientation: the whole system as one **Mermaid graph** — components, the
+boundaries between them, and how data flows — plus entry points and a "how to work here" note.
+It is synthesis, not a file listing; draw and maintain it with
+[software-architecture](../../software-architecture/SKILL.md) (C4 + Mermaid).
 
 ### A wiki page
 

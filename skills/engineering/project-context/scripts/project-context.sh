@@ -54,9 +54,10 @@ Work this repo with the **ataides-skills** toolkit — invoke the matching skill
 The determinism doctrine every skill inherits is `ataides-skills:foundation`.
 
 ## Project brain
-Deep memory lives in [brain/](brain/index.md). Read `brain/index.md` first, then the pages a
-task touches. On a decision: update the page, refresh its index line, and append `brain/log.md`.
-Synthesis only — never restate the code.
+Deep memory lives in [brain/](brain/index.md). Read `brain/index.md` and the
+[architecture map](brain/architecture.md) first, then the pages a task touches. On a decision:
+update the page, refresh its index line, and append `brain/log.md`. Synthesis only — never
+restate the code.
 
 ## Tasks
 See [TODO.md](TODO.md) for the current task list.
@@ -89,8 +90,38 @@ the pages a task touches. On a change, update the page, refresh its line here, a
 `log.md`. Synthesis only — never restate the code; flag contradictions with their source.
 
 ## Architecture
+- [[architecture]] — the system map: components, boundaries, and data flow
 ## Decisions
 ## Systems
+TMPL
+}
+
+brain_arch_template() {
+  cat <<'TMPL'
+# Architecture map
+
+The system at a glance — components, boundaries, and how data flows. Read this first to know
+where to work, and keep it current: a new component, boundary, or flow updates the graph in the
+same change. Draw it with `ataides-skills:software-architecture` (C4 + Mermaid) — synthesis, not
+a file listing; show the seams, not every file.
+
+```mermaid
+graph TD
+  %% Replace with the real components; group by boundary, arrows are data or control flow.
+  UI[Entry / UI] --> API[API or service layer]
+  API --> CORE[Core domain]
+  CORE --> DB[(Data store)]
+  CORE --> EXT[External services]
+```
+
+## Entry points
+- <where execution starts: main, server, CLI, request handlers>
+
+## Boundaries
+- <the seams: module or service edges, the dependency direction, what must not cross>
+
+## How to work here
+- <load-bearing facts to know before changing code: where to add things, what not to touch>
 TMPL
 }
 
@@ -142,6 +173,7 @@ cmd_bootstrap() {
   cmd_init "$dir"
   mkdir -p "$dir/brain"
   write_new "$dir/brain/index.md" brain_index_template
+  write_new "$dir/brain/architecture.md" brain_arch_template
   write_new "$dir/brain/log.md" brain_log_template
 }
 
@@ -163,7 +195,8 @@ selftest() {
   cmd_bootstrap "$b" >/dev/null
   grep -q 'ataides-skills:engineering' "$b/AGENTS.md" || { echo "FAIL: bootstrap skills directive"; exit 1; }
   grep -q 'Project brain' "$b/AGENTS.md" || { echo "FAIL: bootstrap brain pointer"; exit 1; }
-  { [ -f "$b/brain/index.md" ] && [ -f "$b/brain/log.md" ]; } || { echo "FAIL: bootstrap brain seed"; exit 1; }
+  { [ -f "$b/brain/index.md" ] && [ -f "$b/brain/log.md" ] && [ -f "$b/brain/architecture.md" ]; } || { echo "FAIL: bootstrap brain seed"; exit 1; }
+  grep -q 'mermaid' "$b/brain/architecture.md" || { echo "FAIL: architecture map missing the graph"; exit 1; }
   cmd_bootstrap "$b" >/dev/null  # idempotent: a second run keeps everything
   echo "project-context selftest: ok"
 }

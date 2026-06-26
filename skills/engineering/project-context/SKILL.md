@@ -7,7 +7,7 @@ description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a 
 
 A project an agent can pick up cold needs two living files: an AGENTS.md (or CLAUDE.md) that states how to build, test, and work here, and a TODO list that holds what is in flight. This skill creates them when absent and keeps them true to the project. Stale instructions mislead, so the files are updated in the same change as the code.
 
-For deep, evolving memory, a project can adopt the **project brain** — an LLM wiki (Karpathy's pattern) in a `brain/` directory the agent owns and keeps current as an index, synthesis pages, and an append-only log, with no tool to install, covered in step 6.
+For deep, evolving memory, a project can adopt the **project brain** — an LLM wiki (Karpathy's pattern) in a `brain/` directory the agent owns and keeps current as an index, a Mermaid architecture map, synthesis pages, and an append-only log; plain Markdown, seeded by `bootstrap`, covered in step 6.
 
 ## Steps
 
@@ -21,7 +21,7 @@ For deep, evolving memory, a project can adopt the **project brain** — an LLM 
 
 5. **Maintain on change.** A changed command, convention, or gotcha updates AGENTS.md in the same commit; a started or finished task moves in TODO.md. The depth — what a strong AGENTS.md contains and the anti-ambiguity rules it follows — lives in [the context-files guide](references/context-files.md).
 
-6. **Use the project brain for deep memory.** Read `brain/index.md` first, then the pages it catalogs that the task touches, so the agent inherits the synthesized understanding. When a decision lands or the understanding shifts, update the affected page in place, refresh its line in `brain/index.md`, and append a dated entry to `brain/log.md`; flag a contradiction with its source rather than silencing it. The structure, the templates, and the rules live in [the project brain reference](references/project-brain.md). The step is done once `brain/index.md` and the touched pages are read, or `brain/` is confirmed absent.
+6. **Use the project brain for deep memory.** Read `brain/index.md` and `brain/architecture.md` (the system map) first, then the pages it catalogs that the task touches, so the agent inherits the synthesized understanding. When a decision lands or the understanding shifts, update the affected page in place, refresh its line in `brain/index.md`, and append a dated entry to `brain/log.md`; flag a contradiction with its source rather than silencing it. The structure, the templates, and the rules live in [the project brain reference](references/project-brain.md). The step is done once `brain/index.md`, the architecture map, and the touched pages are read, or `brain/` is confirmed absent.
 
 <!-- skill-lint: enable SK080 -->
 
