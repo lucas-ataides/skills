@@ -1,19 +1,19 @@
 ---
 name: project-context
-description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded brain/), when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
+description: Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded .brain/), when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
 ---
 
 <!-- skill-lint: disable SK080 — "TODO" is this skill's subject (the TODO.md task file), not a stray authoring marker. -->
 
 A project an agent can pick up cold needs two living files: an AGENTS.md (or CLAUDE.md) that states how to build, test, and work here, and a TODO list that holds what is in flight. This skill creates them when absent and keeps them true to the project. Stale instructions mislead, so the files are updated in the same change as the code.
 
-For deep, evolving memory, a project can adopt the **project brain** — an LLM wiki (Karpathy's pattern) in a `brain/` directory the agent owns and keeps current as an index, a Mermaid architecture map, synthesis pages, and an append-only log; plain Markdown, seeded by `bootstrap`, covered in step 6.
+For deep, evolving memory, a project can adopt the **project brain** — an LLM wiki (Karpathy's pattern) in a `.brain/` directory the agent owns and keeps current as an index, a Mermaid architecture map, synthesis pages, and an append-only log; plain Markdown, seeded by `bootstrap`, covered in step 6.
 
 ## Steps
 
 1. **Detect.** Run the helper `skills/engineering/project-context/scripts/project-context.sh check` at the project root. The output reports whether AGENTS.md or CLAUDE.md and TODO.md are present. The step is done once the status of all three is known.
 
-2. **Create what is missing.** Run the helper with `bootstrap`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, seeds a missing `brain/` (an index, a Mermaid architecture map, and a log), and never overwrites an existing file — safe on a populated repo. The step is done once the agent-instructions file, the TODO file, and `brain/` exist. (Use `init` for the rare project that should stay without a brain.)
+2. **Create what is missing.** Run the helper with `bootstrap`. It writes an AGENTS.md only in the absence of both AGENTS.md and CLAUDE.md, adds a missing TODO.md, seeds a missing `.brain/` (an index, a Mermaid architecture map, and a log), and never overwrites an existing file — safe on a populated repo. The step is done once the agent-instructions file, the TODO file, and `.brain/` exist. (Use `init` for the rare project that should stay without a brain.)
 
 3. **Fill the agent-instructions file.** Replace the placeholders with the real build, test, run, and lint commands, the conventions, the load-bearing architecture facts, the quality gates, and the gotchas. Each entry is concrete enough to act on without guessing. The step is done once a newcomer could build and test from the file alone.
 
@@ -21,7 +21,7 @@ For deep, evolving memory, a project can adopt the **project brain** — an LLM 
 
 5. **Maintain on change.** A changed command, convention, or gotcha updates AGENTS.md in the same commit; a started or finished task moves in TODO.md. The depth — what a strong AGENTS.md contains and the anti-ambiguity rules it follows — lives in [the context-files guide](references/context-files.md).
 
-6. **Use the project brain for deep memory.** Read `brain/index.md` and `brain/architecture.md` (the system map) first, then the pages it catalogs that the task touches, so the agent inherits the synthesized understanding. When a decision lands or the understanding shifts, update the affected page in place, refresh its line in `brain/index.md`, and append a dated entry to `brain/log.md`; flag a contradiction with its source rather than silencing it. The structure, the templates, and the rules live in [the project brain reference](references/project-brain.md). The step is done once `brain/index.md`, the architecture map, and the touched pages are read, or `brain/` is confirmed absent.
+6. **Use the project brain for deep memory.** Read `.brain/index.md` and `.brain/architecture.md` (the system map) first, then the pages it catalogs that the task touches, so the agent inherits the synthesized understanding. When a decision lands or the understanding shifts, update the affected page in place, refresh its line in `.brain/index.md`, and append a dated entry to `.brain/log.md`; flag a contradiction with its source rather than silencing it. The structure, the templates, and the rules live in [the project brain reference](references/project-brain.md). The step is done once `.brain/index.md`, the architecture map, and the touched pages are read, or `.brain/` is confirmed absent.
 
 <!-- skill-lint: enable SK080 -->
 

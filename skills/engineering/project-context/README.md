@@ -1,13 +1,13 @@
 # project-context
 
-> Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded brain/), when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
+> Keep every project legible to agents — an AGENTS.md/CLAUDE.md, a current TODO list, and the project brain for deep, structured memory. Use when starting work in a project, to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded .brain/), when an AGENTS.md/CLAUDE.md or TODO is missing, to adopt or read the project brain, or to keep them current as the project changes.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
 ## When to use
 
 - starting work in a project
-- to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded brain/)
+- to bootstrap a repo to use the ataides-skills (AGENTS.md plus a seeded .brain/)
 - when an AGENTS.md/CLAUDE.md
 - TODO is missing
 - to adopt

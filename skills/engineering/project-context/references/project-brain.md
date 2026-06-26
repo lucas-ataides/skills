@@ -1,7 +1,7 @@
 # The project brain — an LLM wiki for the repo
 
 The depth behind the "use the project brain" step in [the skill](../SKILL.md). The project
-brain is a **predefined Markdown structure** in a repo's `brain/` directory, following
+brain is a **predefined Markdown structure** in a repo's `.brain/` directory, following
 [Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 No tool to install: the structure is plain Markdown and the agent does all the bookkeeping.
 It is the project-scoped sibling of the personal
@@ -20,7 +20,7 @@ bored.
 ## The structure
 
 ```
-brain/
+.brain/
   index.md         the catalog — every page, one-line summary, by category. Read FIRST.
   architecture.md  the system map — a Mermaid graph of components, boundaries, data flow.
   log.md           append-only, parseable: ## [YYYY-MM-DD] <kind> | <summary>
@@ -32,9 +32,9 @@ fills the rest.
 
 Filenames are lowercase slugs so they double as `[[wikilink]]` targets. Pages are
 **synthesis kept current** (rewritten in place), not a log — the chronology lives once in
-`log.md`. The repo's `AGENTS.md` points at `brain/index.md` so an agent always finds it.
+`log.md`. The repo's `AGENTS.md` points at `.brain/index.md` so an agent always finds it.
 
-### `brain/index.md`
+### `.brain/index.md`
 
 ```markdown
 # Project brain
@@ -52,7 +52,7 @@ source. Plain Markdown, no tool required.
 - [[billing-service]] — the billing service and its seams
 ```
 
-### `brain/architecture.md`
+### `.brain/architecture.md`
 
 Read first for orientation: the whole system as one **Mermaid graph** — components, the
 boundaries between them, and how data flows — plus entry points and a "how to work here" note.
@@ -81,7 +81,7 @@ Replaced Cognito for self-host control and OIDC parity (see [[adr-keycloak]]).
 - [[adr-keycloak]] · [[billing-service]]
 ```
 
-### `brain/log.md`
+### `.brain/log.md`
 
 ```markdown
 # Log
@@ -94,7 +94,7 @@ Replaced Cognito for self-host control and OIDC parity (see [[adr-keycloak]]).
 
 1. **The agent owns the wiki.** Every page, cross-reference, index line, and log entry is the
    agent's to maintain — you curate the code and ask questions.
-2. **Index first.** Read `brain/index.md` before drilling into pages.
+2. **Index first.** Read `.brain/index.md` before drilling into pages.
 3. **Synthesis, not a dump.** A page compiles understanding the code lacks; it never restates
    the code, which is the raw source.
 4. **Contradictions are flagged, not silenced.** New information that conflicts with a page is
@@ -106,14 +106,14 @@ Replaced Cognito for self-host control and OIDC parity (see [[adr-keycloak]]).
 
 ## Workflow
 
-- **Read:** `brain/index.md` → the listed pages a task touches → follow `[[wikilinks]]`.
+- **Read:** `.brain/index.md` → the listed pages a task touches → follow `[[wikilinks]]`.
 - **Update:** rewrite the affected page in place, refresh its `index.md` summary, append a
   `log.md` line; flag a contradiction with its source.
 - **Lint (optional, no per-repo tool):** the format matches the second brain, so the plugin's
-  generic validators check `./brain` deterministically — links resolve, slugs are clean:
+  generic validators check `./.brain` deterministically — links resolve, slugs are clean:
   ```sh
-  python skills/obsidian/second-brain/scripts/validate-wikilinks.py --vault ./brain
-  python skills/obsidian/second-brain/scripts/validate-slugs.py --vault ./brain
+  python skills/obsidian/second-brain/scripts/validate-wikilinks.py --vault ./.brain
+  python skills/obsidian/second-brain/scripts/validate-slugs.py --vault ./.brain
   ```
 
 ## Relationship to AGENTS.md / TODO
@@ -121,5 +121,5 @@ Replaced Cognito for self-host control and OIDC parity (see [[adr-keycloak]]).
 `AGENTS.md` and `TODO.md` (`scripts/project-context.sh`) are the **lightweight, always-present
 entry** — how to build, test, and work here, and what is in flight. The brain is the **deep,
 compounding wiki** — the synthesized understanding per topic. A small project may need only
-the entry layer; a long-lived one keeps `brain/index.md` linked from `AGENTS.md` so every
+the entry layer; a long-lived one keeps `.brain/index.md` linked from `AGENTS.md` so every
 agent starts from the catalog.

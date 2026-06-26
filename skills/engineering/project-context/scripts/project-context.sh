@@ -4,7 +4,7 @@
 # overwrites an existing file (Poka-yoke); writes atomically (temp + mv).
 #   project-context.sh check     [dir]   report what exists / is missing
 #   project-context.sh init      [dir]   create missing AGENTS.md + TODO.md
-#   project-context.sh bootstrap [dir]   init + seed brain/ — the full ataides-skills setup
+#   project-context.sh bootstrap [dir]   init + seed .brain/ — the full ataides-skills setup
 #   project-context.sh --selftest
 set -euo pipefail
 
@@ -54,9 +54,9 @@ Work this repo with the **ataides-skills** toolkit — invoke the matching skill
 The determinism doctrine every skill inherits is `ataides-skills:foundation`.
 
 ## Project brain
-Deep memory lives in [brain/](brain/index.md). Read `brain/index.md` and the
-[architecture map](brain/architecture.md) first, then the pages a task touches. On a decision:
-update the page, refresh its index line, and append `brain/log.md`. Synthesis only — never
+Deep memory lives in [.brain/](.brain/index.md). Read `.brain/index.md` and the
+[architecture map](.brain/architecture.md) first, then the pages a task touches. On a decision:
+update the page, refresh its index line, and append `.brain/log.md`. Synthesis only — never
 restate the code.
 
 ## Tasks
@@ -166,15 +166,15 @@ cmd_init() {
 }
 
 # bootstrap: the full ataides-skills setup — AGENTS.md (with the skills directive and the
-# brain pointer), TODO.md, and a seeded brain/. Never overwrites; safe to re-run.
+# brain pointer), TODO.md, and a seeded .brain/. Never overwrites; safe to re-run.
 cmd_bootstrap() {
   local dir="${1:-.}"
   [ -d "$dir" ] || { echo "no such directory: $dir" >&2; return 2; }
   cmd_init "$dir"
-  mkdir -p "$dir/brain"
-  write_new "$dir/brain/index.md" brain_index_template
-  write_new "$dir/brain/architecture.md" brain_arch_template
-  write_new "$dir/brain/log.md" brain_log_template
+  mkdir -p "$dir/.brain"
+  write_new "$dir/.brain/index.md" brain_index_template
+  write_new "$dir/.brain/architecture.md" brain_arch_template
+  write_new "$dir/.brain/log.md" brain_log_template
 }
 
 selftest() {
@@ -195,8 +195,8 @@ selftest() {
   cmd_bootstrap "$b" >/dev/null
   grep -q 'ataides-skills:engineering' "$b/AGENTS.md" || { echo "FAIL: bootstrap skills directive"; exit 1; }
   grep -q 'Project brain' "$b/AGENTS.md" || { echo "FAIL: bootstrap brain pointer"; exit 1; }
-  { [ -f "$b/brain/index.md" ] && [ -f "$b/brain/log.md" ] && [ -f "$b/brain/architecture.md" ]; } || { echo "FAIL: bootstrap brain seed"; exit 1; }
-  grep -q 'mermaid' "$b/brain/architecture.md" || { echo "FAIL: architecture map missing the graph"; exit 1; }
+  { [ -f "$b/.brain/index.md" ] && [ -f "$b/.brain/log.md" ] && [ -f "$b/.brain/architecture.md" ]; } || { echo "FAIL: bootstrap brain seed"; exit 1; }
+  grep -q 'mermaid' "$b/.brain/architecture.md" || { echo "FAIL: architecture map missing the graph"; exit 1; }
   cmd_bootstrap "$b" >/dev/null  # idempotent: a second run keeps everything
   echo "project-context selftest: ok"
 }
