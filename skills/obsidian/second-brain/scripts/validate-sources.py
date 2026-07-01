@@ -60,7 +60,10 @@ _CANONICAL_FOLDERS = (
     "Procedures",
     "Preferences",
 )
-_PLACEHOLDER = re.compile(r"(?i)(?:\bTODO\b|\bTBD\b|\?\?\?|<source>|\bFIXME\b|\bunknown source\b)")
+# Placeholder markers. TODO/TBD/FIXME match case-SENSITIVELY (uppercase only): lowercased,
+# "todo"/"tbd" are ordinary words in other languages (Portuguese "todo" = "all") and must not
+# trip the gate. Only the multi-word "unknown source" stays case-insensitive.
+_PLACEHOLDER = re.compile(r"\bTODO\b|\bTBD\b|\bFIXME\b|\?\?\?|<source>|(?i:\bunknown source\b)")
 _SOURCES_WIKILINK = re.compile(r"\[\[\s*(Sources/[^\]|#]+?)\s*(?:[|#][^\]]*)?\]\]")
 _MANIFEST_REF = re.compile(r"\bmanifest:([A-Za-z0-9._\-]+)\b")
 _FRONT_SOURCES = re.compile(r"^\s*(?:sources?|provenance)\s*:\s*(.*)$", re.IGNORECASE)
@@ -230,6 +233,12 @@ def selftest() -> int:
             vault / "Projects" / "Atlas.md",
             "---\nsources:\n  - [[Sources/does-not-exist]]\n---\nPer manifest:no-such-id.\n",
         )
+        # A note using the Portuguese word "todo" (= "all") with valid provenance must stay
+        # clean — the case-sensitive TODO marker must not false-positive on other languages.
+        _write(
+            vault / "Topics" / "Multilingual.md",
+            "---\nsources:\n  - [[Sources/chat-2026-06-ada]]\n---\ntodo conteúdo é válido.\n",
+        )
 
         report = scan(vault)
         assert any("People/Bob.md" in p for p in report["missing-provenance"]), report
@@ -239,6 +248,9 @@ def selftest() -> int:
         # The good note must be clean across every class.
         assert all("Ada Lovelace.md" not in p for p in report["missing-provenance"]), report
         assert all("Ada Lovelace.md" not in p for p in report["unresolved-ref"]), report
+        # Portuguese "todo" (= "all") is not a placeholder: the multilingual note is clean.
+        assert all("Multilingual.md" not in p for p in report["placeholder-ref"]), report
+        assert all("Multilingual.md" not in p for p in report["missing-provenance"]), report
 
     print("validate-sources selftest: ok")
     return 0

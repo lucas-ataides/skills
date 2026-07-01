@@ -1,6 +1,6 @@
 # brainstorm
 
-> Think a problem through to a simple, clear answer — frame the real question, diverge then converge, and pick the simplest thing that works. Use when the user wants to brainstorm, talk an idea or decision through, untangle a vague or messy problem, weigh options, get unstuck, find an approach, or sanity-check a direction before building.
+> Think a problem through to a simple, clear answer — frame the real question, diverge then converge, and pick the simplest thing that works. Use when the user wants to brainstorm, talk an idea or decision through, untangle a vague or messy problem, weigh options, get unstuck, find an approach, or sanity-check a direction before building. When a draft or spec already exists and needs answers extracted, use grill-me instead.
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 

@@ -23,4 +23,4 @@ What overdrive changes, when it is warranted versus wasteful, the cost calculus,
 
 7. **Decide done or stop.** Confirm steps 1 through 6 each reported their completion criterion, and that the effort stayed aimed at the stake rather than drifting into polish nobody asked for. The deliverable is done when every step is checked off and one sentence states that the rigor matched the stakes.
 
-See also: [the foundation doctrine](../../meta/foundation/SKILL.md) and the verification discipline the polish task applies on green.
+See also: [the foundation doctrine](../../meta/foundation/SKILL.md). Prove done with [verification-before-completion](../verification-before-completion/SKILL.md); after the gates are green, finish a user-facing surface with [polish](../polish/SKILL.md).

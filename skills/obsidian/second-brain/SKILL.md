@@ -58,7 +58,8 @@ frontmatter contract — is in
    once the command prints the note path and the requested links sit under
    `## Related`.
 
-3. **Retrieve connected context.** Load an existing pack from `Context Packs/`
+3. **Retrieve connected context.** Read `index.md` first (refresh with
+   `scripts/vault.sh index`), then load an existing pack from `Context Packs/`
    for a recurring task, else locate notes with `scripts/vault.sh find "<query>"`
    by entity, tag (`tags: [project]`), text, or a declared alias, then follow the matched note's
    `## Related` and `## Sources` links into the connected notes — the retrieval
@@ -113,7 +114,7 @@ frontmatter contract — is in
 Every operation delegates here; a script runs `--selftest` to build temp
 fixtures, assert, and exit 0:
 
-- `scripts/vault.sh` — init, capture, append, link, daily, find, and the guarded
+- `scripts/vault.sh` — init, capture, append, link, daily, find, index, and the guarded
   `rm` (the CRUD + correlation engine).
 - `scripts/scaffold.py` — build the canonical vault (folders, control files, the
   `state.json` schema) and copy the validators into the vault's `_tools/`.

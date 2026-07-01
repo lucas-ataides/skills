@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Extract the knowledge only the user holds through pointed, doc-grounded questions asked one at a time, recorded into a target document until answers saturate. Use when the user wants to be interviewed or grilled, capture or sharpen requirements, fill a spec from a vague feature request, surface hidden assumptions, pin down edge cases and constraints, or turn tacit knowledge into a written artifact.
+description: Extract the knowledge only the user holds through pointed, doc-grounded questions asked one at a time, recorded into a target document until answers saturate. Use when the user wants to be interviewed or grilled, capture or sharpen requirements, fill a spec from a vague feature request, surface hidden assumptions, pin down edge cases and constraints, or turn tacit knowledge into a written artifact. When the problem itself is still unshaped, use brainstorm instead.
 ---
 
 The user holds knowledge the docs and code do not. A grill pulls that knowledge out one question at a time, grounds every question in what already exists so it never re-asks an answered point, and records each answer into a target document until new answers stop changing it.

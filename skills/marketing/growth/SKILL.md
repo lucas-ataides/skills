@@ -35,8 +35,9 @@ step names before running that step:
    jobs-to-be-done, competitor teardown, 10x not 10%) deferring all scoring, then
    cluster the raw list, cut the off-thesis ideas, and score the survivors on one
    model from [references/idea-generation.md](references/idea-generation.md). This step
-   is done when 15 or more raw ideas collapse to 6–8 scored bets, each carrying an
-   ICE or RICE value, a growth-mode tag (loop or funnel), and a one-line reason.
+   is done when 15 or more raw ideas collapse to 6–8 scored bets, each carrying its score
+   on the one named model (ICE by default; RICE when reach data exists), a growth-mode
+   tag (loop or funnel), and a one-line reason.
 
 3. **Pick the top bets and attach a success metric to each.** Commit to the
    highest-ranked bets the constraint allows, name the deferred tail as not-now rather

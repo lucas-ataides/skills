@@ -19,7 +19,7 @@ Run the deterministic link check first. Spend judgment on what the check cannot 
 
 5. **Re-run the examples.** Execute each documented code example against the current code; a snippet that imports a moved module or calls a renamed symbol is dead and gets rewritten. This step is done when every example runs without error.
 
-6. **Regenerate the reference.** Where the stack ships a doc generator (typedoc, godoc, sphinx), run it so the generated reference matches the current signatures. This step is done when the generator exits clean and its output is committed.
+6. **Regenerate the reference.** Where the stack ships a doc generator (typedoc, godoc, sphinx), run it so the generated reference matches the current signatures. This step is done when the generator exits clean and its output is committed. A stack with no doc generator skips the run, and the step is then done by recording that no generated reference exists.
 
 7. **Record and verify.** Run `skill-docs` once more, then hand the user-visible change to [git-guardrails](../git-guardrails/SKILL.md) for its CHANGELOG entry. This step is done when the link check exits zero and the changelog records the change.
 

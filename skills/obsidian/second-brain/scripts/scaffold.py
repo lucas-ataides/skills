@@ -101,8 +101,9 @@ Root control files — the resumable state and audit trail: `SOURCE-MANIFEST.md`
 
 ## How an agent should use it
 
-1. **Retrieve cheapest-first.** Load a `Context Packs/` note for a recurring task; else
-   search by entity, tag, or text; else follow a note's wikilinks and `## Sources`.
+1. **Retrieve cheapest-first.** Read `index.md` (regenerate with `vault.sh index`), then load
+   a `Context Packs/` note for a recurring task; else search by entity, tag, or text; else
+   follow a note's wikilinks and `## Sources`.
 2. **Trust only what is sourced.** Every canonical claim links to a `Sources/` note or a
    `manifest:<id>` entry. A claim with no source is a defect, not knowledge.
 3. **Never invent.** A gap is written as a gap. Single-source claims are flagged.

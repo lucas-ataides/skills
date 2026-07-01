@@ -55,8 +55,9 @@ building:
 3. **Build hierarchy and verify contrast.** Rank elements by importance and express that
    rank through size, weight, color, and whitespace rather than borders, giving the surface
    exactly one primary action; then check every text-on-background pair, including text on
-   an accent, with a contrast checker (`axe`, Lighthouse, or brandkit's `tokens.py contrast
-   <fg> <bg>`) rather than the eye. Done when the primary action is the most prominent
+   an accent, with a contrast checker rather than the eye — brandkit's `tokens.py contrast
+   <fg> <bg>` is the deciding gate, with `axe` or Lighthouse as advisory second opinions.
+   Done when the primary action is the most prominent
    element, no separation relies on a border that whitespace or a tint could carry (outside a
    stated brutalist system), and the checker reports every pair at WCAG AA or higher (4.5:1
    body, 3:1 large).

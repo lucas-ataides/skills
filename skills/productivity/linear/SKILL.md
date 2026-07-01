@@ -15,7 +15,7 @@ Climb the determinism ladder — the API call, the issue selection, the dashboar
 
 3. **Claim it.** Run `scripts/linear.py state <ID> "In Progress"` so the board shows the work has started. This step is done once the command confirms the new state.
 
-4. **Do the work, then prove it.** Carry out the task — the judgment the model owns — and route a code change through [appsec](../../engineering/appsec/SKILL.md) before it ships. This step is done once the task's acceptance is met and verified against real output.
+4. **Do the work, then prove it.** Carry out the task — the judgment the model owns — and route a code change through [appsec](../../engineering/appsec/SKILL.md) before it ships. This step is done once the task's acceptance is met and verified against real output per [verification-before-completion](../../quality/verification-before-completion/SKILL.md).
 
 5. **Comment the outcome.** Run `scripts/linear.py comment <ID> "<what changed and why>"` to record the result on the issue. This step is done once the command prints the comment URL.
 

@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Think a problem through to a simple, clear answer — frame the real question, diverge then converge, and pick the simplest thing that works. Use when the user wants to brainstorm, talk an idea or decision through, untangle a vague or messy problem, weigh options, get unstuck, find an approach, or sanity-check a direction before building.
+description: Think a problem through to a simple, clear answer — frame the real question, diverge then converge, and pick the simplest thing that works. Use when the user wants to brainstorm, talk an idea or decision through, untangle a vague or messy problem, weigh options, get unstuck, find an approach, or sanity-check a direction before building. When a draft or spec already exists and needs answers extracted, use grill-me instead.
 ---
 
 A good answer starts with the right question. Most stuck thinking is a problem framed wrong, a first idea mistaken for the only idea, or a simple need dressed up as a hard one. This skill is a thinking partner: pull the real question to the surface, open the space of answers wide before judging any, then close on the simplest direction that actually works.

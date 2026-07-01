@@ -8,6 +8,11 @@ as a checkable outcome. Move finished items to Done; keep the history.
 
 ## Next
 - [ ] Identify the untracked-file reaper (suspect: PostCompact vault agent; brain committed as mitigation)
+- [ ] skill-changelog --verify: assert rendered entries match the commit range (kills the manual re-read in git-guardrails step 7)
+- [ ] brandkit tokens.py validate: reject hue-named tokens (color.blue-500) so role-naming is a gate, not prose
+- [ ] outreach-lint.py: CAN-SPAM/GDPR floor check (unsubscribe link, postal address, real sender) for cold outbound drafts
+- [ ] docx: section-vs-archetype validator so a skipped section fails the render, not the eye
+- [ ] pdf render.py: pin or record the chosen engine (auto-detect is per-machine non-deterministic)
 - [ ] Observe one scheduled 11:00 content-radar run write a radar note end-to-end
 - [ ] Wire LINEAR_API_KEY (or OAuth the Linear MCP) and smoke-test the linear skill live
 - [ ] Export Cursor rules into an active repo (`skill-cursor <repo>/.cursor/rules --prune`)
