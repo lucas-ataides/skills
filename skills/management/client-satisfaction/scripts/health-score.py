@@ -163,8 +163,12 @@ def selftest() -> int:
     # The same input twice yields the identical score (determinism).
     sample = {
         "factors": {
-            "usage": 4, "sentiment": 3, "payment": 5,
-            "support_load": 2, "nps": 40, "engagement": 3,
+            "usage": 4,
+            "sentiment": 3,
+            "payment": 5,
+            "support_load": 2,
+            "nps": 40,
+            "engagement": 3,
         }
     }
     first, _ = score_factors(parse_factors(sample))
@@ -206,9 +210,7 @@ def selftest() -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument(
-        "--selftest", action="store_true", help="Run the self-test and exit."
-    )
+    parser.add_argument("--selftest", action="store_true", help="Run the self-test and exit.")
     sub = parser.add_subparsers(dest="command")
     score_cmd = sub.add_parser("score", help="Compute the score from an inputs file.")
     score_cmd.add_argument("inputs", help="Path to inputs.json of judged factors.")

@@ -112,9 +112,7 @@ def _validate_formats(formats: Any, columns: list, name: str, where: str) -> Non
     known = set(columns)
     for key in formats:
         if key not in known:
-            raise ValueError(
-                f"{where} ('{name}') number_formats names unknown column '{key}'"
-            )
+            raise ValueError(f"{where} ('{name}') number_formats names unknown column '{key}'")
 
 
 def _column_widths(columns: list[str], rows: list[list]) -> list[float]:

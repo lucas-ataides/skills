@@ -21,38 +21,58 @@ import argparse
 import json
 import shutil
 import subprocess
-import sys
 import tempfile
 from datetime import date
 from pathlib import Path
 
 FOLDERS = [
-    "People", "Companies", "Projects", "Products", "Topics",
-    "Decisions", "Commitments", "Procedures", "Preferences",
-    "Context Packs", "Sources", "Maps", "Reports", "_tools",
+    "People",
+    "Companies",
+    "Projects",
+    "Products",
+    "Topics",
+    "Decisions",
+    "Commitments",
+    "Procedures",
+    "Preferences",
+    "Context Packs",
+    "Sources",
+    "Maps",
+    "Reports",
+    "_tools",
 ]
 
 VALIDATORS = [
-    "validate-slugs.py", "validate-sources.py", "validate-wikilinks.py",
-    "scan-secrets.py", "generate-manifest.py", "validate-artifacts.sh",
+    "validate-slugs.py",
+    "validate-sources.py",
+    "validate-wikilinks.py",
+    "scan-secrets.py",
+    "generate-manifest.py",
+    "validate-artifacts.sh",
 ]
 
 
 def _state(vault_abs: str, today: str) -> str:
-    return json.dumps({
-        "output_path": vault_abs,
-        "current_phase": "scaffolded",
-        "completed_phases": ["scaffold"],
-        "sources_discovered": [],
-        "sources_ingested": [],
-        "connector_status": {},
-        "batches_completed": 0,
-        "canonical_notes_created": 0,
-        "validation_status": "pending",
-        "next_actions": ["orient: inventory sources, write Reports/ORIENTATION-REPORT.md"],
-        "blockers": [],
-        "scaffolded": today,
-    }, indent=2) + "\n"
+    return (
+        json.dumps(
+            {
+                "output_path": vault_abs,
+                "current_phase": "scaffolded",
+                "completed_phases": ["scaffold"],
+                "sources_discovered": [],
+                "sources_ingested": [],
+                "connector_status": {},
+                "batches_completed": 0,
+                "canonical_notes_created": 0,
+                "validation_status": "pending",
+                "next_actions": ["orient: inventory sources, write Reports/ORIENTATION-REPORT.md"],
+                "blockers": [],
+                "scaffolded": today,
+            },
+            indent=2,
+        )
+        + "\n"
+    )
 
 
 def _readme(today: str) -> str:
@@ -164,13 +184,17 @@ def _write_if_absent(path: Path, content: str) -> bool:
     """Create the file with content only when it does not exist. Returns True if written."""
     if path.exists():
         return False
-    fd = tempfile.NamedTemporaryFile("w", dir=str(path.parent), delete=False, encoding="utf-8")
+    tmp: Path | None = None
     try:
-        fd.write(content)
-        fd.close()
-        Path(fd.name).replace(path)
+        with tempfile.NamedTemporaryFile(
+            "w", dir=str(path.parent), delete=False, encoding="utf-8"
+        ) as fd:
+            tmp = Path(fd.name)
+            fd.write(content)
+        tmp.replace(path)
     except BaseException:
-        Path(fd.name).unlink(missing_ok=True)
+        if tmp is not None:
+            tmp.unlink(missing_ok=True)
         raise
     return True
 
@@ -215,14 +239,30 @@ def selftest() -> int:
 
         for folder in FOLDERS:
             assert (root / folder).is_dir(), f"missing folder {folder}"
-        for name in ("README.md", "SOURCE-MANIFEST.md", "VALIDATION-REPORT.md",
-                     "COMPLETION-AUDIT.md", "INGESTION-LOG.md", "state.json"):
+        for name in (
+            "README.md",
+            "SOURCE-MANIFEST.md",
+            "VALIDATION-REPORT.md",
+            "COMPLETION-AUDIT.md",
+            "INGESTION-LOG.md",
+            "state.json",
+        ):
             assert (root / name).is_file(), f"missing control file {name}"
 
         state = json.loads((root / "state.json").read_text())
-        for key in ("output_path", "current_phase", "completed_phases", "sources_discovered",
-                    "sources_ingested", "connector_status", "batches_completed",
-                    "canonical_notes_created", "validation_status", "next_actions", "blockers"):
+        for key in (
+            "output_path",
+            "current_phase",
+            "completed_phases",
+            "sources_discovered",
+            "sources_ingested",
+            "connector_status",
+            "batches_completed",
+            "canonical_notes_created",
+            "validation_status",
+            "next_actions",
+            "blockers",
+        ):
             assert key in state, f"state.json missing key {key}"
 
         # the copied validators must be present and run standalone (portability)
@@ -235,8 +275,9 @@ def selftest() -> int:
 
         # the scaffolded vault passes the artifact gate
         artifacts = Path(__file__).resolve().parent / "validate-artifacts.sh"
-        result = subprocess.run(["bash", str(artifacts), "--vault", str(root)],
-                                capture_output=True, text=True)
+        result = subprocess.run(
+            ["bash", str(artifacts), "--vault", str(root)], capture_output=True, text=True
+        )
         assert result.returncode == 0, f"artifact gate failed:\n{result.stdout}{result.stderr}"
 
     print("scaffold selftest: ok")

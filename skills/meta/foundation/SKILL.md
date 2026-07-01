@@ -48,7 +48,7 @@ The best code is the code never written. Before adding, climb the subtraction la
 
 When a vault is configured (`skill-config path`), a skill works against the [second-brain](../../obsidian/second-brain/SKILL.md) at the configured vault path in both directions. The vault path and the toggles live in `skills.toml`, read through `skillkit.config`. Each direction is opt-out, on by default, and skipped silently when no vault is set.
 
-- **Prime — read, on the way in.** Before the work begins, the skill pulls the context for its subject through the second-brain retrieval — `scripts/vault.sh find "<subject>"`, then the matched note's `## Related` and `## Sources` — so the agent inherits what the vault already knows instead of re-deriving it. The prime is read-only, and an empty result is reported plainly rather than filled by invention.
+- **Prime — read, on the way in.** Before the work begins, the skill pulls the context for its subject through the second-brain retrieval — `skills/obsidian/second-brain/scripts/vault.sh find "<subject>"`, then the matched note's `## Related` and `## Sources` — so the agent inherits what the vault already knows instead of re-deriving it. The prime is read-only, and an empty result is reported plainly rather than filled by invention.
 - **Feed — write, on the way out.** Afterward, the skill records its salient outcome — a decision made, a fact learned, a task closed — through the second-brain capture. The agent judges what is worth keeping. When the value is unclear, it asks before writing.
 
 ## Japanese quality principles

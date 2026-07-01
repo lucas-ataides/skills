@@ -22,10 +22,12 @@ import sys
 import tempfile
 from pathlib import Path
 
+
 # Bootstrap the repo's deterministic primitives whether run under `uv run`
 # (tools/ already on sys.path) or standalone (insert it from the repo root).
 def _atomic_write(path: str, data: str) -> None:
     """Write atomically (temp + rename); stdlib-only so this runs from a vault's _tools/."""
+    import contextlib
     import os
     import tempfile
 
@@ -36,11 +38,10 @@ def _atomic_write(path: str, data: str) -> None:
             handle.write(data)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
+
 
 # [[target]] or [[target|alias]] or [[target#heading]] or [[target#^block]].
 # Embeds (![[...]]) share the target grammar, so the same pattern catches them.
@@ -202,17 +203,19 @@ def selftest() -> int:
         assert "companies/acme" in index, "path-qualified key should index"
         unresolved, ambiguous = scan_links(vault, index)
 
-        assert any("Analytical Engine" in u for u in unresolved), f"missing unresolved: {unresolved}"
+        assert any("Analytical Engine" in u for u in unresolved), (
+            f"missing unresolved: {unresolved}"
+        )
         assert all("[[Ada]]" not in u for u in unresolved), "alias link wrongly unresolved"
-        assert all(
-            "Ada Lovelace#Career" not in u for u in unresolved
-        ), "heading-fragment link wrongly unresolved"
-        assert all(
-            "[[Companies/Acme]]" not in u for u in unresolved
-        ), "path-qualified link wrongly unresolved"
-        assert all(
-            "[[Companies/Acme]]" not in a for a in ambiguous
-        ), "path-qualified link wrongly ambiguous"
+        assert all("Ada Lovelace#Career" not in u for u in unresolved), (
+            "heading-fragment link wrongly unresolved"
+        )
+        assert all("[[Companies/Acme]]" not in u for u in unresolved), (
+            "path-qualified link wrongly unresolved"
+        )
+        assert all("[[Companies/Acme]]" not in a for a in ambiguous), (
+            "path-qualified link wrongly ambiguous"
+        )
         assert any("[[Acme]]" in a for a in ambiguous), f"missing ambiguous: {ambiguous}"
 
         # A clean vault yields exit 0.

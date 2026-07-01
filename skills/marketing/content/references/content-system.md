@@ -195,6 +195,31 @@ that flatten a draft into AI-default:
 The fix is not slang. It is one real anecdote, one genuine opinion, and uneven sentences —
 write the piece the way the founder would say it out loud to one person.
 
+## Visual identity — lock the reference before rendering
+
+A founder's visual system is discovered, not invented. Guessing an aesthetic from the
+niche produces generic, machine-made-looking visuals and a string of rejected drafts;
+one named reference beats any amount of taste-guessing.
+
+- **Ask for the reference first.** Before generating any visual asset, get 2–3 accounts
+  or specific posts the founder wants to resemble — then study whole carousels, not
+  covers. The system lives in the interior slides: the type mix, the accent discipline,
+  the photo treatment, the proof-slide collage, the footer micro-branding.
+- **Extract a reusable system, not a look.** Name the background treatment, two or three
+  typefaces with roles (display, script accent, mono body), ONE accent color and where it
+  may appear, the texture, and the recurring furniture (kicker, page index, footer,
+  arrows). Templates built from the system survive many posts; a copied look survives one.
+- **Real photography beats type-on-color.** Type over a gradient with synthetic grain is
+  the loudest machine-made tell. Use the founder's own photos, treated to match the
+  system (grain, duotone, crushed blacks).
+- **Strip the machine tells.** Radial-gradient glows, text-shadow neon, perfectly
+  symmetric grids, identical margins and footers on every slide. Break the grid on
+  purpose: bleed display type off the frame, rotate script and sticker elements a few
+  degrees, vary the footer per slide.
+- **Deliver editable artifacts.** Ship a per-slide PDF (imports into Canva with live text
+  when the fonts exist there) or the source file alongside the PNGs — the founder will
+  iterate on copy and layout, and flattened images dead-end that.
+
 ## Failure modes
 
 These are the patterns that sink founder accounts. Each is a direct violation of one
@@ -223,6 +248,10 @@ system rule above.
   rhythm, no concrete detail. The audience clocks the machine shape and scrolls past the
   substance. Violates write-human. Fix: one real anecdote, one opinion, uneven sentences;
   cut the boilerplate CTA.
+- **Reference-less visuals** — drafting designed assets from taste-guessing instead of a
+  locked reference account. Reads generic, collects rejections, burns rounds. Violates
+  visual identity. Fix: get the 2–3 reference accounts and study their full carousels
+  before rendering anything.
 
 ## Red flags
 
@@ -243,6 +272,10 @@ Stop and rework the plan the moment one of these appears:
 - A draft with no concrete, screenshot-worthy beat — nothing in it earns a save or a send.
 - A draft that reads as templated — parallel lists, repeated "not X but Y", marker emoji,
   no detail only this founder would know.
+- A visual drafted before any reference account is locked — stop and ask for the
+  reference.
+- A visual leaning on gradient glows, synthetic grain over flat color, and a perfect
+  grid — the machine-made tells; use real photos and break the grid.
 
 ## Worked example — one insight to a week of posts
 

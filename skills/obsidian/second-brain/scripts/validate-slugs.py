@@ -24,8 +24,10 @@ import sys
 import tempfile
 from pathlib import Path, PurePosixPath
 
+
 def _atomic_write(path: str, data: str) -> None:
     """Write atomically (temp + rename); stdlib-only so this runs from a vault's _tools/."""
+    import contextlib
     import os
     import tempfile
 
@@ -36,16 +38,18 @@ def _atomic_write(path: str, data: str) -> None:
             handle.write(data)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
+
 
 # Characters illegal in Windows filenames and/or meaningful to Obsidian linking.
 _UNSAFE = re.compile(r'[<>:"\\|?*\x00-\x1f]')
 _RESERVED = {
-    "con", "prn", "aux", "nul",
+    "con",
+    "prn",
+    "aux",
+    "nul",
     *(f"com{i}" for i in range(1, 10)),
     *(f"lpt{i}" for i in range(1, 10)),
 }
@@ -138,9 +142,7 @@ def selftest() -> int:
         report = scan(vault)
         assert any("People/.md" in p for p in report["empty"]), f"empty miss: {report['empty']}"
         assert report["unsafe-char"], "unsafe char not caught"
-        assert any(
-            "CON" in p for p in report["reserved"]
-        ), f"reserved miss: {report['reserved']}"
+        assert any("CON" in p for p in report["reserved"]), f"reserved miss: {report['reserved']}"
 
     # Pure-classifier pass: a case-folding collision (Acme vs acme) cannot exist
     # as two real files on a case-insensitive filesystem, so the duplicate class

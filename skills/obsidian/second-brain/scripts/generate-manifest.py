@@ -33,8 +33,10 @@ import sys
 import tempfile
 from pathlib import Path
 
+
 def _atomic_write(path: str, data: str) -> None:
     """Write atomically (temp + rename); stdlib-only so this runs from a vault's _tools/."""
+    import contextlib
     import os
     import tempfile
 
@@ -45,11 +47,10 @@ def _atomic_write(path: str, data: str) -> None:
             handle.write(data)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
+
 
 _REQUIRED_FIELDS = ("account", "workspace", "verified", "timestamp", "capability", "approval")
 
@@ -138,15 +139,21 @@ def run_generate(vault: Path, out: Path) -> int:
 def selftest() -> int:
     complete = {
         "gmail": {
-            "account": "a@b.com", "workspace": "personal", "verified": True,
-            "timestamp": "2026-06-22T10:00:00Z", "capability": "read",
+            "account": "a@b.com",
+            "workspace": "personal",
+            "verified": True,
+            "timestamp": "2026-06-22T10:00:00Z",
+            "capability": "read",
             "approval": "user-approved",
         }
     }
     incomplete = {
         "slack": {
-            "account": "", "workspace": "acme", "verified": False,
-            "timestamp": "2026-06-22T10:00:00Z", "capability": "read",
+            "account": "",
+            "workspace": "acme",
+            "verified": False,
+            "timestamp": "2026-06-22T10:00:00Z",
+            "capability": "read",
             "approval": "pending",
         }
     }
@@ -154,7 +161,9 @@ def selftest() -> int:
     # A manifest naming the connector + complete fields verifies clean.
     manifest = render_manifest(complete)
     assert "gmail" in manifest, "render dropped the connector name"
-    assert verify(complete, manifest) == [], f"clean connector flagged: {verify(complete, manifest)}"
+    assert verify(complete, manifest) == [], (
+        f"clean connector flagged: {verify(complete, manifest)}"
+    )
 
     # Missing account, verified=false, and approval=pending each raise a gap.
     gaps = verify(incomplete, render_manifest(incomplete))
@@ -163,7 +172,9 @@ def selftest() -> int:
     assert any("not approved" in g for g in gaps), gaps
 
     # A connector absent from the manifest text is a gap even if its fields are ok.
-    assert any("not documented" in g for g in verify(complete, "# empty manifest\n")), "absence missed"
+    assert any("not documented" in g for g in verify(complete, "# empty manifest\n")), (
+        "absence missed"
+    )
 
     # End-to-end generate then verify over a temp vault.
     with tempfile.TemporaryDirectory(prefix="manifest-selftest.") as tmp:
@@ -194,7 +205,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--vault", help="Path to the Obsidian vault root.")
     parser.add_argument("--verify", action="store_true", help="Verify the existing manifest.")
     parser.add_argument("--generate", action="store_true", help="Write a manifest skeleton.")
-    parser.add_argument("--out", help="Output path for --generate (default: <vault>/SOURCE-MANIFEST.md).")
+    parser.add_argument(
+        "--out", help="Output path for --generate (default: <vault>/SOURCE-MANIFEST.md)."
+    )
     parser.add_argument("--selftest", action="store_true", help="Run the self-test and exit.")
     args = parser.parse_args(argv)
 

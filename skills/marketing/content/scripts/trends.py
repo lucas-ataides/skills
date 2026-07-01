@@ -143,11 +143,16 @@ def selftest() -> int:
     grouped = group_trends([{"platform": "tiktok", "topic": "t"}, {"platform": "x", "topic": "x"}])
     assert list(grouped) == ["x", "instagram", "tiktok"] and grouped["tiktok"][0]["topic"] == "t"
 
-    report = render_report({
-        "niche": "devtools", "captured_at": "2026-06-24",
-        "trends": [{"platform": "tiktok", "topic": "AI agents", "why_now": "launch", "angle": "fit"}],
-        "posts": [high, low],
-    })
+    report = render_report(
+        {
+            "niche": "devtools",
+            "captured_at": "2026-06-24",
+            "trends": [
+                {"platform": "tiktok", "topic": "AI agents", "why_now": "launch", "angle": "fit"}
+            ],
+            "posts": [high, low],
+        }
+    )
     assert "Daily content radar — devtools" in report
     assert "### Tiktok" in report and "AI agents" in report
     assert report.index('"save this"') < report.index('"nice"'), "report not ranked"

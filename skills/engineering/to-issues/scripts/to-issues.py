@@ -34,7 +34,9 @@ def validate(spec: dict) -> list[str]:
     errors: list[str] = []
     tracker = spec.get("tracker", "github")
     if tracker not in SUPPORTED_TRACKERS:
-        errors.append(f"tracker {tracker!r} unsupported; this script writes only {SUPPORTED_TRACKERS}")
+        errors.append(
+            f"tracker {tracker!r} unsupported; this script writes only {SUPPORTED_TRACKERS}"
+        )
     issues = spec.get("issues")
     if not isinstance(issues, list) or not issues:
         errors.append("'issues' must be a non-empty list")
@@ -67,8 +69,15 @@ def render_body(issue: dict) -> str:
 
 def build_command(issue: dict) -> list[str]:
     """Build the exact `gh issue create` argv for one issue. Pure and deterministic."""
-    cmd = ["gh", "issue", "create", "--title", str(issue["title"]).strip(),
-           "--body", render_body(issue)]
+    cmd = [
+        "gh",
+        "issue",
+        "create",
+        "--title",
+        str(issue["title"]).strip(),
+        "--body",
+        render_body(issue),
+    ]
     for label in issue.get("labels", []):
         cmd += ["--label", str(label)]
     assignee = issue.get("assignee")
@@ -113,18 +122,29 @@ def cmd_create(path: str, dry_run: bool) -> int:
 
 
 def _shell_quote(s: str) -> str:
-    return s if s and all(c.isalnum() or c in "-_/=:." for c in s) else "'" + s.replace("'", "'\\''") + "'"
+    return (
+        s
+        if s and all(c.isalnum() or c in "-_/=:." for c in s)
+        else "'" + s.replace("'", "'\\''") + "'"
+    )
 
 
 def selftest() -> int:
-    good = {"tracker": "github", "issues": [
-        {"title": "Add login", "body": "Users need auth.",
-         "acceptance": ["POST /login returns 200", "bad creds return 401"],
-         "labels": ["type:feat"], "assignee": "octocat"}]}
+    good = {
+        "tracker": "github",
+        "issues": [
+            {
+                "title": "Add login",
+                "body": "Users need auth.",
+                "acceptance": ["POST /login returns 200", "bad creds return 401"],
+                "labels": ["type:feat"],
+                "assignee": "octocat",
+            }
+        ],
+    }
     assert validate(good) == [], validate(good)
     assert validate({"issues": []}) == ["'issues' must be a non-empty list"]
-    assert any("acceptance" in e for e in validate(
-        {"issues": [{"title": "x", "acceptance": []}]}))
+    assert any("acceptance" in e for e in validate({"issues": [{"title": "x", "acceptance": []}]}))
     cmd = build_command(good["issues"][0])
     assert cmd[:5] == ["gh", "issue", "create", "--title", "Add login"], cmd
     assert "--label" in cmd and "type:feat" in cmd and "octocat" in cmd
@@ -139,11 +159,15 @@ def selftest() -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Create tracker issues from an approved JSON spec.")
+    parser = argparse.ArgumentParser(
+        description="Create tracker issues from an approved JSON spec."
+    )
     sub = parser.add_subparsers(dest="cmd")
     p_check = sub.add_parser("check", help="Validate the spec against the issue anatomy.")
     p_check.add_argument("spec")
-    p_create = sub.add_parser("create", help="Create the issues (or --dry-run to print the commands).")
+    p_create = sub.add_parser(
+        "create", help="Create the issues (or --dry-run to print the commands)."
+    )
     p_create.add_argument("spec")
     p_create.add_argument("--dry-run", action="store_true")
     parser.add_argument("--selftest", action="store_true", help=argparse.SUPPRESS)

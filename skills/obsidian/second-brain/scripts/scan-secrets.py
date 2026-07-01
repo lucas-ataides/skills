@@ -26,8 +26,10 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
+
 def _atomic_write(path: str, data: str) -> None:
     """Write atomically (temp + rename); stdlib-only so this runs from a vault's _tools/."""
+    import contextlib
     import os
     import tempfile
 
@@ -38,10 +40,8 @@ def _atomic_write(path: str, data: str) -> None:
             handle.write(data)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
 
 
@@ -55,22 +55,56 @@ class Rule:
 # pass, not zero false positives -- a flagged non-secret costs a glance.
 _RULES: tuple[Rule, ...] = (
     Rule("aws-access-key-id", re.compile(r"\b(?:AKIA|ASIA|AGPA|AIDA|AROA)[0-9A-Z]{16}\b")),
-    Rule("aws-secret-access-key", re.compile(r"(?i)aws.{0,20}(?:secret|sk).{0,5}[:=]\s*['\"]?[A-Za-z0-9/+=]{40}\b")),
+    Rule(
+        "aws-secret-access-key",
+        re.compile(r"(?i)aws.{0,20}(?:secret|sk).{0,5}[:=]\s*['\"]?[A-Za-z0-9/+=]{40}\b"),
+    ),
     Rule("google-api-key", re.compile(r"\bAIza[0-9A-Za-z_\-]{35}\b")),
     Rule("slack-token", re.compile(r"\bxox[baprs]-[0-9A-Za-z-]{10,}\b")),
     Rule("github-token", re.compile(r"\bgh[pousr]_[0-9A-Za-z]{36,}\b")),
     Rule("stripe-key", re.compile(r"\b(?:sk|rk|pk)_(?:live|test)_[0-9A-Za-z]{16,}\b")),
     Rule("openai-key", re.compile(r"\bsk-(?:proj-)?[0-9A-Za-z_\-]{20,}\b")),
-    Rule("private-key-block", re.compile(r"-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY-----")),
+    Rule(
+        "private-key-block",
+        re.compile(r"-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY-----"),
+    ),
     Rule("ssh-public-key", re.compile(r"\bssh-(?:rsa|ed25519|dss)\s+[A-Za-z0-9+/]{40,}={0,3}")),
     Rule("jwt", re.compile(r"\beyJ[A-Za-z0-9_\-]{8,}\.[A-Za-z0-9_\-]{8,}\.[A-Za-z0-9_\-]{8,}\b")),
     Rule("bearer-token", re.compile(r"(?i)\bbearer\s+[A-Za-z0-9._\-]{16,}\b")),
-    Rule("authorization-header", re.compile(r"(?i)\bauthorization\s*[:=]\s*['\"]?(?:basic|token)\s+[A-Za-z0-9+/=._\-]{12,}")),
-    Rule("db-url-with-password", re.compile(r"(?i)\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp)://[^\s:@/]+:[^\s:@/]+@[^\s/]+")),
-    Rule("webhook-signing-secret", re.compile(r"(?i)\b(?:whsec|signing[_-]?secret|webhook[_-]?secret)\b.{0,5}[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}")),
-    Rule("session-cookie", re.compile(r"(?i)\b(?:session|sid|connect\.sid|sessionid|csrftoken)\b\s*=\s*[A-Za-z0-9%._\-]{16,}")),
-    Rule("password-assignment", re.compile(r"(?i)\b(?:password|passwd|pwd|secret|api[_-]?key|access[_-]?token|client[_-]?secret)\b\s*[:=]\s*['\"][^'\"]{6,}['\"]")),
-    Rule("credential-env-var", re.compile(r"(?i)\b[A-Z][A-Z0-9_]*(?:KEY|TOKEN|SECRET|PASSWORD|PASSWD|CREDENTIAL)\s*=\s*\S{6,}")),
+    Rule(
+        "authorization-header",
+        re.compile(r"(?i)\bauthorization\s*[:=]\s*['\"]?(?:basic|token)\s+[A-Za-z0-9+/=._\-]{12,}"),
+    ),
+    Rule(
+        "db-url-with-password",
+        re.compile(
+            r"(?i)\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp)://[^\s:@/]+:[^\s:@/]+@[^\s/]+"
+        ),
+    ),
+    Rule(
+        "webhook-signing-secret",
+        re.compile(
+            r"(?i)\b(?:whsec|signing[_-]?secret|webhook[_-]?secret)\b.{0,5}[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+        ),
+    ),
+    Rule(
+        "session-cookie",
+        re.compile(
+            r"(?i)\b(?:session|sid|connect\.sid|sessionid|csrftoken)\b\s*=\s*[A-Za-z0-9%._\-]{16,}"
+        ),
+    ),
+    Rule(
+        "password-assignment",
+        re.compile(
+            r"(?i)\b(?:password|passwd|pwd|secret|api[_-]?key|access[_-]?token|client[_-]?secret)\b\s*[:=]\s*['\"][^'\"]{6,}['\"]"
+        ),
+    ),
+    Rule(
+        "credential-env-var",
+        re.compile(
+            r"(?i)\b[A-Z][A-Z0-9_]*(?:KEY|TOKEN|SECRET|PASSWORD|PASSWD|CREDENTIAL)\s*=\s*\S{6,}"
+        ),
+    ),
 )
 
 

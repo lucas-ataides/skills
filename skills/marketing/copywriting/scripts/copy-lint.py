@@ -337,7 +337,9 @@ def selftest() -> int:
 
     # Clean copy: short active sentences, a concrete fact, and a CTA verb.
     clean = "Cut onboarding to 90 seconds. Start your free trial today.\n"
-    assert lint(clean, None, require_cta=True) == [], f"clean copy flagged: {lint(clean, None, True)}"
+    assert lint(clean, None, require_cta=True) == [], (
+        f"clean copy flagged: {lint(clean, None, True)}"
+    )
     assert lint(clean, "x", require_cta=True) == [], "clean copy flagged under platform x"
 
     # A banned word is caught with the right code.
@@ -346,7 +348,7 @@ def selftest() -> int:
     assert "hype" in codes, f"banned word missed: {codes}"
 
     # An over-long sentence (>30 words) is caught.
-    long_sentence = ("We " + "ship " * 40 + "fast.\n")
+    long_sentence = "We " + "ship " * 40 + "fast.\n"
     long_codes = {f.code for f in lint(long_sentence, None, require_cta=False)}
     assert "long" in long_codes, f"long sentence missed: {long_codes}"
 
@@ -357,7 +359,9 @@ def selftest() -> int:
     # Missing CTA is caught only under --cta.
     no_cta = "A quiet sentence about nothing in particular here.\n"
     assert "cta" in {f.code for f in lint(no_cta, None, require_cta=True)}, "missing CTA missed"
-    assert "cta" not in {f.code for f in lint(no_cta, None, require_cta=False)}, "CTA flagged without flag"
+    assert "cta" not in {f.code for f in lint(no_cta, None, require_cta=False)}, (
+        "CTA flagged without flag"
+    )
 
     # An over-limit platform-x string is flagged with the length code.
     over = "x" * 300 + "\n"

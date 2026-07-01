@@ -32,7 +32,7 @@ repos:
         language: python
         additional_dependencies: ["PyYAML>=6.0", "pytest>=8.0"]
         pass_filenames: false
-        files: ^tools/.*\.py$
+        files: ^(tools|skills)/.*\.py$
 
       - id: skill-selftest
         name: skill-selftest (every skill script self-tests green)
@@ -43,16 +43,16 @@ repos:
 
       - id: ruff
         name: ruff (lint tooling)
-        entry: ruff check --fix tools
+        entry: ruff check --fix tools skills
         language: python
         additional_dependencies: ["ruff>=0.6"]
         pass_filenames: false
-        files: ^tools/.*\.py$
+        files: ^(tools|skills)/.*\.py$
 
       - id: ruff-format
         name: ruff format (tooling)
-        entry: ruff format tools
+        entry: ruff format tools skills
         language: python
         additional_dependencies: ["ruff>=0.6"]
         pass_filenames: false
-        files: ^tools/.*\.py$
+        files: ^(tools|skills)/.*\.py$

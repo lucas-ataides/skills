@@ -37,7 +37,7 @@ jobs:
         run: python tools/run_selftests.py skills/ hooks/
 
       - name: Ruff
-        run: ruff check tools/
+        run: ruff check tools/ skills/
 
       - name: Semgrep (SCA)
         run: semgrep scan --error --quiet --config semgrep.yml --config p/python --config p/secrets tools/

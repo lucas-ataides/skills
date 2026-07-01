@@ -131,9 +131,7 @@ def _resolve_type_scale(spec: dict) -> list[tuple[str, float]]:
     ratio = _validate_positive(block, "ratio", "type_scale")
     steps = _validate_int(block, "steps", "type_scale", minimum=1)
     if steps > len(_TYPE_STEP_NAMES):
-        raise ValueError(
-            f"type_scale.steps must be <= {len(_TYPE_STEP_NAMES)}, got {steps}"
-        )
+        raise ValueError(f"type_scale.steps must be <= {len(_TYPE_STEP_NAMES)}, got {steps}")
     names = _TYPE_STEP_NAMES[:steps]
     base_index = names.index("base") if "base" in names else 0
     ramp: list[tuple[str, float]] = []

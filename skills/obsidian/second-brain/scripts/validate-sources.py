@@ -30,8 +30,10 @@ import sys
 import tempfile
 from pathlib import Path
 
+
 def _atomic_write(path: str, data: str) -> None:
     """Write atomically (temp + rename); stdlib-only so this runs from a vault's _tools/."""
+    import contextlib
     import os
     import tempfile
 
@@ -42,15 +44,21 @@ def _atomic_write(path: str, data: str) -> None:
             handle.write(data)
         os.replace(tmp, path)
     except BaseException:
-        try:
+        with contextlib.suppress(OSError):
             os.unlink(tmp)
-        except OSError:
-            pass
         raise
 
+
 _CANONICAL_FOLDERS = (
-    "People", "Companies", "Projects", "Products", "Topics",
-    "Decisions", "Commitments", "Procedures", "Preferences",
+    "People",
+    "Companies",
+    "Projects",
+    "Products",
+    "Topics",
+    "Decisions",
+    "Commitments",
+    "Procedures",
+    "Preferences",
 )
 _PLACEHOLDER = re.compile(r"(?i)(?:\bTODO\b|\bTBD\b|\?\?\?|<source>|\bFIXME\b|\bunknown source\b)")
 _SOURCES_WIKILINK = re.compile(r"\[\[\s*(Sources/[^\]|#]+?)\s*(?:[|#][^\]]*)?\]\]")
@@ -220,8 +228,7 @@ def selftest() -> int:
         # Unresolved refs: a Sources link to a missing file, a missing manifest id.
         _write(
             vault / "Projects" / "Atlas.md",
-            "---\nsources:\n  - [[Sources/does-not-exist]]\n---\n"
-            "Per manifest:no-such-id.\n",
+            "---\nsources:\n  - [[Sources/does-not-exist]]\n---\nPer manifest:no-such-id.\n",
         )
 
         report = scan(vault)
