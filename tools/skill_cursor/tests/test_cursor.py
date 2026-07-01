@@ -50,6 +50,24 @@ def test_cli_writes_one_mdc_per_skill(tmp_path):
     assert "alwaysApply: false" in (out / "beta.mdc").read_text(encoding="utf-8")
 
 
+def test_prune_removes_only_stale_generated_rules(tmp_path):
+    root = tmp_path / "skills" / "dom" / "keep"
+    root.mkdir(parents=True)
+    (root / "SKILL.md").write_text(
+        "---\nname: keep\ndescription: keep skill.\n---\n\nBody.\n", encoding="utf-8"
+    )
+    out = tmp_path / "rules"
+    out.mkdir()
+    (out / "stale.mdc").write_text(
+        "---\n---\n\n> old rule, ported from a Claude Code skill.\n", encoding="utf-8"
+    )
+    (out / "hand.mdc").write_text("---\n---\n\nmine, keep out\n", encoding="utf-8")
+    assert main([str(out), str(tmp_path / "skills"), "--prune"]) == 0
+    assert not (out / "stale.mdc").exists()
+    assert (out / "hand.mdc").is_file()
+    assert (out / "keep.mdc").is_file()
+
+
 def test_discover_dedupes(tmp_path):
     d = tmp_path / "skills" / "x" / "one"
     d.mkdir(parents=True)

@@ -9,7 +9,7 @@ Install the lucas-ataides skills and the CLI toolchain they call. The skills ins
 
 1. **Locate the repository.** Confirm a clone of `github.com/lucas-ataides/skills` on disk, or clone it. The step is done once the repo path is known.
 
-2. **Install the CLIs.** Run `./scripts/install.sh` from the repo root. The script installs the commands (skill-lint, skill-new, skill-gate, skill-changelog, skill-docs, skill-update) onto PATH through uv. The step is done once `skill-lint --version` prints a version.
+2. **Install the CLIs.** Run `./scripts/install.sh` from the repo root. The script installs the full `skill-*` command toolchain onto PATH through uv. The step is done once `skill-lint --version` prints a version.
 
 3. **Add the skills marketplace.** The user runs `/plugin marketplace add lucas-ataides/skills`, then `/plugin install ataides-skills@ataides-skills`. These two commands are interactive, so the user runs them once. The step is done once the plugin shows as installed.
 

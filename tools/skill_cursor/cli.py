@@ -1,10 +1,13 @@
 """skill-cursor — generate Cursor project rules (.mdc) from skills' SKILL.md.
 
     skill-cursor <out-dir> [paths ...]   # default paths: skills/
+    skill-cursor <out-dir> --prune       # also delete stale generated rules
     skill-cursor --selftest
 
 Point ``<out-dir>`` at a project's ``.cursor/rules`` to install the skills as Cursor rules.
 The output is local (machine-specific source paths), so it is generated, never committed.
+``--prune`` removes a previously generated rule whose skill no longer exists — only files
+carrying the generated-rule marker are touched, so hand-written rules are never deleted.
 """
 
 from __future__ import annotations
@@ -14,7 +17,9 @@ import tempfile
 from pathlib import Path
 
 from skill_cursor.core import render_mdc
-from skillkit import atomic_write
+from skillkit import atomic_write, safe_remove
+
+_MARKER = "ported from a Claude Code skill"
 
 
 def discover(paths: list[str]) -> list[Path]:
@@ -35,6 +40,26 @@ def discover(paths: list[str]) -> list[Path]:
     return out
 
 
+def prune_stale(out_dir: Path, current: set[str]) -> list[Path]:
+    """Delete generated rules whose skill no longer exists; hand-written files are kept.
+
+    Only a file carrying the generated-rule marker is ever removed, and the removal goes
+    through ``skillkit.safe_remove`` so nothing outside ``out_dir`` can be touched.
+    """
+    removed: list[Path] = []
+    for f in sorted(out_dir.glob("*.mdc")):
+        if f.stem in current:
+            continue
+        try:
+            text = f.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        if _MARKER in text:
+            safe_remove(f, root=out_dir)
+            removed.append(f)
+    return removed
+
+
 def selftest() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         d = Path(tmp) / "demo"
@@ -51,6 +76,16 @@ def selftest() -> int:
         assert "Run `scripts/x.sh`" in out and "references/x.md" in out, "body dropped"
         assert str(d.resolve()) in out, "source path missing"
         assert out.count("\n---\n") == 1 and out.startswith("---\n"), "frontmatter block malformed"
+
+        rules = Path(tmp) / "rules"
+        rules.mkdir()
+        (rules / "demo.mdc").write_text(out, encoding="utf-8")
+        (rules / "stale.mdc").write_text(f"---\n---\n\n> x {_MARKER}.\n", encoding="utf-8")
+        (rules / "hand.mdc").write_text("---\n---\n\nhand-written rule\n", encoding="utf-8")
+        removed = prune_stale(rules, {"demo"})
+        assert [r.name for r in removed] == ["stale.mdc"], "prune removed the wrong set"
+        assert (rules / "demo.mdc").is_file(), "prune deleted a current rule"
+        assert (rules / "hand.mdc").is_file(), "prune deleted a hand-written rule"
     print("skill-cursor selftest: ok")
     return 0
 
@@ -62,6 +97,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("out", nargs="?", help="Output dir, e.g. <project>/.cursor/rules.")
     parser.add_argument("paths", nargs="*", help="Skill dirs or roots (default: skills/).")
+    parser.add_argument(
+        "--prune", action="store_true", help="Delete stale generated rules (marker-guarded)."
+    )
     parser.add_argument("--selftest", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
 
@@ -75,7 +113,15 @@ def main(argv: list[str] | None = None) -> int:
     dirs = discover(args.paths or ["skills"])
     for d in dirs:
         atomic_write(out_dir / f"{d.name}.mdc", render_mdc(d))
-    print(f"skill-cursor: wrote {len(dirs)} rule(s) to {out_dir}")
+    pruned: list[Path] = []
+    if args.prune:
+        pruned = prune_stale(out_dir, {d.name for d in dirs})
+        for r in pruned:
+            print(f"pruned stale rule {r.name}")
+    print(
+        f"skill-cursor: wrote {len(dirs)} rule(s) to {out_dir}"
+        + (f", pruned {len(pruned)}" if args.prune else "")
+    )
     return 0
 
 

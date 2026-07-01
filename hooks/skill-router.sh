@@ -39,8 +39,10 @@ route() {
 		hit tdd 'the test-first loop'
 	m 'architecture|system design|design the system|refactor' &&
 		hit software-architecture 'judge the design and the seam first'
-	m 'agents\.md|claude\.md|onboard|project context|todo list|project brain' &&
-		hit project-context 'keep AGENTS.md, the TODO, and the project brain current'
+	m 'agents\.md|claude\.md|onboard|bootstrap|project context|todo list|project brain' &&
+		hit project-context 'bootstrap or keep AGENTS.md, the TODO, and the .brain current'
+	m 'fan out|fan-out|parallelize|subagents?|orchestrate|autonomous loop|checkpointed loop|burn down|backlog' &&
+		hit agent-orchestration 'drive big work to done: the loop or parallel fan-out'
 	m 'security review|vulnerability|appsec|owasp|secret scan|threat model' &&
 		hit appsec 'the security gate'
 	m 'content strategy|content engine|what to post|what should i post|tweet|instagram|tiktok|carousel|viral|trend|caption' &&
@@ -66,6 +68,8 @@ if [ "${1:-}" = "--selftest" ]; then
 	expect content "$(route 'what should I post today, any viral trend?')" "post/trend"
 	expect second-brain "$(route 'capture this into my obsidian vault')" "obsidian"
 	expect linear "$(route 'grab the next linear ticket')" "linear"
+	expect agent-orchestration "$(route 'fan out subagents to parallelize this migration')" "fan-out"
+	expect project-context "$(route 'bootstrap this repo for the skills')" "bootstrap"
 	[ -z "$(route 'the weather is nice today')" ] || {
 		echo "FAIL: off-topic prompt should not route"
 		fail=1
