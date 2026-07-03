@@ -14,3 +14,4 @@ Append-only and parseable — one line per event:
 ## [2026-07-01] change | drift gate, skill-cursor --prune, router routes, scaffold protocol line
 ## [2026-07-01] risk | untracked .brain/ deleted twice by an unidentified agent — mitigated by committing it
 ## [2026-07-01] ingest | all-43 skills deep review: abuse tests passed, 10 prose fixes, git-commit hardened, ruff gates skills/, 5 script features queued
+## [2026-07-01] decision | linear skill is MCP-only (OAuth): linear.py and the API-key path removed

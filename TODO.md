@@ -14,7 +14,7 @@ as a checkable outcome. Move finished items to Done; keep the history.
 - [ ] docx: section-vs-archetype validator so a skipped section fails the render, not the eye
 - [ ] pdf render.py: pin or record the chosen engine (auto-detect is per-machine non-deterministic)
 - [ ] Observe one scheduled 11:00 content-radar run write a radar note end-to-end
-- [ ] Wire LINEAR_API_KEY (or OAuth the Linear MCP) and smoke-test the linear skill live
+- [ ] Authorize the Linear MCP (`/mcp` OAuth in an interactive session) and smoke-test the linear skill live
 - [ ] Export Cursor rules into an active repo (`skill-cursor <repo>/.cursor/rules --prune`)
 - [ ] Audit the quality domain for overlap (verification-before-completion / polish / overdrive / full-output-enforcement)
 - [ ] Bootstrap `.brain/` into active repos (pulse, redlens) and draw their real architecture maps
