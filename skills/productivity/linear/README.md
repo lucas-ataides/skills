@@ -1,6 +1,6 @@
 # linear
 
-> Track and work tasks on Linear — work, personal, and projects — deterministically, with every API call made by a script rather than hand-built GraphQL. Use when the user wants to check Linear, grab or pick up a task by label, start, comment on, or close a Linear issue, file a ticket, see what is on their plate, render a task dashboard, or sync Linear into the Obsidian second brain; or when an agent should autonomously pull a labeled task and work it.
+> Track and work tasks on Linear through the Linear MCP — always the MCP, never a hand-built API call or a stored key — check the board, grab the next labeled task, claim it, work it, comment the outcome, move its state, and mirror a dashboard into the vault. Use when the user wants to check Linear, grab or work a Linear task or ticket, comment on or close an issue, file a task, see what is next or in flight, or sync Linear into the second brain. Requires a connected Linear MCP (OAuth).
 
 **Model-invoked** — the agent runs it automatically when your request matches the triggers below. You can also invoke it by name.
 
@@ -8,30 +8,25 @@
 
 - check Linear
 - grab
-- pick up a task by label
-- start
+- work a Linear task
+- ticket
 - comment on
-- close a Linear issue
-- file a ticket
-- see what is on their plate
-- render a task dashboard
-- sync Linear into the Obsidian second brain;
-- when an agent should autonomously pull a labeled task and work it
+- close an issue
+- file a task
+- see what is next
+- in flight
+- sync Linear into the second brain
 
 ## What it does
 
-1. Resolve the pickup label and the key.
-2. Grab the next task.
-3. Claim it.
-4. Do the work, then prove it.
-5. Comment the outcome.
-6. Close or hand off.
+1. Confirm the MCP is connected.
+2. Resolve the pickup label.
+3. Select the next task deterministically.
+4. Claim it.
+5. Do the work, then prove it.
+6. Comment the outcome, then close.
 7. Visualize and feed the brain.
 8. Capture new work anywhere.
-
-## Scripts
-
-- `scripts/linear.py`
 
 ## Learn more
 
