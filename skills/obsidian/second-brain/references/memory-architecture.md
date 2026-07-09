@@ -27,8 +27,8 @@ evidence for both:
    ("how we cut a release") and Preferences ("Lucas wants negative conclusions
    stated first"). These steer the agent's behavior.
 3. **Source traces** — the raw provenance. One note per ingested source under
-   `Sources/`, recording where a fact came from so any claim audits back to its
-   origin.
+   `raw/<domain>/`, recording where a fact came from so any claim audits back
+   to its origin.
 4. **Context packs** — pre-assembled briefings. A context pack stitches the
    declarative and procedural notes relevant to one recurring task into a single
    note the agent loads at the start of that task, so retrieval is one read, not
@@ -41,33 +41,43 @@ SOURCE-MANIFEST.md before a read; the gate lives in
 
 ## The folder structure
 
-The compiler builds the full source-backed structure:
+The vault follows the Life OS domain structure (Karpathy's LLM Wiki pattern):
 
 ```
 <vault>/
-  People/          Companies/       Projects/        Products/
-  Topics/          Decisions/       Commitments/     Procedures/
-  Preferences/     Context Packs/   Sources/         Maps/
-  Reports/         _tools/
-  README.md            SOURCE-MANIFEST.md   VALIDATION-REPORT.md
-  COMPLETION-AUDIT.md  INGESTION-LOG.md     state.json
+  work/               personal/          finance/
+  ├── companies/      ├── health/        ├── accounts/
+  ├── people/         ├── relationships/ ├── income/
+  ├── products/       ├── goals/         ├── investments/
+  ├── projects/       ├── journal/      └── planning/
+  ├── topics/         └── preferences/
+  ├── decisions/      clients/           learning/
+  ├── procedures/     ├── entities/      ├── books/
+  ├── preferences/    └── projects/      ├── courses/
+  ├── maps/                              └── concepts/
+  └── context-packs/
+  raw/
+  ├── work/            personal/         finance/         assets/
+  _templates/          _archive/         _tools/
+  SCHEMA.md            index.md          log.md           AGENTS.md
+  README.md
 ```
 
-- **Canonical knowledge** lives in the nine domain folders (People … Preferences).
-  Each note is one entity or one fact-cluster, source-backed.
-- **`Sources/`** holds one note per ingested source — the provenance layer.
-- **`Context Packs/`** holds the assembled briefings retrieval loads.
-- **`Maps/`** holds Maps of Content (MOCs): index notes that link related
-  canonical notes so the graph stays navigable.
-- **`Reports/`** holds the compiler's own output — ORIENTATION-REPORT.md and any
-  per-phase reports.
-- **`_tools/`** holds a copy of the validator scripts so the vault re-validates on
-  its own after the compiler has moved on.
-- The six root control files are the resumable state and the audit trail.
+- **Domain folders** (`work/`, `personal/`, etc.) hold canonical knowledge — one entity
+  or fact-cluster per note, source-backed.
+- **`raw/`** holds one note per ingested source — the provenance layer, organized
+  by domain. Never modified after ingestion.
+- **`Context Packs/`** (under `work/`) holds assembled briefings retrieval loads.
+- **`Maps/`** (under `work/`) holds Maps of Content (MOCs): index notes that link
+  related canonical notes.
+- **`_templates/`** holds note templates for consistent creation across domains.
+- **`_tools/`** holds validator scripts so the vault re-validates on its own.
+- **`_archive/`** holds superseded content.
+- Root files: `SCHEMA.md` (constitution), `index.md` (catalog), `log.md` (timeline),
+  `AGENTS.md` (agent orientation), `README.md` (human intro).
 
-Fast CRUD capture (see [crud-and-retrieval.md](crud-and-retrieval.md)) writes
-typed notes into the matching domain folders through `scripts/vault.sh`, so a
-hand-captured note and a compiled note share one structure and one query layer.
+Fast CRUD capture writes typed notes into the matching domain folders through
+`scripts/vault.sh`, routing by type and domain.
 
 ## Note formats
 
