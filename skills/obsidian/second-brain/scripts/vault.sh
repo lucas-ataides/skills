@@ -24,7 +24,7 @@
 # that refuses the vault root and anything outside it, mirroring skillkit.safe_remove.
 set -euo pipefail
 
-TYPES="person project meeting idea task decision daily client feedback 1on1 company product topic commitment procedure preference source"
+TYPES="person project meeting idea task decision daily client feedback 1on1 company product topic commitment procedure preference source goal journal health relationship account income investment book course concept"
 
 # --- helpers ---------------------------------------------------------------
 
@@ -58,23 +58,44 @@ slugify() {
   [ -n "$s" ] && printf '%s' "$s" || printf '%s' "untitled"
 }
 
-# Map a note type to its canonical Capitalized vault folder, so a hand-captured note
-# and a compiled note share one structure (People, Companies, Projects, ...). Event
-# and working types fold into the canonical folder that fits (a meeting is a Source).
+# Map a note type to its canonical vault path under the Life OS domain structure.
+# Hand-captured and compiled notes share one structure: work/<folder>, personal/<folder>,
+# raw/work/, etc. Event and working types fold into raw/ (immutable provenance);
+# daily notes live under personal/journal/. The default domain is "work" unless
+# overridden by a `domain=<domain>` capture argument.
 type_folder() {
-  case "$1" in
-    person) echo People ;;
-    company | client) echo Companies ;;
-    project) echo Projects ;;
-    product) echo Products ;;
-    topic | idea) echo Topics ;;
-    decision) echo Decisions ;;
-    task | commitment) echo Commitments ;;
-    procedure) echo Procedures ;;
-    preference) echo Preferences ;;
-    source | meeting | 1on1 | feedback) echo Sources ;;
-    daily) echo Daily ;;
-    *) echo "$1" ;;
+  local type="$1" domain="${2:-work}"
+  case "$type" in
+    person)
+      case "$domain" in personal) echo "personal/relationships" ;; *) echo "work/people" ;; esac ;;
+    company)
+      case "$domain" in clients) echo "clients/entities" ;; *) echo "work/companies" ;; esac ;;
+    client)
+      case "$domain" in work) echo "work/companies" ;; *) echo "clients/entities" ;; esac ;;
+    project)
+      case "$domain" in personal) echo "personal/goals" ;; clients) echo "clients/projects" ;; *) echo "work/projects" ;; esac ;;
+    product) echo "work/products" ;;
+    topic | idea) echo "work/topics" ;;
+    decision) echo "work/decisions" ;;
+    task) echo "work/projects" ;;
+    commitment) echo "work/projects" ;;
+    procedure) echo "work/procedures" ;;
+    preference)
+      case "$domain" in personal) echo "personal/preferences" ;; *) echo "work/preferences" ;; esac ;;
+    source | meeting | 1on1 | feedback) echo "raw/work" ;;
+    daily)
+      case "$domain" in work) echo "personal/journal" ;; *) echo "personal/journal" ;; esac ;;
+    goal) echo "personal/goals" ;;
+    journal) echo "personal/journal" ;;
+    health) echo "personal/health" ;;
+    relationship) echo "personal/relationships" ;;
+    account) echo "finance/accounts" ;;
+    income) echo "finance/income" ;;
+    investment) echo "finance/investments" ;;
+    book) echo "learning/books" ;;
+    course) echo "learning/courses" ;;
+    concept) echo "learning/concepts" ;;
+    *) echo "work/topics" ;;
   esac
 }
 
@@ -190,6 +211,13 @@ render_template() {
     feedback) defaults=$(printf 'date: %s' "$today") ;;
     1on1)     defaults=$(printf 'date: %s' "$today") ;;
     company)  defaults='industry:' ;;
+    goal)     defaults=$'status: active\nconfidence: medium' ;;
+    journal)  defaults=$(printf 'date: %s' "$today") ;;
+    health)   defaults='status: active' ;;
+    book)     defaults=$'status: reading\nrating: /5\nauthor:' ;;
+    course)   defaults=$'status: enrolled' ;;
+    concept)  defaults='status: draft' ;;
+    account)  defaults=$'status: active\ntype: checking' ;;
     *)        defaults='' ;;
   esac
   # Drop any default line whose key is overridden by a user-supplied field.
@@ -229,13 +257,30 @@ render_template() {
 # is reserved, so a bad field aborts without leaving an empty note behind.
 cmd_capture() {
   [ "$#" -ge 2 ] || { echo "usage: vault.sh capture <type> <title> [key=value ...]" >&2; return 2; }
-  local type="$1" title="$2" root slug today path pair key
+  local type="$1" title="$2" root slug today path pair key domain
   shift 2
   require_type "$type" || return 2
+  # Extract domain from key=value args (default: work). A domain= arg sets the domain
+  # prefix for the folder path (work/, personal/, finance/, clients/, learning/).
+  # It is consumed internally and NOT written as a frontmatter field.
+  domain="work"
+  local remaining=() field_count=0
+  for pair in "$@"; do
+    key=${pair%%=*}
+    if [ "$key" = "domain" ]; then
+      domain=${pair#*=}
+      case "$domain" in
+        work|personal|finance|clients|learning) : ;;
+        *) echo "invalid domain: $domain (allowed: work personal finance clients learning)" >&2; return 2 ;;
+      esac
+    else
+      remaining+=("$pair")
+    fi
+  done
   # Validate every field up front (fail fast, before reserving a path). Reserved
   # structural keys are off-limits — overriding them would break correlation
   # queries that depend on uniform title/type/created/tags frontmatter.
-  for pair in "$@"; do
+  for pair in "${remaining[@]}"; do
     render_field "$pair" >/dev/null || return 2
     key=${pair%%=*}
     case "$key" in
@@ -246,8 +291,8 @@ cmd_capture() {
   root=$(vault_root)
   slug=$(slugify "$title")
   today=$(date +%Y-%m-%d)
-  path=$(reserve_path "$root/$(type_folder "$type")" "$slug" ".md")
-  atomic_write "$path" "$(render_template "$type" "$title" "$today" "$@")"
+  path=$(reserve_path "$root/$(type_folder "$type" "$domain")" "$slug" ".md")
+  atomic_write "$path" "$(render_template "$type" "$title" "$today" "${remaining[@]}")"
   printf '%s\n' "$path"
 }
 
@@ -365,7 +410,7 @@ cmd_find() {
 }
 
 # index: (re)generate index.md — a catalog of the vault's canonical notes grouped
-# by folder, each linked with a one-line summary. This is the cheap top-level entry
+# by domain and folder, each linked with a one-line summary. This is the cheap top-level entry
 # point retrieval reads FIRST (memory-architecture: "read index.md first"), before a
 # Context Pack or a find. Retrieval entry points (Maps, Context Packs) lead; then the
 # declarative and procedural folders. Sources are summarized by count, not listed
@@ -376,7 +421,44 @@ cmd_index() {
   root=$(vault_root)
   count=0
   out=$'# Index\n\nCatalog of this vault, generated by `vault.sh index`. Read this first, then\nload a Context Pack or a Map, then follow a note\'s links and `## Sources`.\n'
-  for folder in Maps "Context Packs" People Companies Projects Products Topics Decisions Commitments Procedures Preferences; do
+  # Scan the Life OS domain structure: work/, personal/, finance/, clients/, learning/
+  local domains="work personal finance clients learning"
+  for domain in $domains; do
+    [ -d "$root/$domain" ] || continue
+    out+=$'\n## '"${domain^}"$'\n'
+    # Walk second-level directories within each domain
+    for dir in "$root/$domain"/*/; do
+      [ -d "$dir" ] || continue
+      folder=$(basename "$dir")
+      notes=$(find "$dir" -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort)
+      [ -n "$notes" ] || continue
+      out+=$'\n### '"${domain}/${folder}"$'\n'
+      while IFS= read -r f; do
+        [ -n "$f" ] || continue
+        base=$(basename -- "$f" .md)
+        # First non-empty, non-heading body line (after frontmatter), trimmed to 100 chars.
+        summary=$(awk '
+          NR==1 && $0=="---" { fm=1; next }
+          fm==1 && $0=="---" { fm=0; next }
+          fm==1 { next }
+          /^#/ { next }
+          /^[-*][[:space:]]/ { next }
+          /^[[:space:]]*$/ { next }
+          { gsub(/^[[:space:]]+/,""); print; exit }
+        ' "$f" 2>/dev/null | sed 's/\[\[//g; s/\]\]//g' | cut -c1-100)
+        if [ -n "$summary" ]; then
+          out+="- [[$base]] — $summary"$'\n'
+        else
+          out+="- [[$base]]"$'\n'
+        fi
+        count=$((count + 1))
+      done <<EOF
+$notes
+EOF
+    done
+  done
+  # Also scan root-level Maps and Context Packs if they exist (legacy support)
+  for folder in Maps "Context Packs"; do
     dir="$root/$folder"
     [ -d "$dir" ] || continue
     notes=$(find "$dir" -maxdepth 1 -type f -name '*.md' 2>/dev/null | sort)
@@ -385,7 +467,6 @@ cmd_index() {
     while IFS= read -r f; do
       [ -n "$f" ] || continue
       base=$(basename -- "$f" .md)
-      # First non-empty, non-heading body line (after frontmatter), trimmed to 100 chars.
       summary=$(awk '
         NR==1 && $0=="---" { fm=1; next }
         fm==1 && $0=="---" { fm=0; next }
@@ -405,9 +486,9 @@ cmd_index() {
 $notes
 EOF
   done
-  nsrc=$(find "$root/Sources" -maxdepth 1 -type f -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
-  out+=$'\n## Sources\n- '"$nsrc"$' source notes under `Sources/` — the provenance layer every claim traces to.\n'
-  out+=$'\n_'"$count"$' notes indexed._\n'
+  nsrc=$(find "$root/raw" -type f -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+  out+=$'\n## Sources\n- '"$nsrc"' source notes under `raw/` — the provenance layer every claim traces to.\n'
+  out+=$'\n_'"$count"' notes indexed._\n'
   atomic_write "$root/index.md" "$out"
   printf '%s\n' "$root/index.md"
 }
@@ -492,13 +573,13 @@ selftest() {
   # capture creates a typed note with frontmatter and a slug filename.
   person=$(cmd_capture person "Ada Lovelace")
   [ -f "$person" ] || { echo "FAIL: person note not created"; exit 1; }
-  case "$person" in */People/ada-lovelace.md) : ;; *) echo "FAIL: person path ($person)"; exit 1 ;; esac
+  case "$person" in */work/people/ada-lovelace.md) : ;; *) echo "FAIL: person path ($person)"; exit 1 ;; esac
   grep -q '^type: person$' "$person" || { echo "FAIL: person frontmatter type"; exit 1; }
   grep -q '^## Related$' "$person" || { echo "FAIL: person Related section"; exit 1; }
 
   # capture never overwrites: a second person of the same title gets a -2 name.
   out=$(cmd_capture person "Ada Lovelace")
-  case "$out" in */People/ada-lovelace-2.md) : ;; *) echo "FAIL: collision suffix ($out)"; exit 1 ;; esac
+  case "$out" in */work/people/ada-lovelace-2.md) : ;; *) echo "FAIL: collision suffix ($out)"; exit 1 ;; esac
   [ "$out" != "$person" ] || { echo "FAIL: collision overwrote"; exit 1; }
 
   project=$(cmd_capture project "Q3 Roadmap")
@@ -507,10 +588,10 @@ selftest() {
   meeting=$(cmd_capture meeting "Kickoff sync")
   grep -q '^## Action items$' "$meeting" || { echo "FAIL: meeting headings"; exit 1; }
 
-  # an added type (client) captures into its own directory with a typed tag.
+  # an added type (client) captures into work/companies by default.
   client=$(cmd_capture client "Acme Corp")
   [ -f "$client" ] || { echo "FAIL: client note not created"; exit 1; }
-  case "$client" in */Companies/acme-corp.md) : ;; *) echo "FAIL: client path ($client)"; exit 1 ;; esac
+  case "$client" in */work/companies/acme-corp.md) : ;; *) echo "FAIL: client path ($client)"; exit 1 ;; esac
   grep -q '^type: client$' "$client" || { echo "FAIL: client frontmatter type"; exit 1; }
   grep -q '^tags: \[client\]$' "$client" || { echo "FAIL: client tag"; exit 1; }
 
@@ -537,9 +618,9 @@ selftest() {
   cmd_capture idea "Reserved" type=person 2>/dev/null && { echo "FAIL: reserved key accepted"; exit 1; } || true
 
   # a bad field key is rejected and leaves no note behind.
-  before=$({ find "$tmp/vault/Topics" -type f 2>/dev/null || true; } | wc -l)
+  before=$({ find "$tmp/vault/work/topics" -type f 2>/dev/null || true; } | wc -l)
   cmd_capture idea "Bad field" "Bad Key=x" 2>/dev/null && { echo "FAIL: bad field key accepted"; exit 1; } || true
-  after=$({ find "$tmp/vault/Topics" -type f 2>/dev/null || true; } | wc -l)
+  after=$({ find "$tmp/vault/work/topics" -type f 2>/dev/null || true; } | wc -l)
   [ "$before" = "$after" ] || { echo "FAIL: bad field left an orphan note"; exit 1; }
 
   # append adds a timestamped bullet under ## Log (assert bullet + text + section,

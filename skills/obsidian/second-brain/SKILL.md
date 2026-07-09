@@ -22,7 +22,65 @@ vault against what it must deliver — fast recall of connected, source-backed
 context — not only whether each note is tidy. The determinism doctrine is the
 [foundation](../../meta/foundation/SKILL.md).
 
-## Pick the capability
+## The vault structure (Life OS)
+
+The vault follows Karpathy's LLM Wiki pattern with domain-based top-level
+organization. Every mutation delegates to `scripts/vault.sh` or the
+Obsidian MCP tools; the vault root resolves from `$VAULT`, `skill-config`,
+or `./vault`.
+
+```
+<vault>/
+├── SCHEMA.md              # Constitution — rules, conventions, tag taxonomy
+├── index.md               # Master catalog of all pages
+├── log.md                 # Chronological action log
+│
+├── raw/                   # Layer 1: Immutable sources
+│   ├── work/              #   DefensePoint source documents
+│   ├── personal/          #   Journal entries, personal docs
+│   ├── finance/           #   Statements, receipts
+│   └── assets/            #   Images, attachments
+│
+├── work/                  # Layer 2: Work domain
+│   ├── companies/         #   DefensePoint and client profiles
+│   ├── people/            #   Colleague profiles
+│   ├── products/          #   point, hercules, etc.
+│   ├── projects/          #   Active work projects
+│   ├── topics/            #   Concepts: keycloak, azure, etc.
+│   ├── decisions/         #   Architecture decisions (ADRs)
+│   ├── procedures/        #   Runbooks and how-tos
+│   ├── preferences/       #   Communication, working style
+│   ├── maps/              #   Maps of Content
+│   └── context-packs/     #   Pre-assembled task briefings
+│
+├── personal/              # Personal life
+│   ├── health/            #   Medical, fitness, sleep
+│   ├── relationships/     #   Family, friends
+│   ├── goals/             #   Short and long-term goals
+│   ├── journal/           #   Daily reflections
+│   └── preferences/       #   Personal rules, values
+│
+├── finance/               # Money management
+│   ├── accounts/          #   Bank accounts, cards
+│   ├── income/            #   Salary, client income
+│   ├── investments/       #   Portfolio, strategies
+│   └── planning/          #   Budget, tax, retirement
+│
+├── clients/               # Direct/personal clients
+│   ├── entities/          #   Client profiles
+│   └── projects/          #   Client projects
+│
+├── learning/              # Knowledge & growth
+│   ├── books/             #   Book notes
+│   ├── courses/           #   Course notes
+│   └── concepts/          #   Ideas and frameworks
+│
+├── _templates/            # Note templates
+└── _archive/              # Superseded content
+```
+
+Capture routes notes to the correct domain folder via `vault.sh capture <type> "<title>" [domain=<domain>] [key=value...]`.
+The domain defaults to `work`. Set `domain=personal`, `domain=finance`, `domain=clients`, or `domain=learning` for other life areas.
 
 Route the request to one capability, then follow its step:
 
