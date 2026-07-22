@@ -672,7 +672,8 @@ selftest() {
   out=$(cmd_index)
   case "$out" in */index.md) : ;; *) echo "FAIL: index path ($out)"; exit 1 ;; esac
   [ -f "$VAULT/index.md" ] || { echo "FAIL: index.md not created"; exit 1; }
-  grep -q '^## Projects$' "$VAULT/index.md" || { echo "FAIL: index missing folder heading"; exit 1; }
+  grep -q '^## Work$' "$VAULT/index.md" || { echo "FAIL: index missing domain heading"; exit 1; }
+  grep -q '^### work/projects$' "$VAULT/index.md" || { echo "FAIL: index missing domain folder heading"; exit 1; }
   grep -qF -- '[[q3-roadmap]]' "$VAULT/index.md" || { echo "FAIL: index missing a known note link"; exit 1; }
   grep -q 'notes indexed' "$VAULT/index.md" || { echo "FAIL: index missing count footer"; exit 1; }
 
