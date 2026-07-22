@@ -201,10 +201,16 @@ A founder's visual system is discovered, not invented. Guessing an aesthetic fro
 niche produces generic, machine-made-looking visuals and a string of rejected drafts;
 one named reference beats any amount of taste-guessing.
 
-- **Ask for the reference first.** Before generating any visual asset, get 2–3 accounts
-  or specific posts the founder wants to resemble — then study whole carousels, not
-  covers. The system lives in the interior slides: the type mix, the accent discipline,
-  the photo treatment, the proof-slide collage, the footer micro-branding.
+- **Check the founder's second brain first.** A founder who keeps a vault may have
+  written a style bible — a note naming their palette, type roles, mood, photo
+  treatment, and anti-patterns. That document IS the locked reference and outranks any
+  inferred aesthetic, any prior theme built in-session, and any verbal brief; retrieve
+  it before rendering and re-read it when the founder says the aesthetic changed.
+- **Ask for the reference first.** Absent a style bible, before generating any visual
+  asset get 2–3 accounts or specific posts the founder wants to resemble — then study
+  whole carousels, not covers. The system lives in the interior slides: the type mix,
+  the accent discipline, the photo treatment, the proof-slide collage, the footer
+  micro-branding.
 - **Extract a reusable system, not a look.** Name the background treatment, two or three
   typefaces with roles (display, script accent, mono body), ONE accent color and where it
   may appear, the texture, and the recurring furniture (kicker, page index, footer,
